@@ -14,7 +14,7 @@ Here is the use case diagram, the entity-relationship diagram and the class diag
 
 ### ENTITY-RELATIONSHIP DIAGRAM
 
-![ENTITY-RELATIONSHIP DIAGRAM](https://github.com/Aridane1/EventFlow/blob/master/screenshots/class_diagram.PNG)
+![ENTITY-RELATIONSHIP DIAGRAM](https://github.com/Aridane1/EventFlow/blob/master/screenshots/entity_relationship_diagram.PNG)
 
 ### USE CASE DRIAGRAM
 
