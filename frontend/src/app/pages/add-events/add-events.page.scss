@@ -1,0 +1,67 @@
+.form{
+    width: 278px;
+    height: 663px;
+    flex-shrink: 0;
+    background-color: rgba(108, 117, 125, 0.75); 
+    margin: 0 auto;
+    position: relative;
+    top: 50px;
+    color: white;
+    border-radius: 8px;
+}
+
+.form main{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 25px;
+    gap: 15px;
+}
+
+.form section input{
+    display: block;
+    background: white;
+    border: none;
+    width: 217px;
+    height: 42px;
+    color: black;
+    border-radius: 8px;
+}
+.form section button{
+    display: block;
+    background: white;
+    width: 217px;
+    color: black;
+    border-radius: 8px;
+}
+
+select{
+    background: white;
+    border: none;
+    width: 217px;
+    height: 42px;
+    color: black;
+    border-radius: 8px;
+}
+textarea{
+    display: block;
+    resize: none;
+    width: 217px;
+    height: 103px;
+    background: white;
+    border: none;
+    color: black;
+    border-radius: 8px;
+}
+
+.form main section{
+    margin: 0 auto;
+}
+
+button{
+    width: 168px;
+    height: 42px;
+    border-radius: 8px;
+    background: #FFF;
+    color: black;
+}
