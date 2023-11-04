@@ -6,12 +6,16 @@ exports.create = (req, res) => {
     name: req.body.name,
     description: req.body.description,
     date: req.body.date,
+    price: req.body.price,
     numTickets: req.body.numTickets,
+    locationId: req.body.location,
+    img: req.file.filename,
   };
-
+  console.log(newEvent);
+  // Save event in the database
   Event.create(newEvent)
-    .then((createEvent) => {
-      res.send(createEvent);
+    .then((data) => {
+      res.send(data);
     })
     .catch((err) => {
       res.status(500).send({

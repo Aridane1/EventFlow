@@ -1,0 +1,36 @@
+<app-menu></app-menu>
+<ion-content>
+  <header class="head">
+    <p>Eventos de tus municipio</p>
+    <img
+      src="../../assets/add.svg"
+      alt=""
+      routerLink="/add-events"
+      style="cursor: pointer"
+    />
+  </header>
+  <main class="card-container">
+    <section class="card" *ngFor="let event of events">
+      <img
+        src="http://localhost:8080/images/{{event.img}}"
+        alt="{{event.img}}"
+      />
+      <section class="card-content">
+        <header><p>{{event.name}}</p></header>
+        <section>
+          <p>{{event.description}}</p>
+        </section>
+        <footer>
+          <p>{{event.price}}€</p>
+          <p>{{event.locationName}}</p>
+        </footer>
+      </section>
+      <picture class="delete-svg" (click)="deleteOneEvent(event.id)">
+        <img src="../../assets/delete.svg" alt="" />
+      </picture>
+      <picture class="update-svg">
+        <img src="../../assets/update.svg" alt="" />
+      </picture>
+    </section>
+  </main>
+</ion-content>

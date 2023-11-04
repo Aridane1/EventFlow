@@ -1,0 +1,53 @@
+<ion-content>
+  <form [formGroup]="eventForm" class="form">
+    <main>
+      <section>
+        <label for="title">Titulo del evento</label>
+        <input type="text" id="title" formControlName="title" />
+      </section>
+      <section>
+        <label for="image">Imagen</label>
+        <button (click)="selectImage()">Seleccionar imagen</button>
+      </section>
+      <section>
+        <label for="location">Municipio</label>
+        <select formControlName="locationName" name="location" id="location">
+          <option *ngFor="let location of locations" value="{{location.id}}">
+            {{location.name}}
+          </option>
+        </select>
+      </section>
+      <section>
+        <label for="price">Precio</label>
+        <input
+          type="number"
+          formControlName="price"
+          min="0"
+          step="1"
+          id="price"
+        />
+      </section>
+      <section>
+        <label for="numTickets">Numero de Tickets</label>
+        <input
+          type="number"
+          formControlName="numTickets"
+          min="0"
+          step="1"
+          id="numTickets"
+        />
+      </section>
+      <section>
+        <label for="description">Descripcion</label>
+        <textarea
+          rows="4"
+          formControlName="description"
+          id="description"
+        ></textarea>
+      </section>
+      <section>
+        <button (click)="addEvent()">Crear Evento</button>
+      </section>
+    </main>
+  </form>
+</ion-content>

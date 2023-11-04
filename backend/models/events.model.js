@@ -3,14 +3,20 @@ module.exports = (sequelize, Sequelize) => {
     name: {
       type: Sequelize.STRING,
     },
-    description: {
+    img: {
       type: Sequelize.STRING,
+    },
+    description: {
+      type: Sequelize.TEXT,
     },
     date: {
       type: Sequelize.DATE,
     },
     numTickets: {
       type: Sequelize.INTEGER,
+    },
+    price: {
+      type: Sequelize.FLOAT,
     },
   });
 
