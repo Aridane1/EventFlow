@@ -1,0 +1,10 @@
+<ion-content>
+  <form [formGroup]="loginForm">
+    <label for="email">Correo electornico</label>
+    <input formControlName="email" id="email" />
+
+    <label for="password">Contraseña</label>
+    <input formControlName="password" id="password" />
+    <button type="submit" (click)="login()">Ingresar</button>
+  </form>
+</ion-content>

@@ -1,0 +1,95 @@
+.header {
+  background: #6c757d;
+  height: 68px;
+}
+.header h2 {
+  text-align: center;
+}
+
+main > section:first-child {
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
+}
+img {
+  position: absolute;
+  top: 20px;
+  left: 10px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.container-form {
+  width: 250px;
+  background-color: rgba(108, 117, 125, 0.75);
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.container-form section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.container-form input {
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: white;
+  border: none;
+  border-radius: 8px;
+}
+.container-form label {
+  color: white;
+}
+
+//Añade borders a la tabla
+td,
+th {
+  border: 1px solid #000;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table {
+  width: 94.3%;
+  border-collapse: collapse;
+  font-size: 1em;
+  color: black;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+td > button {
+  padding: 10px;
+  border-radius: 8px;
+}
+//media querie a partir de 600px{
+@media (min-width: 600px) {
+  .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+  }
+  table {
+    width: 50%;
+  }
+}

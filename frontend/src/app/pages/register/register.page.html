@@ -1,0 +1,13 @@
+<ion-content>
+  <form [formGroup]="registerForm">
+    <label for="name">Tu nombre</label>
+    <input formControlName="name" id="name" />
+
+    <label for="email">Correo electornico</label>
+    <input formControlName="email" id="email" />
+
+    <label for="password">Contraseña</label>
+    <input formControlName="password" id="password" />
+    <button type="submit" (click)="register()">Registrarte</button>
+  </form>
+</ion-content>

@@ -11,6 +11,9 @@ export class EventService {
   getAllEvent() {
     return this.httpClient.get(this.endpoint);
   }
+  getOneEvent(id: number) {
+    return this.httpClient.get(this.endpoint + `/${id}`);
+  }
 
   addEvent(event: any, blob: any) {
     let formData = new FormData();
@@ -27,5 +30,22 @@ export class EventService {
 
   deleteOneEvent(id: number) {
     return this.httpClient.delete(this.endpoint + `/${id}`);
+  }
+
+  updateEventWithPhoto(id: number, event: any, blob: any) {
+    console.log('pep');
+    let formData = new FormData();
+    formData.append('name', event.name);
+    formData.append('description', event.description);
+    formData.append('date', event.date);
+    formData.append('file', blob);
+    formData.append('price', event.price);
+    formData.append('numTickets', event.numTickets);
+    formData.append('location', event.location);
+
+    return this.httpClient.put(this.endpoint + `/no-image/${id}`, formData);
+  }
+  updateEvent(id: number, event: any) {
+    return this.httpClient.put(this.endpoint + `/${id}`, event);
   }
 }

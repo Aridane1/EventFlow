@@ -24,7 +24,7 @@ export class AddEventsPage implements OnInit {
     this.eventForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      // dateTime: ['', Validators.required],
+      dateTime: ['', Validators.required],
       numTickets: ['', Validators.required],
       price: ['', Validators.required],
       locationName: ['', Validators.required],
@@ -34,9 +34,14 @@ export class AddEventsPage implements OnInit {
   ngOnInit() {
     this.getAllLocation();
   }
+
   ionViewWillEnter() {
-    //borrar llos valores del formulario
     this.eventForm.reset();
+    this.capturedPhoto = null;
+  }
+
+  discardImage() {
+    this.capturedPhoto = null;
   }
 
   getAllLocation() {
@@ -59,6 +64,10 @@ export class AddEventsPage implements OnInit {
     const numTickets = this.eventForm.get('numTickets')?.value;
 
     if (!this.eventForm.valid) {
+      if (date == null) {
+        console.log('The date is null');
+        return;
+      }
       console.log('Please provide all the required values!');
       return;
     } else {

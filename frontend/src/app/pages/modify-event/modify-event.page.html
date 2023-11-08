@@ -1,0 +1,80 @@
+<ion-content>
+  <img
+    src="../../../assets/arrow-left.svg"
+    alt="arrow-left"
+    routerLink="/home"
+  />
+  <h1>Añadir un evento</h1>
+
+  <main class="container-form">
+    <form [formGroup]="eventForm" class="form">
+      <section class="item">
+        <label>Nombre del evento:</label>
+        <input type="text" formControlName="title" />
+      </section>
+      <section class="item">
+        <label>Imagen</label>
+        <input type="text" value="{{capturedPhoto}}" />
+        <ion-button *ngIf="!capturedPhoto" (click)="selectImage()"
+          >Seleccionar imagen</ion-button
+        >
+        <ion-button
+          *ngIf="capturedPhoto"
+          color="danger"
+          (click)="discardImage()"
+          >Descartar imagen</ion-button
+        >
+      </section>
+      <section class="item">
+        <label>Fecha y hora:</label>
+        <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+        <ion-modal [keepContentsMounted]="true">
+          <ng-template>
+            <ion-datetime
+              id="datetime"
+              formControlName="dateTime"
+            ></ion-datetime>
+          </ng-template>
+        </ion-modal>
+      </section>
+      <section class="item">
+        <label>Municipio:</label>
+        <ion-select
+          placeholder="Eligue el municipio"
+          formControlName="locationName"
+          interface="popover"
+        >
+          <ion-select-option
+            *ngFor="let location of locations"
+            value="{{location.id}}"
+          >
+            {{location.name}}
+          </ion-select-option>
+        </ion-select>
+      </section>
+      <section class="item">
+        <label>Precio</label>
+        <input type="number" min="0" step="any" formControlName="price" />
+      </section>
+      <section class="item">
+        <label>Numero de tickets</label>
+        <input type="number" min="0" step="any" formControlName="numTickets" />
+      </section>
+      <section class="item">
+        <label>Descripción:</label>
+        <textarea
+          rows="4"
+          cols="50"
+          formControlName="description"
+          style="resize: none"
+        ></textarea>
+      </section>
+      <section>
+        <ion-button (click)="updateEvent()" color="success"
+          >Actualizar Evento</ion-button
+        >
+      </section>
+    </form>
+  </main>
+</ion-content>
