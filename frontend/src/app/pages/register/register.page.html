@@ -1,13 +1,29 @@
 <ion-content>
-  <form [formGroup]="registerForm">
-    <label for="name">Tu nombre</label>
-    <input formControlName="name" id="name" />
-
-    <label for="email">Correo electornico</label>
-    <input formControlName="email" id="email" />
-
-    <label for="password">Contraseña</label>
-    <input formControlName="password" id="password" />
-    <button type="submit" (click)="register()">Registrarte</button>
-  </form>
+  <header class="head">
+    <h2>INICIAR SESIÓN</h2>
+  </header>
+  <main class="container">
+    <form [formGroup]="registerForm" class="container-form">
+      <section class="container-inputs">
+        <section class="name">
+          <label for="name">Tu nombre</label>
+          <input formControlName="name" id="name" />
+        </section>
+        <section class="email">
+          <label for="email">Correo electornico</label>
+          <input formControlName="email" id="email" />
+        </section>
+        <section class="password">
+          <label for="password">Contraseña</label>
+          <input formControlName="password" id="password" />
+        </section>
+      </section>
+      <section class="btn">
+        <button type="submit" (click)="register()">Registrarte</button>
+      </section>
+    </form>
+    <footer class="container-footer" routerLink="/login">
+      <p>Iniciar sesión</p>
+    </footer>
+  </main>
 </ion-content>

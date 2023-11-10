@@ -35,3 +35,20 @@ exports.getAll = (req, res) => {
       });
     });
 };
+exports.getOne = (req, res) => {
+  let id = req.params.id;
+  Rol.findByPk(id)
+    .then((rol) => {
+      if (!rol) {
+        return res.status(404).send({
+          message: "rol not found with id" + id,
+        });
+      }
+      res.send(rol);
+    })
+    .catch((error) => {
+      return res.status(500).send({
+        message: "Error getting rol information!",
+      });
+    });
+};

@@ -1,19 +1,24 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'start',
+    pathMatch: 'full',
+  },
+  {
     path: 'home',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: 'admin' },
     loadChildren: () =>
       import('./home/home.module').then((m) => m.HomePageModule),
   },
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-  },
-  {
     path: 'add-events',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: 'customer' },
     loadChildren: () =>
       import('./pages/add-events/add-events.module').then(
         (m) => m.AddEventsPageModule
@@ -22,6 +27,8 @@ const routes: Routes = [
 
   {
     path: 'admin-page',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: 'admin' },
     loadChildren: () =>
       import('./pages/admin-page/admin-page.module').then(
         (m) => m.AdminPagePageModule
@@ -29,6 +36,8 @@ const routes: Routes = [
   },
   {
     path: 'location',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: 'admin' },
     loadChildren: () =>
       import('./pages/location/location.module').then(
         (m) => m.LocationPageModule
@@ -36,6 +45,8 @@ const routes: Routes = [
   },
   {
     path: 'modify-event',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: 'admin' },
     loadChildren: () =>
       import('./pages/modify-event/modify-event.module').then(
         (m) => m.ModifyEventPageModule
@@ -45,11 +56,19 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () =>
       import('./pages/login/login.module').then((m) => m.LoginPageModule),
-  },  {
-    path: 'register',
-    loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
-
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('./pages/register/register.module').then(
+        (m) => m.RegisterPageModule
+      ),
+  },
+  {
+    path: 'start',
+    loadChildren: () =>
+      import('./pages/start/start.module').then((m) => m.StartPageModule),
+  },
 ];
 
 @NgModule({

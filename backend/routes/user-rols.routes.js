@@ -4,6 +4,7 @@ module.exports = (app) => {
 
   router.post("/", UserRol.create);
   router.get("/", UserRol.getAll);
+  router.get("/:id", UserRol.getOneUserRol);
   router.delete("/:userId/:rolId", UserRol.delete);
 
   app.use("/api/user-rols", router);

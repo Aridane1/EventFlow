@@ -4,6 +4,7 @@ module.exports = (app) => {
 
   router.post("/", rol.create);
   router.get("/", rol.getAll);
+  router.get("/:id", rol.getOne);
 
   app.use("/api/rols", router);
 };

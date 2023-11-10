@@ -45,7 +45,6 @@ app.use(function (req, res, next) {
       "ascii"
     );
     //saca la informacion que llegue desde el req.body
-    console.log(req.body);
 
     const [email, password] = credentials.split(":");
     req.body.email = email;
