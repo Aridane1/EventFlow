@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Location } from '../interfaces/location';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +14,11 @@ export class LocationService {
     return this.httpClient.get(this.endpoint);
   }
 
-  addLocation(location: any) {
+  addLocation(location: Location) {
     return this.httpClient.post(this.endpoint, location);
   }
 
-  deleteLocation(locationId: any) {
+  deleteLocation(locationId: number) {
     return this.httpClient.delete(this.endpoint + `/${locationId}`);
   }
 }

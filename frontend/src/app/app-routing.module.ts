@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'add-events',
     canActivate: [AuthGuard],
-    data: { allowedRoles: 'customer' },
+    data: { allowedRoles: 'admin' },
     loadChildren: () =>
       import('./pages/add-events/add-events.module').then(
         (m) => m.AddEventsPageModule
@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'admin-page',
     canActivate: [AuthGuard],
-    data: { allowedRoles: 'admin' },
+    data: { allowedRoles: 'manager' },
     loadChildren: () =>
       import('./pages/admin-page/admin-page.module').then(
         (m) => m.AdminPagePageModule

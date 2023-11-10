@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -30,14 +31,11 @@ export class LoginPage implements OnInit {
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
 
-    let user = {
-      // id: null,
+    let user: User = {
+      name: null,
       email: email,
       password: password,
-      // name: null,
-      // isAdmin: null
     };
-    console.log(user);
     this.authService.login(user).subscribe(
       (res) => {
         if (!res.access_token) {
