@@ -1,0 +1,28 @@
+<section class="card">
+  <img
+    src="http://localhost:8080/images/{{ event.img }}"
+    alt="{{ event.img }}"
+  />
+  <section class="card-content">
+    <header class="card-header">
+      <p class="header">{{ event.name }}</p>
+    </header>
+    <section class="card-body">
+      <p class="body">{{ event.description }}</p>
+    </section>
+    <footer class="card-footer">
+      <p class="footer">{{ event.price }}€</p>
+      <p class="footer">{{ event.locationName }}</p>
+    </footer>
+  </section>
+  <picture class="delete-svg" (click)="deleteOneEvent(event.id)">
+    <img src="../../assets/delete.svg" alt="" />
+  </picture>
+  <picture class="update-svg">
+    <img
+      src="../../assets/update.svg"
+      alt=""
+      [routerLink]="['/modify-event', { id: event.id }]"
+    />
+  </picture>
+</section>

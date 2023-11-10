@@ -2,6 +2,7 @@ const db = require("../models");
 const Location = db.Location;
 
 exports.create = (req, res) => {
+  console.log(req.body.name);
   const newLocation = {
     name: req.body.name,
   };
@@ -56,4 +57,31 @@ exports.delete = (req, res) => {
 };
 
 //update
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+  // Validate request
+  if (!req.body.name) {
+    return res.status(400).send({
+      message: "Content can not be empty!",
+    });
+  }
+  // Find user and update it with the requested information
+  Location.update(req.body, { where: { id: req.params.id } })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "location was updated successfully.",
+        });
+      } else {
+        res.send({
+          message: `Cannot update location with id=${req.params.id}. Maybe location was not found or req.body is empty!`,
+          message: `Cannot update location with id=${id}. Maybe location was not found or req.body is empty!`,
+          message: `Cannot update location with id=${id}. Maybe location was not found or does not exist!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "Error updating location with this id",
+      });
+    });
+};

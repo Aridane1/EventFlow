@@ -20,8 +20,12 @@ db.Sequelize = Sequelize;
 
 db.Event = require("./events.model.js")(sequelize, Sequelize);
 db.Location = require("./location.model.js")(sequelize, Sequelize);
+db.User = require("./users.model.js")(sequelize, Sequelize);
+db.Rol = require("./rols.model.js")(sequelize, Sequelize);
+db.UserRol = require("./user-rol.model.js")(sequelize, Sequelize);
 
 db.Location.hasMany(db.Event);
 db.Event.belongsTo(db.Location);
+db.User.belongsToMany(db.Rol, { through: "user-rols" });
 
 module.exports = db;

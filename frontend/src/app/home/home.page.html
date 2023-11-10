@@ -1,5 +1,5 @@
-<app-menu></app-menu>
 <ion-content>
+  <app-menu></app-menu>
   <header class="head">
     <p>Eventos de tus municipio</p>
     <img
@@ -10,27 +10,10 @@
     />
   </header>
   <main class="card-container">
-    <section class="card" *ngFor="let event of events">
-      <img
-        src="http://localhost:8080/images/{{event.img}}"
-        alt="{{event.img}}"
-      />
-      <section class="card-content">
-        <header><p>{{event.name}}</p></header>
-        <section>
-          <p>{{event.description}}</p>
-        </section>
-        <footer>
-          <p>{{event.price}}€</p>
-          <p>{{event.locationName}}</p>
-        </footer>
-      </section>
-      <picture class="delete-svg" (click)="deleteOneEvent(event.id)">
-        <img src="../../assets/delete.svg" alt="" />
-      </picture>
-      <picture class="update-svg">
-        <img src="../../assets/update.svg" alt="" />
-      </picture>
-    </section>
+    <app-card
+      *ngFor="let event of events"
+      [event]="event"
+      (change)="deleteOneEvent($event)"
+    ></app-card>
   </main>
 </ion-content>

@@ -12,4 +12,12 @@ export class LocationService {
   getAllLocation() {
     return this.httpClient.get(this.endpoint);
   }
+
+  addLocation(location: any) {
+    return this.httpClient.post(this.endpoint, location);
+  }
+
+  deleteLocation(locationId: any) {
+    return this.httpClient.delete(this.endpoint + `/${locationId}`);
+  }
 }

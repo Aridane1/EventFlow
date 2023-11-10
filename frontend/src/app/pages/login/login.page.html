@@ -1,0 +1,25 @@
+<ion-content>
+  <header class="head">
+    <h2>INICIAR SESIÓN</h2>
+  </header>
+  <main class="container">
+    <form [formGroup]="loginForm" class="container-form">
+      <section class="container-inputs">
+        <section class="email">
+          <label for="email">Correo electornico</label>
+          <input type="email" formControlName="email" id="email" />
+        </section>
+        <section class="password">
+          <label for="password">Contraseña</label>
+          <input type="password" formControlName="password" id="password" />
+        </section>
+      </section>
+      <section class="btn">
+        <button type="submit" (click)="login()">Ingresar</button>
+      </section>
+    </form>
+    <footer class="container-footer" routerLink="/register">
+      <p>Crear cuenta</p>
+    </footer>
+  </main>
+</ion-content>

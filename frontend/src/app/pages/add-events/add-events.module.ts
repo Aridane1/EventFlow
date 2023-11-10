@@ -8,6 +8,7 @@ import { AddEventsPageRoutingModule } from './add-events-routing.module';
 
 import { AddEventsPage } from './add-events.page';
 import { MenuComponent } from 'src/app/components/menu/menu.component';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { MenuComponent } from 'src/app/components/menu/menu.component';
     ReactiveFormsModule,
     IonicModule,
     AddEventsPageRoutingModule,
+    SharedModule,
   ],
   declarations: [AddEventsPage],
 })

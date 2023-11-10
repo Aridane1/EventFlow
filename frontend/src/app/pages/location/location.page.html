@@ -1,0 +1,48 @@
+<header class="header">
+  <h2>EventFlow</h2>
+</header>
+<ion-content>
+  <main>
+    <section>
+      <img
+        src="../../../assets/arrow-left.svg"
+        alt="arrow"
+        routerLink="/admin-page"
+      />
+      <h1>Municipios registrados</h1>
+    </section>
+
+    <section class="container">
+      <section class="container-form">
+        <form [formGroup]="locationForm" (ngSubmit)="onAdd()" class="form">
+          <section>
+            <label for="name">Nombre del Municipio</label>
+            <input
+              type="text"
+              placeholder="Nombre del municipio"
+              formControlName="name"
+              id="name"
+            />
+          </section>
+          <ion-button color="primary" type="submit">
+            Añadir Municipio
+          </ion-button>
+        </form>
+      </section>
+      <table>
+        <tr>
+          <th>Municipio</th>
+          <th>Accion</th>
+        </tr>
+        <tr *ngFor="let location of locations">
+          <td>{{location.name}}</td>
+          <td>
+            <ion-button (click)="deleteLocation(location.id)"
+              >Eliminar</ion-button
+            >
+          </td>
+        </tr>
+      </table>
+    </section>
+  </main>
+</ion-content>

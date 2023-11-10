@@ -20,9 +20,9 @@ export class HomePage implements OnInit {
     this.getAllEvents();
   }
 
-  ionViewWillEnter() {
-    this.getAllEvents();
-  }
+  ngAfterViewInit() {}
+
+  ionViewWillEnter() {}
 
   getAllEvents() {
     this.eventService.getAllEvent().subscribe((dataEvent) => {

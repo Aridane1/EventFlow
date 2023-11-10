@@ -3,11 +3,11 @@
     <section class="nav-container">
       <h2 class="nav-logo">EventFlow</h2>
       <input class="nav-input" type="checkbox" id="menu" name="menu" />
-      <label for="menu" class="nav-label">
+      <label class="nav-label" (click)="switch()">
         <img src="../../../assets/menu.svg" alt="menu" />
         <img src="../../../assets/cross.svg" alt="menu" />
       </label>
-      <section class="nav-menu">
+      <section class="nav-menu" [ngClass]="{ show: showMenu }">
         <a href="/home">Ver Eventos</a>
         <a href="#">Mandar Notificaciones</a>
         <a href="#">Perfil</a>
