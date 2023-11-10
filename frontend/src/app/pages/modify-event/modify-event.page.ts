@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 import { LocationService } from 'src/app/services/location.service';
 import { PhotoService } from 'src/app/services/photo.service';
+import { Event } from '../../interfaces/event';
 
 @Component({
   selector: 'app-modify-event',
@@ -85,6 +86,16 @@ export class ModifyEventPage implements OnInit {
     const locationName = this.eventForm.get('locationName')?.value;
     const price = this.eventForm.get('price')?.value;
     const numTickets = this.eventForm.get('numTickets')?.value;
+
+    let event: Event = {
+      name: title,
+      description: description,
+      date: '12-09-2022',
+      price: price,
+      numTickets: numTickets,
+      location: locationName,
+    };
+
     if (!this.eventForm.valid) {
       if (date == null) {
         console.log('The date is null');
@@ -98,38 +109,19 @@ export class ModifyEventPage implements OnInit {
         const response = await fetch(this.capturedPhoto);
         blob = await response.blob();
       }
+
       if (this.havePhoto == false) {
         console.log('false');
         this.eventService
-          .updateEventWithPhoto(
-            this.id,
-            {
-              name: title,
-              description: description,
-              date: date,
-              price: price,
-              numTickets: numTickets,
-              location: locationName,
-            },
-            blob
-          )
+          .updateEventWithPhoto(this.id, event, blob)
           .subscribe((data) => {
             this.router.navigateByUrl('/home');
           });
       } else {
         console.log('true');
-        this.eventService
-          .updateEvent(this.id, {
-            name: title,
-            description: description,
-            date: date,
-            price: price,
-            numTickets: numTickets,
-            location: locationName,
-          })
-          .subscribe((data) => {
-            this.router.navigateByUrl('/home');
-          });
+        this.eventService.updateEvent(this.id, event).subscribe((data) => {
+          this.router.navigateByUrl('/home');
+        });
       }
     }
   }

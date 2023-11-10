@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EventService } from 'src/app/services/event.service';
 import { LocationService } from 'src/app/services/location.service';
 import { PhotoService } from 'src/app/services/photo.service';
+import { Event } from '../../interfaces/event';
 
 @Component({
   selector: 'app-add-events',
@@ -49,6 +50,7 @@ export class AddEventsPage implements OnInit {
       this.locations = data;
     });
   }
+
   selectImage() {
     this.photoService.pickImage().then((data) => {
       this.capturedPhoto = data.webPath;
@@ -63,6 +65,15 @@ export class AddEventsPage implements OnInit {
     const price = this.eventForm.get('price')?.value;
     const numTickets = this.eventForm.get('numTickets')?.value;
 
+    let event: Event = {
+      name: title,
+      description: description,
+      date: '12-09-2022',
+      price: price,
+      numTickets: numTickets,
+      location: locationName,
+    };
+
     if (!this.eventForm.valid) {
       if (date == null) {
         console.log('The date is null');
@@ -76,22 +87,9 @@ export class AddEventsPage implements OnInit {
         const response = await fetch(this.capturedPhoto);
         blob = await response.blob();
       }
-
-      this.eventService
-        .addEvent(
-          {
-            name: title,
-            description: description,
-            date: '12-09-2022',
-            price: price,
-            numTickets: numTickets,
-            location: locationName,
-          },
-          blob
-        )
-        .subscribe((data) => {
-          this.router.navigateByUrl('/home');
-        });
+      this.eventService.addEvent(event, blob).subscribe((data) => {
+        this.router.navigateByUrl('/home');
+      });
     }
   }
 }
