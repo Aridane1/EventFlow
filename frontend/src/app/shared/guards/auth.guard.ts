@@ -35,9 +35,6 @@ export class AuthGuard implements CanActivate {
     this.userRoles = await firstValueFrom(
       this.userRolService.getAllUserRolByIdUser(1)
     );
-    console.log(this.userRoles);
-    console.log(allowedRoles);
-    console.log(isAuthenticated && this.userRoles.includes(allowedRoles));
 
     if (isAuthenticated && this.userRoles.includes(allowedRoles)) {
       return true; // Usuario está autenticado, permite el acceso.

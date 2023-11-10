@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocationService } from 'src/app/services/location.service';
+import { Location } from '../../interfaces/location';
 
 @Component({
   selector: 'app-location',
@@ -31,11 +32,14 @@ export class LocationPage implements OnInit {
 
   onAdd() {
     const name = this.locationForm.get('name')?.value;
-
-    this.locationService.addLocation({ name: name }).subscribe((data) => {
+    let location: Location = {
+      name: name,
+    };
+    this.locationService.addLocation(location).subscribe((data) => {
       this.getAllLocation();
     });
   }
+
   deleteLocation(locationId: number) {
     this.locationService.deleteLocation(locationId).subscribe((data) => {
       this.getAllLocation();

@@ -3,14 +3,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
 import { Observable, tap } from 'rxjs';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { User } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   initialized = false;
-  private jwtHelper: JwtHelperService = new JwtHelperService();
 
   endpoint = 'http://localhost:8080/api/users';
   constructor(
@@ -37,9 +36,9 @@ export class AuthService {
     return options;
   }
 
-  login(user: any): Observable<any> {
+  login(user: User): Observable<User> {
     return this.httpClient
-      .post<any>(`${this.endpoint}/signin`, null, this.getOptions(user))
+      .post<User>(`${this.endpoint}/signin`, null, this.getOptions(user))
       .pipe(
         tap(async (res: any) => {
           if (res.user) {
@@ -50,12 +49,9 @@ export class AuthService {
       );
   }
 
-  register(user: any): Observable<any> {
-    let newUser = {
-      name: user.name,
-    };
+  register(user: User): Observable<User> {
     return this.httpClient
-      .post<any>(this.endpoint, newUser, this.getOptions(user))
+      .post<any>(this.endpoint, { name: user.name }, this.getOptions(user))
       .pipe(
         tap(async (res: any) => {
           if (res.user) {

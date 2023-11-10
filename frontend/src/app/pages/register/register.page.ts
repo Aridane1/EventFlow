@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserRolService } from 'src/app/services/user-rol.service';
 
@@ -26,23 +27,22 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {}
 
-  register() {
+  async register() {
     const name = this.registerForm.get('name')?.value;
     const email = this.registerForm.get('email')?.value;
     const password = this.registerForm.get('password')?.value;
 
-    let user = {
+    let user: User = {
       email: email,
       password: password,
       name: name,
-      rol: 'customer',
     };
 
     this.authService.register(user).subscribe((res) => {
       this.userRolService
         .addUserRol({
           email: user.email,
-          nameRol: user.rol,
+          nameRol: 'customer',
         })
         .subscribe((data) => {});
       this.router.navigateByUrl('home');
