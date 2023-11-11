@@ -2,20 +2,22 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
-import { Observable, tap } from 'rxjs';
+import { Observable, firstValueFrom, switchMap, tap } from 'rxjs';
 import { User } from '../interfaces/user';
+import { UserRolService } from './user-rol.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   initialized = false;
-
+  userRoles: any;
   endpoint = 'http://localhost:8080/api/users';
   constructor(
     private httpClient: HttpClient,
     private storage: Storage,
-    private router: Router
+    private router: Router,
+    private userRolService: UserRolService
   ) {
     this.storage.create();
   }
@@ -40,10 +42,16 @@ export class AuthService {
     return this.httpClient
       .post<User>(`${this.endpoint}/signin`, null, this.getOptions(user))
       .pipe(
-        tap(async (res: any) => {
+        switchMap(async (res: any) => {
           if (res.user) {
             await this.storage.set('token', res.access_token);
-            await this.storage.set('idUser', res.user.id);
+            this.userRoles = await firstValueFrom(
+              this.userRolService.getAllUserRolByIdUser(res.user.id)
+            );
+            await this.storage.set('rol', this.userRoles);
+            return res; // Emitir la respuesta original después de realizar las operaciones de almacenamiento
+          } else {
+            throw new Error('Invalid credentials'); // Puedes personalizar el mensaje de error según tus necesidades
           }
         })
       );
@@ -56,7 +64,10 @@ export class AuthService {
         tap(async (res: any) => {
           if (res.user) {
             await this.storage.set('token', res.access_token);
-            await this.storage.set('idUser', res.user.id);
+            this.userRoles = await firstValueFrom(
+              this.userRolService.getAllUserRolByIdUser(res.user.id)
+            );
+            await this.storage.set('rol', this.userRoles);
           }
         })
       );

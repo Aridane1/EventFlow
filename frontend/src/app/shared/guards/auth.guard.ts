@@ -19,7 +19,6 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private userRolService: UserRolService,
     private storage: Storage
   ) {}
 
@@ -30,13 +29,8 @@ export class AuthGuard implements CanActivate {
     const isAuthenticated = await this.authService.isLoggedIn();
     const allowedRoles = route.data['allowedRoles'];
 
-    const userId = await this.storage.get('idUser');
-
-    this.userRoles = await firstValueFrom(
-      this.userRolService.getAllUserRolByIdUser(1)
-    );
-
-    if (isAuthenticated && this.userRoles.includes(allowedRoles)) {
+    this.userRoles = await this.storage.get('rol');
+    if (isAuthenticated) {
       return true; // Usuario está autenticado, permite el acceso.
     } else {
       return false; // No permite el acceso.

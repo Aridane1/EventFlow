@@ -11,7 +11,7 @@ const routes: Routes = [
   {
     path: 'home',
     canActivate: [AuthGuard],
-    data: { allowedRoles: 'admin' },
+    data: { allowedRoles: ['admin'] },
     loadChildren: () =>
       import('./home/home.module').then((m) => m.HomePageModule),
   },
