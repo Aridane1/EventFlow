@@ -69,6 +69,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/start/start.module').then((m) => m.StartPageModule),
   },
+  {
+    path: 'events',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: 'customer' },
+    loadChildren: () =>
+      import('./pages/events/events.module').then((m) => m.EventsPageModule),
+  },
 ];
 
 @NgModule({

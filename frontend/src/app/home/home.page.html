@@ -1,5 +1,5 @@
 <ion-content>
-  <app-menu></app-menu>
+  <app-menu [mode]="'admin'"></app-menu>
   <header class="head">
     <p>Eventos de tus municipio</p>
     <img
@@ -11,6 +11,7 @@
   </header>
   <main class="card-container">
     <app-card
+      [mode]="'admin'"
       *ngFor="let event of events"
       [event]="event"
       (change)="deleteOneEvent($event)"

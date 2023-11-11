@@ -53,7 +53,7 @@ export class LoginPage implements OnInit {
           this.router.navigateByUrl('/home');
         }
         if (rol.includes('customer')) {
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/events');
         }
 
         this.loginForm.reset();

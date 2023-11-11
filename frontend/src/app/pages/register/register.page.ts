@@ -45,7 +45,7 @@ export class RegisterPage implements OnInit {
           nameRol: 'customer',
         })
         .subscribe((data) => {});
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl('/events');
     });
   }
 }
