@@ -74,6 +74,7 @@ require("./routes/location.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/rol.routes")(app);
 require("./routes/user-rols.routes")(app);
+require("./routes/client-subscription-municipality.routes")(app);
 
 app.listen(PORT, () => {
   console.log("Server started on: " + PORT);
