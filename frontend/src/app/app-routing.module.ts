@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'add-events',
     canActivate: [AuthGuard],
-    data: { allowedRoles: 'admin' },
+    data: { allowedRoles: ['admin'] },
     loadChildren: () =>
       import('./pages/add-events/add-events.module').then(
         (m) => m.AddEventsPageModule
@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'admin-page',
     canActivate: [AuthGuard],
-    data: { allowedRoles: 'manager' },
+    data: { allowedRoles: ['manager'] },
     loadChildren: () =>
       import('./pages/admin-page/admin-page.module').then(
         (m) => m.AdminPagePageModule
@@ -37,7 +37,7 @@ const routes: Routes = [
   {
     path: 'location',
     canActivate: [AuthGuard],
-    data: { allowedRoles: 'admin' },
+    data: { allowedRoles: ['admin'] },
     loadChildren: () =>
       import('./pages/location/location.module').then(
         (m) => m.LocationPageModule
@@ -46,7 +46,7 @@ const routes: Routes = [
   {
     path: 'modify-event',
     canActivate: [AuthGuard],
-    data: { allowedRoles: 'admin' },
+    data: { allowedRoles: ['admin'] },
     loadChildren: () =>
       import('./pages/modify-event/modify-event.module').then(
         (m) => m.ModifyEventPageModule
@@ -72,9 +72,16 @@ const routes: Routes = [
   {
     path: 'events',
     canActivate: [AuthGuard],
-    data: { allowedRoles: 'customer' },
+    data: { allowedRoles: ['customer'] },
     loadChildren: () =>
       import('./pages/events/events.module').then((m) => m.EventsPageModule),
+  },
+  {
+    path: 'account',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['customer', 'admin'] },
+    loadChildren: () =>
+      import('./pages/account/account.module').then((m) => m.AccountPageModule),
   },
 ];
 

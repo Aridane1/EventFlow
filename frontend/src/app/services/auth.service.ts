@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
@@ -55,6 +55,16 @@ export class AuthService {
           }
         })
       );
+  }
+
+  getUserByToken(token: any) {
+    const header = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.httpClient.get<any>(`${this.endpoint}/token`, {
+      headers: header,
+    });
   }
 
   register(user: User): Observable<User> {
