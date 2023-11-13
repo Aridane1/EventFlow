@@ -42,7 +42,6 @@ export class EventsPage implements OnInit {
             ) {
               this.events[indexEvent].locationName =
                 dataLocation[indexLocation].name;
-              console.log(this.events[indexEvent]);
             }
           }
         }

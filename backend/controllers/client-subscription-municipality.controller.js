@@ -40,6 +40,7 @@ exports.findAllByClientId = (req, res) => {
         .send({ message: "There was a problem finding the data" });
     });
 };
+
 exports.findAll = (req, res) => {
   ClientSubscriptionMunicipality.findAll()
     .then((data) => {

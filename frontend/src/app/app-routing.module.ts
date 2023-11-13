@@ -37,7 +37,7 @@ const routes: Routes = [
   {
     path: 'location',
     canActivate: [AuthGuard],
-    data: { allowedRoles: ['admin'] },
+    data: { allowedRoles: ['manager'] },
     loadChildren: () =>
       import('./pages/location/location.module').then(
         (m) => m.LocationPageModule
@@ -82,6 +82,13 @@ const routes: Routes = [
     data: { allowedRoles: ['customer', 'admin'] },
     loadChildren: () =>
       import('./pages/account/account.module').then((m) => m.AccountPageModule),
+  },
+  {
+    path: 'search',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['customer'] },
+    loadChildren: () =>
+      import('./pages/search/search.module').then((m) => m.SearchPageModule),
   },
 ];
 
