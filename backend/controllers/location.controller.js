@@ -1,5 +1,6 @@
 const db = require("../models");
 const Location = db.Location;
+const Event = db.Event;
 const fs = require("fs");
 const path = require("path");
 
@@ -22,6 +23,32 @@ exports.create = (req, res) => {
       res.status(500).send({
         message:
           err.message || "Some error occurred while creating the location.",
+      });
+    });
+};
+
+exports.getAllEventsInLocation = (req, res) => {
+  let id = req.params.id;
+  console.log(id);
+  Location.findAll({
+    where: {
+      id: id,
+    },
+    include: {
+      model: Event,
+    },
+  })
+    .then((data) => {
+      if (!data) {
+        return res.status(404).send({
+          message: `No data found with id ${id}`,
+        });
+      }
+      return res.json(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message,
       });
     });
 };

@@ -6,6 +6,7 @@ module.exports = (app) => {
 
   router.post("/", upload.single("file"), location.create);
   router.get("/", location.getAll);
+  router.get("/events-locations/:id", location.getAllEventsInLocation);
   router.put("/:id", location.update);
   router.put("/image/:id", upload.single("file"), location.updateImage);
   router.delete("/:id", location.delete);
