@@ -14,8 +14,11 @@ export class LocationService {
     return this.httpClient.get(this.endpoint);
   }
 
-  addLocation(location: Location) {
-    return this.httpClient.post(this.endpoint, location);
+  addLocation(location: Location, blob: any) {
+    const body = new FormData();
+    body.append('name', location.name);
+    body.append('file', blob);
+    return this.httpClient.post(this.endpoint, body);
   }
 
   deleteLocation(locationId: number) {

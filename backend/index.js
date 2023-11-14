@@ -17,10 +17,8 @@ var corsOptions = {
   origin: "*",
 };
 
-// database conection
 const db = require("./models");
 
-// For explotation. Database is not dropped.
 db.sequelize.sync();
 // db.sequelize
 //   .sync({ force: true })

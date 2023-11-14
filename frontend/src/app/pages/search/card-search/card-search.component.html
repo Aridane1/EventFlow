@@ -1,14 +1,21 @@
 <section class="container">
   <section class="container-card">
-    <img src="" alt="{{ location.name }}" />
-    <section>
-      <p>{{ location.name }}</p>
+    <section class="content">
+      <section class="location-img">
+        <img
+          src="http://localhost:8080/images/{{ location.location_img }}"
+          alt="{{ location.name }}"
+        />
+      </section>
+      <section>
+        <p>{{ location.name }}</p>
+      </section>
     </section>
     <section class="menu" (click)="open(location)">
       <img src="../../../../assets/three_points.svg" alt="three_points" />
     </section>
-  </section>
-  <section class="container-text" *ngIf="location.showText">
-    <p (click)="subscribe(location.id)">Suscribirte a este municipio</p>
+    <section class="container-text" *ngIf="location.showText">
+      <div (click)="subscribe(location.id)">Suscribirte a este municipio</div>
+    </section>
   </section>
 </section>

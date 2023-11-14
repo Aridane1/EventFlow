@@ -34,6 +34,7 @@ exports.getAll = (req, res) => {
       res.status(500).send({ message: "Server error. Couldn´t find events" });
     });
 };
+
 exports.getOne = (req, res) => {
   const id = req.params.id;
   Event.findByPk(id)

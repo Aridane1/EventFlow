@@ -1,11 +1,15 @@
 const db = require("../models");
 const Location = db.Location;
+const fs = require("fs");
+const path = require("path");
 
 exports.create = (req, res) => {
   console.log(req.body.name);
   const newLocation = {
     name: req.body.name,
+    location_img: req.file.filename,
   };
+
   Location.create(newLocation)
     .then((createLocation) => {
       res.send({
@@ -21,6 +25,7 @@ exports.create = (req, res) => {
       });
     });
 };
+
 exports.getAll = (req, res) => {
   Location.findAll()
     .then((allLocation) => {
@@ -39,7 +44,6 @@ exports.getAll = (req, res) => {
     });
 };
 
-//Delete
 exports.delete = (req, res) => {
   const id = req.params.id;
   Location.destroy({ where: { id: id } })
@@ -56,16 +60,16 @@ exports.delete = (req, res) => {
     });
 };
 
-//update
 exports.update = (req, res) => {
-  // Validate request
   if (!req.body.name) {
     return res.status(400).send({
       message: "Content can not be empty!",
     });
   }
-  // Find user and update it with the requested information
-  Location.update(req.body, { where: { id: req.params.id } })
+  const updateLocation = {
+    name: req.body.name,
+  };
+  Location.update(updateLocation, { where: { id: req.params.id } })
     .then((num) => {
       if (num == 1) {
         res.send({
@@ -82,6 +86,35 @@ exports.update = (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message: err.message || "Error updating location with this id",
+      });
+    });
+};
+
+exports.updateImage = (req, res) => {
+  let locationId = req.params.id;
+  let updateLocation = {
+    name: req.body.name,
+  };
+  console.log(locationId);
+
+  Location.findByPk(locationId)
+    .then((data) => {
+      let imagePath = path.join(
+        __dirname,
+        "../public/images",
+        data.location_img
+      );
+      fs.unlinkSync(imagePath);
+      updateLocation.location_img = req.file.filename;
+      return Location.update(updateLocation, { where: { id: locationId } });
+    })
+    .then(() => {
+      res.send({ message: "Update successful" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({
+        message: "Error updating location.",
       });
     });
 };
