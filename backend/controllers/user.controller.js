@@ -9,7 +9,10 @@ exports.create = (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
+    rol: req.body.rol,
   };
+  console.log("-------");
+  console.log(newUser);
 
   User.findOne({ where: { email: req.body.email } }).then((data) => {
     if (data) {
@@ -57,7 +60,7 @@ exports.getAll = (req, res) => {
       });
     });
 };
-//Buscar un usuario a partir del token
+
 exports.userByToken = async (req, res) => {
   try {
     let decoded;

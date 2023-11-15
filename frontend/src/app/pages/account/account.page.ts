@@ -19,6 +19,7 @@ export class AccountPage implements OnInit {
     email: '',
     password: '',
     profile_picture: '',
+    rol: '',
   };
   constructor(private storage: Storage, private authService: AuthService) {}
 
@@ -30,6 +31,7 @@ export class AccountPage implements OnInit {
       name: this.user?.user.name ? this.user.user.name : '',
       email: '',
       password: '',
+      rol: '',
       profile_picture: this.user?.user.profile_picture
         ? this.user.user.profile_picture
         : '',

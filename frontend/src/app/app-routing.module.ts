@@ -72,7 +72,7 @@ const routes: Routes = [
   {
     path: 'events',
     canActivate: [AuthGuard],
-    data: { allowedRoles: ['customer'] },
+    data: { allowedRoles: ['customer', 'admin'] },
     loadChildren: () =>
       import('./pages/events/events.module').then((m) => m.EventsPageModule),
   },
@@ -86,7 +86,7 @@ const routes: Routes = [
   {
     path: 'search',
     canActivate: [AuthGuard],
-    data: { allowedRoles: ['customer'] },
+    data: { allowedRoles: ['customer', 'admin'] },
     loadChildren: () =>
       import('./pages/search/search.module').then((m) => m.SearchPageModule),
   },
