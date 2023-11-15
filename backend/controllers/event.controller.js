@@ -13,7 +13,6 @@ exports.create = (req, res) => {
     locationId: req.body.location,
     img: req.file.filename,
   };
-  console.log(newEvent);
   // Save event in the database
   Event.create(newEvent)
     .then((data) => {
@@ -35,6 +34,7 @@ exports.getAll = (req, res) => {
       res.status(500).send({ message: "Server error. Couldn´t find events" });
     });
 };
+
 exports.getOne = (req, res) => {
   const id = req.params.id;
   Event.findByPk(id)

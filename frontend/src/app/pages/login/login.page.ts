@@ -6,7 +6,6 @@ import { Storage } from '@ionic/storage-angular';
 import { firstValueFrom } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserRolService } from 'src/app/services/user-rol.service';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +20,6 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private router: Router,
     private storage: Storage,
-    private userRolService: UserRolService,
     private alertController: AlertController
   ) {
     this.storage.create();
@@ -39,13 +37,16 @@ export class LoginPage implements OnInit {
 
     let user: User = {
       name: null,
+      rol: null,
       email: email,
       password: password,
     };
 
     this.authService.login(user).subscribe(
       async (res) => {
-        let rol = await this.storage.get('rol');
+        let user: any = res;
+        let rol = user.user.rol;
+
         if (rol.includes('manager')) {
           this.router.navigateByUrl('/admin-page');
         }
@@ -53,7 +54,7 @@ export class LoginPage implements OnInit {
           this.router.navigateByUrl('/home');
         }
         if (rol.includes('customer')) {
-          this.router.navigateByUrl('/home');
+          this.router.navigateByUrl('/events');
         }
 
         this.loginForm.reset();

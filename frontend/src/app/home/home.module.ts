@@ -16,6 +16,6 @@ import { SharedModule } from '../shared/shared/shared.module';
     HomePageRoutingModule,
     SharedModule,
   ],
-  declarations: [HomePage, CardComponent],
+  declarations: [HomePage],
 })
 export class HomePageModule {}

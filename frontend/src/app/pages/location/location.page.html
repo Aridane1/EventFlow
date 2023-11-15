@@ -23,8 +23,19 @@
               formControlName="name"
               id="name"
             />
+            <label for="name">Imagen del Municipio</label>
+            <input
+              type="text"
+              placeholder="Nombre del municipio"
+              formControlName="name"
+              id="name"
+              value="{{capturedPhoto}}"
+            />
+            <ion-button *ngIf="!capturedPhoto" (click)="selectImage()"
+              >Seleccionar imagen</ion-button
+            >
           </section>
-          <ion-button color="primary" type="submit">
+          <ion-button color="success" type="submit">
             Añadir Municipio
           </ion-button>
         </form>
@@ -37,7 +48,7 @@
         <tr *ngFor="let location of locations">
           <td>{{location.name}}</td>
           <td>
-            <ion-button (click)="deleteLocation(location.id)"
+            <ion-button color="danger" (click)="deleteLocation(location.id)"
               >Eliminar</ion-button
             >
           </td>

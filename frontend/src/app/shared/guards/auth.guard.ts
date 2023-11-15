@@ -9,13 +9,12 @@ import {
 import { Storage } from '@ionic/storage-angular';
 import { Observable, firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { UserRolService } from 'src/app/services/user-rol.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  userRoles: any;
+  userRol: any;
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -27,13 +26,14 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Promise<boolean> {
     const isAuthenticated = await this.authService.isLoggedIn();
-    const allowedRoles = route.data['allowedRoles'];
+    const allowedRoles: Array<any> = route.data['allowedRoles'] as string[];
+    let token = await this.storage.get('token');
+    const user = await firstValueFrom(this.authService.getUserByToken(token));
 
-    this.userRoles = await this.storage.get('rol');
-    if (isAuthenticated) {
-      return true; // Usuario está autenticado, permite el acceso.
+    if (isAuthenticated && allowedRoles.includes(user.user.rol)) {
+      return true;
     } else {
-      return false; // No permite el acceso.
+      return false;
     }
   }
 }

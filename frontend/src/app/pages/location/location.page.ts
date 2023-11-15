@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocationService } from 'src/app/services/location.service';
 import { Location } from '../../interfaces/location';
+import { PhotoService } from 'src/app/services/photo.service';
 
 @Component({
   selector: 'app-location',
@@ -11,8 +12,11 @@ import { Location } from '../../interfaces/location';
 export class LocationPage implements OnInit {
   locationForm: FormGroup;
   locations: any;
+  capturedPhoto: any;
   constructor(
     private locationService: LocationService,
+    private photoService: PhotoService,
+
     private formBuilder: FormBuilder
   ) {
     this.locationForm = this.formBuilder.group({
@@ -29,15 +33,32 @@ export class LocationPage implements OnInit {
       this.locations = data;
     });
   }
+  selectImage() {
+    this.photoService.pickImage().then((data) => {
+      this.capturedPhoto = data.webPath;
+    });
+  }
 
-  onAdd() {
+  async onAdd() {
     const name = this.locationForm.get('name')?.value;
     let location: Location = {
       name: name,
     };
-    this.locationService.addLocation(location).subscribe((data) => {
-      this.getAllLocation();
-    });
+
+    if (!this.locationForm.valid) {
+      console.log('Please provide all the required values!');
+      return;
+    } else {
+      let blob = null;
+      if (this.capturedPhoto != '') {
+        const response = await fetch(this.capturedPhoto);
+        blob = await response.blob();
+      }
+
+      this.locationService.addLocation(location, blob).subscribe((data) => {
+        this.getAllLocation();
+      });
+    }
   }
 
   deleteLocation(locationId: number) {

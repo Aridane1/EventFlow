@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { EventService } from '../services/event.service';
-import { LocationService } from '../services/location.service';
-import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { EventService } from 'src/app/services/event.service';
+import { LocationService } from 'src/app/services/location.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-events',
+  templateUrl: './events.page.html',
+  styleUrls: ['./events.page.scss'],
 })
-export class HomePage implements OnInit {
+export class EventsPage implements OnInit {
   events: any;
-
   constructor(
     private eventService: EventService,
     private locationService: LocationService
@@ -19,7 +18,6 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.getAllEvents();
   }
-
   ionViewWillEnter() {
     this.getAllEvents();
   }
@@ -48,11 +46,6 @@ export class HomePage implements OnInit {
           }
         }
       });
-    });
-  }
-  deleteOneEvent(id: number) {
-    this.eventService.deleteOneEvent(id).subscribe((data) => {
-      this.getAllEvents();
     });
   }
 }

@@ -2,13 +2,17 @@ const db = require("../models");
 const User = db.User;
 const bcrypt = require("bcryptjs");
 const utils = require("../utils");
+const jwt = require("jsonwebtoken");
 
 exports.create = (req, res) => {
   const newUser = {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
+    rol: req.body.rol,
   };
+  console.log("-------");
+  console.log(newUser);
 
   User.findOne({ where: { email: req.body.email } }).then((data) => {
     if (data) {
@@ -55,4 +59,38 @@ exports.getAll = (req, res) => {
         message: "Error retrieving users from database",
       });
     });
+};
+
+exports.userByToken = async (req, res) => {
+  try {
+    let decoded;
+    try {
+      decoded = jwt.verify(
+        req.headers["authorization"].split(" ")[1],
+        process.env.JWT_SECRET
+      );
+      console.log(decoded);
+    } catch (e) {
+      throw e;
+    }
+    await User.findOne({
+      where: { id: decoded.id },
+    }).then((user) => {
+      if (!user) {
+        return res.status(403).send({
+          message: "Unauthorized",
+        });
+      } else {
+        return res.status(200).send({
+          user,
+        });
+      }
+    });
+  } catch (error) {
+    console.log("Error en el middleware de autenticacion", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error interno del servidor",
+    });
+  }
 };

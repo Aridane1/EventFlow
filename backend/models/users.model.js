@@ -18,6 +18,9 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.TEXT,
       allowNull: true,
     },
+    rol: {
+      type: Sequelize.STRING,
+    },
   });
 
   return User;

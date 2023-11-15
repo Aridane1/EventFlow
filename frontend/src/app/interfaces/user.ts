@@ -5,4 +5,5 @@ export interface User {
   aboutMe?: string;
   profile_picture?: string;
   access_token?: string;
+  rol: string | null;
 }

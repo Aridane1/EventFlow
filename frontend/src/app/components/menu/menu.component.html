@@ -1,16 +1,35 @@
-<header>
+<header *ngIf="mode === 'admin'">
   <nav class="nav">
     <section class="nav-container">
       <h2 class="nav-logo">EventFlow</h2>
       <input class="nav-input" type="checkbox" id="menu" name="menu" />
       <label class="nav-label" (click)="switch()">
-        <img src="../../../assets/menu.svg" alt="menu" />
-        <img src="../../../assets/cross.svg" alt="menu" />
+        <img src="../../../assets/menu.svg" alt="menu" *ngIf="!showMenu" />
+        <img src="../../../assets/cross.svg" alt="menu" *ngIf="showMenu" />
       </label>
       <section class="nav-menu" [ngClass]="{ show: showMenu }">
         <a href="/home">Ver Eventos</a>
         <a href="#">Mandar Notificaciones</a>
-        <a href="#">Perfil</a>
+        <a href="/account">Perfil</a>
+      </section>
+    </section>
+  </nav>
+</header>
+<header>
+  <nav class="nav" *ngIf="mode === 'customer'">
+    <section class="nav-container">
+      <h2 class="nav-logo">EventFlow</h2>
+      <input class="nav-input" type="checkbox" id="menu" name="menu" />
+      <label class="nav-label" (click)="switch()">
+        <img src="../../../assets/menu.svg" alt="menu" *ngIf="!showMenu" />
+        <img src="../../../assets/cross.svg" alt="menu" *ngIf="showMenu" />
+      </label>
+      <section class="nav-menu" [ngClass]="{ show: showMenu }">
+        <a href="/events">Eventos populares</a>
+        <a href="#">Eventos en los que participas</a>
+        <a href="#">Notificaciones</a>
+        <a href="/search">Busqueda</a>
+        <a href="/account">Perfil</a>
       </section>
     </section>
   </nav>

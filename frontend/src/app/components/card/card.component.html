@@ -15,7 +15,11 @@
       <p class="footer">{{ event.locationName }}</p>
     </footer>
   </section>
-  <picture class="delete-svg" (click)="deleteOneEvent(event.id)">
+  <picture
+    class="delete-svg"
+    (click)="deleteOneEvent(event.id)"
+    *ngIf="mode === 'admin'"
+  >
     <img src="../../assets/delete.svg" alt="" />
   </picture>
   <picture class="update-svg">
@@ -23,6 +27,7 @@
       src="../../assets/update.svg"
       alt=""
       [routerLink]="['/modify-event', { id: event.id }]"
+      *ngIf="mode === 'admin'"
     />
   </picture>
 </section>

@@ -17,14 +17,12 @@ var corsOptions = {
   origin: "*",
 };
 
-// database conection
 const db = require("./models");
 
-// For explotation. Database is not dropped.
-db.sequelize.sync();
-// db.sequelize
-//   .sync({ force: true })
-//   .then(() => console.log("Drop and Resync with { force: true }"));
+// db.sequelize.sync();
+db.sequelize
+  .sync({ force: true })
+  .then(() => console.log("Drop and Resync with { force: true }"));
 
 app.use(cors(corsOptions));
 
@@ -72,8 +70,7 @@ app.use(function (req, res, next) {
 require("./routes/event.routes")(app);
 require("./routes/location.routes")(app);
 require("./routes/user.routes")(app);
-require("./routes/rol.routes")(app);
-require("./routes/user-rols.routes")(app);
+require("./routes/client-subscription-municipality.routes")(app);
 
 app.listen(PORT, () => {
   console.log("Server started on: " + PORT);

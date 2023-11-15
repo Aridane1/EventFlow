@@ -1,0 +1,17 @@
+<ion-content
+  ><app-menu [mode]="'customer'"></app-menu>
+  <header>
+    <ion-searchbar
+      search-icon="search"
+      class="custom-search"
+      [(ngModel)]="searcher"
+    ></ion-searchbar>
+  </header>
+  <main class="container">
+    <app-card-search
+      *ngFor="let location of onSearch()"
+      [location]="location"
+      (locationId)="subscribeThisLocation($event)"
+    ></app-card-search>
+  </main>
+</ion-content>

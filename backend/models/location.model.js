@@ -4,6 +4,9 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       unique: true,
     },
+    location_img: {
+      type: Sequelize.TEXT,
+    },
   });
   return Location;
 };

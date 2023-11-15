@@ -21,11 +21,22 @@ db.Sequelize = Sequelize;
 db.Event = require("./events.model.js")(sequelize, Sequelize);
 db.Location = require("./location.model.js")(sequelize, Sequelize);
 db.User = require("./users.model.js")(sequelize, Sequelize);
-db.Rol = require("./rols.model.js")(sequelize, Sequelize);
-db.UserRol = require("./user-rol.model.js")(sequelize, Sequelize);
+db.ClientSubscriptionMunicipality =
+  require("./client-subscription-municipality.model.js")(sequelize, Sequelize);
 
 db.Location.hasMany(db.Event);
-db.Event.belongsTo(db.Location);
-db.User.belongsToMany(db.Rol, { through: "user-rols" });
+db.Event.belongsTo(db.Location, { foreignKey: "locationId" });
+
+db.User.hasMany(db.ClientSubscriptionMunicipality, { foreignKey: "userId" });
+db.Location.hasMany(db.ClientSubscriptionMunicipality, {
+  foreignKey: "locationId",
+});
+
+db.ClientSubscriptionMunicipality.belongsTo(db.User, {
+  foreignKey: "userId",
+});
+db.ClientSubscriptionMunicipality.belongsTo(db.Location, {
+  foreignKey: "locationId",
+});
 
 module.exports = db;

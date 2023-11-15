@@ -68,7 +68,7 @@ export class AddEventsPage implements OnInit {
     let event: Event = {
       name: title,
       description: description,
-      date: '12-09-2022',
+      date: date,
       price: price,
       numTickets: numTickets,
       location: locationName,

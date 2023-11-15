@@ -18,6 +18,9 @@ module.exports = (sequelize, Sequelize) => {
     price: {
       type: Sequelize.FLOAT,
     },
+    locationId: {
+      type: Sequelize.INTEGER,
+    },
   });
 
   return Event;

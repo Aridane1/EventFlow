@@ -8,6 +8,7 @@ import { EventService } from 'src/app/services/event.service';
 })
 export class CardComponent implements OnInit {
   @Input() event: any;
+  @Input() mode: any;
   @Output() change = new EventEmitter<any>();
   constructor() {}
 
