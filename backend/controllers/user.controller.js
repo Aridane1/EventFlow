@@ -11,6 +11,42 @@ exports.create = (req, res) => {
     password: req.body.password,
     rol: req.body.rol,
   };
+
+  User.findOne({ where: { email: req.body.email } }).then((data) => {
+    if (data) {
+      const result = bcrypt.compareSync(newUser.password, data.password);
+      if (!result) return res.status(401).send("Password not valid!");
+      const token = utils.generateToken(data);
+      // get basic user details
+      const userObj = utils.getCleanUser(data);
+      return res.json({ user: userObj, access_token: token });
+    }
+
+    newUser.password = bcrypt.hashSync(req.body.password);
+
+    User.create(newUser)
+      .then((data) => {
+        const token = utils.generateToken(data);
+        // get basic user details
+        const userObj = utils.getCleanUser(data);
+        return res.json({ user: userObj, access_token: token });
+      })
+      .catch((err) => {
+        res.status(500).send({
+          message:
+            err.message || "Some error occurred while creating the user.",
+        });
+      });
+  });
+};
+
+exports.createAdmin = (req, res) => {
+  const newUser = {
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    rol: req.body.rol,
+  };
   console.log("-------");
   console.log(newUser);
 
@@ -57,6 +93,26 @@ exports.getAll = (req, res) => {
       return res.status(500).json({
         success: false,
         message: "Error retrieving users from database",
+      });
+    });
+};
+
+exports.updateRol = (req, res) => {
+  let emailUser = req.params.email;
+  let rol = req.body.rol;
+  console.log(emailUser);
+  User.update({ rol: rol }, { where: { email: emailUser } })
+    .then((user) => {
+      if (user == 1) {
+        res.send({ message: "Update successful" });
+      } else {
+        res.send({ message: `Cannot find User with email ${emailUser}` });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({
+        message: "Error updating user.",
       });
     });
 };

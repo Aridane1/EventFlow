@@ -104,7 +104,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { allowedRoles: ['manager'] },
     loadChildren: () =>
-      import('./pages/see-administrator/see-administrator.module').then(
+      import('./pages/see-users/see-administrator.module').then(
         (m) => m.SeeAdministratorPageModule
       ),
   },
