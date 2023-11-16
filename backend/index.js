@@ -19,10 +19,10 @@ var corsOptions = {
 
 const db = require("./models");
 
-// db.sequelize.sync();
-db.sequelize
-  .sync({ force: true })
-  .then(() => console.log("Drop and Resync with { force: true }"));
+db.sequelize.sync();
+// db.sequelize
+//   .sync({ force: true })
+// .then(() => console.log("Drop and Resync with { force: true }"));
 
 app.use(cors(corsOptions));
 

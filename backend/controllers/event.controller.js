@@ -110,6 +110,7 @@ exports.updateOneWithFile = (req, res) => {
       });
     });
 };
+
 exports.updateOne = (req, res) => {
   const eventId = req.params.id;
   const updateEvent = {
@@ -122,11 +123,18 @@ exports.updateOne = (req, res) => {
   };
   console.log("no updatePhoto");
 
-  Event.update(updateEvent, { where: { id: eventId } }).then((event) => {
-    if (event == 1) {
-      res.send({ message: "Update successful" });
-    } else {
-      res.send({ message: `Cannot find Event with id ${eventId}` });
-    }
-  });
+  Event.update(updateEvent, { where: { id: eventId } })
+    .then((event) => {
+      if (event == 1) {
+        res.send({ message: "Update successful" });
+      } else {
+        res.send({ message: `Cannot find Event with id ${eventId}` });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({
+        message: "Error updating event.",
+      });
+    });
 };
