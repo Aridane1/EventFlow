@@ -6,4 +6,5 @@ export interface User {
   profile_picture?: string;
   access_token?: string;
   rol: string | null;
+  isAdmin?: boolean;
 }

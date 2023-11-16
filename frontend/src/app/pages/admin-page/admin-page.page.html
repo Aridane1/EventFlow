@@ -1,17 +1,41 @@
-<header><h2>EventFlow</h2></header>
+<header class="bg-slate-500 flex justify-center text-white">
+  <h2 class="text-4xl pb-2 pt-2">EventFlow</h2>
+</header>
 <ion-content>
-  <main>
-    <section>
-      <p>Añadir un administrador</p>
-    </section>
-    <section>
-      <p>Ver Administradores registrados</p>
-    </section>
-    <section routerLink="/location">
-      <p>Añadir un municipio y Ver Municipios registrados</p>
-    </section>
-    <section (click)="closeSession()">
-      <p>Cerrar sesión</p>
+  <main class="pt-6 pb-6">
+    <section class="flex flex-col justify-center gap-9 h-full text-center">
+      <section>
+        <button
+          routerLink="/add-administrator"
+          class="bg-slate-600 p-9 text-2xl text-white rounded-lg w-56 sm:w-96"
+        >
+          Añadir un administrador
+        </button>
+      </section>
+      <section>
+        <button
+          routerLink="/see-administrator"
+          class="bg-slate-600 p-9 text-2xl text-white rounded-lg w-56 sm:w-96"
+        >
+          Usuarios registrados
+        </button>
+      </section>
+      <section>
+        <button
+          routerLink="/location"
+          class="bg-slate-600 p-9 text-2xl text-white rounded-lg w-56 sm:w-96"
+        >
+          Añadir un municipio y Ver Municipios registrados
+        </button>
+      </section>
+      <section>
+        <button
+          (click)="closeSession()"
+          class="bg-slate-600 p-9 text-2xl text-white rounded-lg w-56 sm:w-96"
+        >
+          Cerrar sesión
+        </button>
+      </section>
     </section>
   </main>
 </ion-content>

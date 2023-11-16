@@ -90,6 +90,24 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/search/search.module').then((m) => m.SearchPageModule),
   },
+  {
+    path: 'add-administrator',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['manager'] },
+    loadChildren: () =>
+      import('./pages/add-administrator/add-administrator.module').then(
+        (m) => m.AddAdministratorPageModule
+      ),
+  },
+  {
+    path: 'see-administrator',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['manager'] },
+    loadChildren: () =>
+      import('./pages/see-administrator/see-administrator.module').then(
+        (m) => m.SeeAdministratorPageModule
+      ),
+  },
 ];
 
 @NgModule({

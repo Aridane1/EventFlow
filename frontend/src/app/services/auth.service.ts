@@ -79,9 +79,31 @@ export class AuthService {
       );
   }
 
+  registerAdmin(user: User): Observable<User> {
+    return this.httpClient.post<any>(
+      this.endpoint + '/create-admin',
+      { name: user.name, rol: user.rol },
+      this.getOptions(user)
+    );
+  }
+
   logout() {
     this.router.navigate(['login']);
     this.storage.remove('token');
+  }
+
+  changeRol(user: User, token: any) {
+    return this.httpClient.put(this.endpoint + `/rol/${user.email}`, user, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
+  getAllUser(token: string) {
+    return this.httpClient.get(this.endpoint, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   }
 
   async isLoggedIn() {

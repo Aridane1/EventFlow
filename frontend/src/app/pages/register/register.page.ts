@@ -25,7 +25,7 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {}
 
-  async register() {
+  register() {
     const name = this.registerForm.get('name')?.value;
     const email = this.registerForm.get('email')?.value;
     const password = this.registerForm.get('password')?.value;
