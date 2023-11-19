@@ -9,6 +9,6 @@ export class UserSubscribeLocationService {
   constructor(private httpClient: HttpClient) {}
 
   subscribeUserALocation(userSubscribeLocation: any) {
-    return this.httpClient.post<any>(this.endpoint, userSubscribeLocation);
+    return this.httpClient.post(this.endpoint, userSubscribeLocation);
   }
 }

@@ -11,6 +11,15 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      endpoint: {
+        type: Sequelize.TEXT,
+      },
+      auth: {
+        type: Sequelize.STRING,
+      },
+      p256dh: {
+        type: Sequelize.STRING,
+      },
     }
   );
   return ClientSubscriptionMunicipality;

@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const webpush = require("web-push");
 const jwt = require("jsonwebtoken");
 const express = require("express");
 const cors = require("cors");
@@ -16,6 +16,17 @@ const PORT = process.env.PORT || 8000;
 var corsOptions = {
   origin: "*",
 };
+
+const vapidKeys = {
+  publicKey: process.env.PUBLIC_VAPID_KEY,
+  privateKey: process.env.PRIVATE_VAPID_KEY,
+};
+
+webpush.setVapidDetails(
+  "mailto:example@yourdomain.org",
+  vapidKeys.publicKey,
+  vapidKeys.privateKey
+);
 
 const db = require("./models");
 
@@ -71,6 +82,7 @@ require("./routes/event.routes")(app);
 require("./routes/location.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/client-subscription-municipality.routes")(app);
+require("./routes/notifications-municipality.routes")(app);
 
 app.listen(PORT, () => {
   console.log("Server started on: " + PORT);

@@ -4,6 +4,7 @@ import { firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocationService } from 'src/app/services/location.service';
 import { UserSubscribeLocationService } from 'src/app/services/user-subscribe-location.service';
+import { SwPush } from '@angular/service-worker';
 
 @Component({
   selector: 'app-search',
@@ -11,15 +12,19 @@ import { UserSubscribeLocationService } from 'src/app/services/user-subscribe-lo
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
+  respuesta: any;
   locations: any;
   token: any;
   searcher: string;
+  readonly PUBLIC_VAPID_KEY =
+    'BMZ80ZRGERRFOYFrKBboF2T5g_sq-XTwZsWD49FYZelLjSN97B5570OmJKPm_GnIp_t_2lyw8NINyw2yfVFxxWw';
 
   constructor(
     private locationService: LocationService,
     private authService: AuthService,
     private userSubLocationService: UserSubscribeLocationService,
-    private storage: Storage
+    private storage: Storage,
+    private swPush: SwPush
   ) {
     this.searcher = '';
   }
@@ -29,7 +34,7 @@ export class SearchPage implements OnInit {
   }
 
   getAllLocations() {
-    this.locationService.getAllLocation().subscribe((data) => {
+    this.locationService.getAllLocation().subscribe((data: any) => {
       this.locations = data;
       for (let index = 0; index < this.locations.length; index++) {
         this.locations[index].showText = false;
@@ -39,10 +44,24 @@ export class SearchPage implements OnInit {
   async subscribeThisLocation(id: number) {
     let token = await this.storage.get('token');
     let user = await firstValueFrom(this.authService.getUserByToken(token));
-    let subscribe = { userId: user.user.id, locationId: id };
-    this.userSubLocationService
-      .subscribeUserALocation(subscribe)
-      .subscribe((data) => {});
+    this.swPush
+      .requestSubscription({ serverPublicKey: this.PUBLIC_VAPID_KEY })
+      .then((respuesta) => {
+        this.respuesta = respuesta;
+
+        let subscribe = {
+          userId: user.user.id,
+          locationId: id,
+          respuesta: this.respuesta,
+        };
+        this.userSubLocationService
+          .subscribeUserALocation(subscribe)
+          .subscribe((data) => {});
+      })
+      .catch((err) => {
+        this.respuesta = err;
+        console.log(err);
+      });
   }
 
   onSearch() {
