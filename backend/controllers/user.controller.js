@@ -47,8 +47,6 @@ exports.createAdmin = (req, res) => {
     password: req.body.password,
     rol: req.body.rol,
   };
-  console.log("-------");
-  console.log(newUser);
 
   User.findOne({ where: { email: req.body.email } }).then((data) => {
     if (data) {
@@ -100,7 +98,6 @@ exports.getAll = (req, res) => {
 exports.updateRol = (req, res) => {
   let emailUser = req.params.email;
   let rol = req.body.rol;
-  console.log(emailUser);
   User.update({ rol: rol }, { where: { email: emailUser } })
     .then((user) => {
       if (user == 1) {

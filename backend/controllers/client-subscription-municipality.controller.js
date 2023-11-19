@@ -5,8 +5,12 @@ exports.create = (req, res) => {
   const newClientSubMunicipality = {
     userId: req.body.userId,
     locationId: req.body.locationId,
+    endpoint: req.body.respuesta.endpoint,
+    auth: req.body.respuesta.keys.auth,
+    p256dh: req.body.respuesta.keys.p256dh,
   };
 
+  console.log(newClientSubMunicipality);
   ClientSubscriptionMunicipality.create(newClientSubMunicipality)
     .then((data) => {
       if (!data) {
@@ -22,6 +26,7 @@ exports.create = (req, res) => {
         .send({ message: "There was an error in the server", err });
     });
 };
+
 exports.findAllByClientId = (req, res) => {
   let id = req.params.id;
   ClientSubscriptionMunicipality.findAll({ userId: id })
