@@ -108,6 +108,15 @@ const routes: Routes = [
         (m) => m.SeeAdministratorPageModule
       ),
   },
+  {
+    path: 'send-message',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] },
+    loadChildren: () =>
+      import('./pages/send-message/send-message.module').then(
+        (m) => m.SendMessagePageModule
+      ),
+  },
 ];
 
 @NgModule({

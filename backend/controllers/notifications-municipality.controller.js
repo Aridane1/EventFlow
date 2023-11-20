@@ -6,9 +6,10 @@ const ClientSubscriptionMunicipality = db.ClientSubscriptionMunicipality;
 exports.sendNotificationForIdLocation = (req, res) => {
   let message = {
     title: req.body.title,
-    body: req.body.message,
+    message: req.body.message,
+    locationIds: [req.params.id],
   };
-
+  console.log(message);
   ClientSubscriptionMunicipality.findAll({
     where: { locationId: req.params.id },
   })
@@ -16,7 +17,11 @@ exports.sendNotificationForIdLocation = (req, res) => {
       const notificationPromises = subscriptions.map((subscription) =>
         sendNotificationToSubscription(subscription, message)
       );
-
+      NotificationMunicipality.create(message)
+        .then(() => {})
+        .catch((err) => {
+          console.log("no se pudo guardar la notifiacion");
+        });
       return Promise.all(notificationPromises);
     })
     .then((responses) => {
@@ -28,6 +33,22 @@ exports.sendNotificationForIdLocation = (req, res) => {
     .catch((error) => {
       console.error("Error al enviar notificaciones:", error);
       res.status(500).send({ error: "Error al enviar notificaciones." });
+    });
+};
+
+exports.getNotificationByLocation = (req, res) => {
+  NotificationMunicipality.findAll({ where: { locationIds: req.params.id } })
+    .then((notifications) => {
+      if (!notifications) {
+        res.json({ data: "No hay notificaciones para este lugar" });
+      } else {
+        res.json(notifications);
+      }
+    })
+    .catch((err) => {
+      res.status(400).send({
+        error: err,
+      });
     });
 };
 
