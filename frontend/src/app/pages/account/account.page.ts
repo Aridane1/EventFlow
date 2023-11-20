@@ -39,8 +39,9 @@ export class AccountPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    this.mode = await this.storage.get('rol');
-    this.rol = this.mode[0];
+    let token = await this.storage.get('token');
+    const user = await firstValueFrom(this.authService.getUserByToken(token));
+    this.rol = user.user.rol;
   }
 
   openPopup() {

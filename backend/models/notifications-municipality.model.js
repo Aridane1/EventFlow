@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.TEXT,
       },
       locationIds: {
-        type: Sequelize.BLOB,
+        type: Sequelize.JSON,
       },
     }
   );
