@@ -23,10 +23,15 @@ db.Location = require("./location.model.js")(sequelize, Sequelize);
 db.User = require("./users.model.js")(sequelize, Sequelize);
 db.ClientSubscriptionMunicipality =
   require("./client-subscription-municipality.model.js")(sequelize, Sequelize);
+db.NotificationMuni = require("./notifications-muni.model.js")(
+  sequelize,
+  Sequelize
+);
 db.NotificationMunicipality = require("./notifications-municipality.model.js")(
   sequelize,
   Sequelize
 );
+db.Device = require("./device.model.js")(sequelize, Sequelize);
 
 db.Location.hasMany(db.Event);
 db.Event.belongsTo(db.Location, { foreignKey: "locationId" });
@@ -42,5 +47,22 @@ db.ClientSubscriptionMunicipality.belongsTo(db.User, {
 db.ClientSubscriptionMunicipality.belongsTo(db.Location, {
   foreignKey: "locationId",
 });
+
+db.Location.hasMany(db.NotificationMunicipality, {
+  foreignKey: "locationId",
+});
+db.NotificationMuni.hasMany(db.NotificationMunicipality, {
+  foreignKey: "notificationId",
+});
+
+db.NotificationMunicipality.belongsTo(db.Location, {
+  foreignKey: "locationId",
+});
+db.NotificationMunicipality.belongsTo(db.NotificationMuni, {
+  foreignKey: "notificationId",
+});
+
+db.User.hasMany(db.Device);
+db.Device.belongsTo(db.User, { foreignKey: "userId" });
 
 module.exports = db;

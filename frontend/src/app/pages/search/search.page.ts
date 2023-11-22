@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { LocationService } from 'src/app/services/location.service';
 import { UserSubscribeLocationService } from 'src/app/services/user-subscribe-location.service';
 import { SwPush } from '@angular/service-worker';
+import { DeviceService } from 'src/app/services/device.service';
 
 @Component({
   selector: 'app-search',
@@ -23,6 +24,7 @@ export class SearchPage implements OnInit {
     private locationService: LocationService,
     private authService: AuthService,
     private userSubLocationService: UserSubscribeLocationService,
+    private deviceService: DeviceService,
     private storage: Storage,
     private swPush: SwPush
   ) {
@@ -52,11 +54,17 @@ export class SearchPage implements OnInit {
         let subscribe = {
           userId: user.user.id,
           locationId: id,
-          respuesta: this.respuesta,
         };
         this.userSubLocationService
           .subscribeUserALocation(subscribe)
-          .subscribe((data) => {});
+          .subscribe((data) => {
+            this.deviceService
+              .subscribeDevice({
+                subscription: respuesta,
+                userId: user.user.id,
+              })
+              .subscribe((data) => {});
+          });
       })
       .catch((err) => {
         this.respuesta = err;

@@ -5,12 +5,7 @@ exports.create = (req, res) => {
   const newClientSubMunicipality = {
     userId: req.body.userId,
     locationId: req.body.locationId,
-    endpoint: req.body.respuesta.endpoint,
-    auth: req.body.respuesta.keys.auth,
-    p256dh: req.body.respuesta.keys.p256dh,
   };
-
-  console.log(newClientSubMunicipality);
   ClientSubscriptionMunicipality.create(newClientSubMunicipality)
     .then((data) => {
       if (!data) {
