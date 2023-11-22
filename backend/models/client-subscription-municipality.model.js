@@ -4,21 +4,11 @@ module.exports = (sequelize, Sequelize) => {
     {
       userId: {
         primaryKey: true,
-        allowNull: false,
         type: Sequelize.INTEGER,
       },
       locationId: {
         primaryKey: true,
         type: Sequelize.INTEGER,
-      },
-      endpoint: {
-        type: Sequelize.TEXT,
-      },
-      auth: {
-        type: Sequelize.STRING,
-      },
-      p256dh: {
-        type: Sequelize.STRING,
       },
     }
   );

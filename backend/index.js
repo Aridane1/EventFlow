@@ -33,7 +33,7 @@ const db = require("./models");
 db.sequelize.sync();
 // db.sequelize
 //   .sync({ force: true })
-// .then(() => console.log("Drop and Resync with { force: true }"));
+//   .then(() => console.log("Drop and Resync with { force: true }"));
 
 app.use(cors(corsOptions));
 
@@ -82,7 +82,9 @@ require("./routes/event.routes")(app);
 require("./routes/location.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/client-subscription-municipality.routes")(app);
+require("./routes/notifications-muni.routes")(app);
 require("./routes/notifications-municipality.routes")(app);
+require("./routes/device.routes")(app);
 
 app.listen(PORT, () => {
   console.log("Server started on: " + PORT);
