@@ -5,6 +5,10 @@ const NotificationMuni = db.NotificationMuni;
 const User = db.User;
 const Device = db.Device;
 const Op = db.Sequelize.Op;
+const UserSubscriptionEvent = db.UserSubscriptionEvent;
+const Event = db.Event;
+const RelationNotificationEvent = db.RelationNotificationEvent;
+const NotificationEvent = db.NotificationEvent;
 
 exports.sendNotificationForIdLocation = async (notificationMunicipality) => {
   try {
@@ -69,11 +73,40 @@ exports.sendNotificationAllUserInAnyLocation = async (
   }
 };
 
+exports.sendNotificationAllUserInAnyEvent = async (notificationId, eventId) => {
+  try {
+    console.log(notificationId, eventId);
+    const subscriptions = await UserSubscriptionEvent.findAll({
+      where: { eventId: eventId },
+      include: [{ model: User, include: [Device] }],
+    });
+    const message = await NotificationEvent.findOne({
+      where: { id: notificationId },
+    });
+    const devices = [];
+
+    for (const subscription of subscriptions) {
+      const userDevices = subscription.user.get("devices");
+
+      if (userDevices && userDevices.length > 0) {
+        devices.push(...userDevices.map((device) => device.dataValues));
+        console.log(devices);
+      }
+    }
+    for (const device of devices) {
+      sendNotificationToSubscription(device, message.dataValues);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 async function sendNotificationToSubscription(subscription, message) {
   const pushSubscription = {
     endpoint: subscription.endpoint,
     keys: JSON.parse(subscription.keys),
   };
+  console.log(pushSubscription);
   const payload = {
     notification: {
       title: message.title,
@@ -89,5 +122,5 @@ async function sendNotificationToSubscription(subscription, message) {
       ],
     },
   };
-  await webpush.sendNotification(pushSubscription, JSON.stringify(payload));
+  return webpush.sendNotification(pushSubscription, JSON.stringify(payload));
 }
