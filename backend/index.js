@@ -85,6 +85,7 @@ require("./routes/client-subscription-municipality.routes")(app);
 require("./routes/notifications-muni.routes")(app);
 require("./routes/notifications-municipality.routes")(app);
 require("./routes/device.routes")(app);
+require("./routes/user-subscription-event.routes")(app);
 
 app.listen(PORT, () => {
   console.log("Server started on: " + PORT);

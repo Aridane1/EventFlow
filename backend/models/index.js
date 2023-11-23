@@ -32,6 +32,10 @@ db.NotificationMunicipality = require("./notifications-municipality.model.js")(
   Sequelize
 );
 db.Device = require("./device.model.js")(sequelize, Sequelize);
+db.UserSubscriptionEvent = require("./user-subsciption-event.model.js")(
+  sequelize,
+  Sequelize
+);
 
 db.Location.hasMany(db.Event);
 db.Event.belongsTo(db.Location, { foreignKey: "locationId" });
@@ -64,5 +68,17 @@ db.NotificationMunicipality.belongsTo(db.NotificationMuni, {
 
 db.User.hasMany(db.Device);
 db.Device.belongsTo(db.User, { foreignKey: "userId" });
+
+db.User.hasMany(db.UserSubscriptionEvent, { foreignKey: "userId" });
+db.Event.hasMany(db.UserSubscriptionEvent, {
+  foreignKey: "eventId",
+});
+
+db.UserSubscriptionEvent.belongsTo(db.User, {
+  foreignKey: "userId",
+});
+db.UserSubscriptionEvent.belongsTo(db.Event, {
+  foreignKey: "eventId",
+});
 
 module.exports = db;
