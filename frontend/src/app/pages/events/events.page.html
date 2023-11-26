@@ -1,11 +1,13 @@
 <ion-content>
   <app-menu [mode]="'customer'"></app-menu>
-  <main class="flex flex-wrap gap-2 mt-9 justify-center">
+  <p class="text-3xl text-center mt-9">Eventos populares</p>
+
+  <div class="flex flex-wrap gap-2 mt-9 justify-center">
     <app-card
       *ngFor="let event of events"
       [event]="event"
       [mode]="'customer'"
       [routerLink]="['/see-event', { id: event.id }]"
     ></app-card>
-  </main>
+  </div>
 </ion-content>

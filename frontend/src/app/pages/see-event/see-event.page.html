@@ -17,10 +17,18 @@
       </div>
       <div class="flex justify-center mb-8">
         <button
+          *ngIf="!isSubscribe"
           (click)="subscribe()"
           class="block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
         >
           Subscribirte
+        </button>
+        <button
+          *ngIf="isSubscribe"
+          (click)="unSubscribe()"
+          class="block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
+        >
+          Desubscribirte
         </button>
       </div>
     </div>

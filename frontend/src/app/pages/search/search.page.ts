@@ -6,6 +6,7 @@ import { LocationService } from 'src/app/services/location.service';
 import { UserSubscribeLocationService } from 'src/app/services/user-subscribe-location.service';
 import { SwPush } from '@angular/service-worker';
 import { DeviceService } from 'src/app/services/device.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-search',
@@ -17,8 +18,7 @@ export class SearchPage implements OnInit {
   locations: any;
   token: any;
   searcher: string;
-  readonly PUBLIC_VAPID_KEY =
-    'BMZ80ZRGERRFOYFrKBboF2T5g_sq-XTwZsWD49FYZelLjSN97B5570OmJKPm_GnIp_t_2lyw8NINyw2yfVFxxWw';
+  readonly PUBLIC_VAPID_KEY = environment.PUBLIC_VAPID_KEY;
 
   constructor(
     private locationService: LocationService,
