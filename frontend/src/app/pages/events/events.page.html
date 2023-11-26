@@ -1,4 +1,10 @@
 <ion-content>
   <app-menu [mode]="'customer'"></app-menu>
-  <app-card *ngFor="let event of events" [event]="event"></app-card
-></ion-content>
+  <main class="flex flex-wrap gap-2 mt-9 justify-center">
+    <app-card
+      *ngFor="let event of events"
+      [event]="event"
+      [mode]="'customer'"
+    ></app-card>
+  </main>
+</ion-content>

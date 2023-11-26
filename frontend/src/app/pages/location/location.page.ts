@@ -12,7 +12,9 @@ import { PhotoService } from 'src/app/services/photo.service';
 export class LocationPage implements OnInit {
   locationForm: FormGroup;
   locations: any;
+  isPopupOpen = false;
   capturedPhoto: any;
+  searcher: string = '';
   constructor(
     private locationService: LocationService,
     private photoService: PhotoService,
@@ -28,6 +30,16 @@ export class LocationPage implements OnInit {
     this.getAllLocation();
   }
 
+  seeImage() {
+    this.isPopupOpen = true;
+  }
+
+  closeImage() {
+    this.isPopupOpen = false;
+  }
+  discardImage() {
+    this.capturedPhoto = null;
+  }
   getAllLocation() {
     this.locationService.getAllLocation().subscribe((data) => {
       this.locations = data;
@@ -64,6 +76,13 @@ export class LocationPage implements OnInit {
   deleteLocation(locationId: number) {
     this.locationService.deleteLocation(locationId).subscribe((data) => {
       this.getAllLocation();
+    });
+  }
+
+  onSearch() {
+    if (this.searcher.trim() === '') return this.locations;
+    return this.locations.filter((location: any) => {
+      return location.name.toLowerCase().includes(this.searcher.toLowerCase());
     });
   }
 }
