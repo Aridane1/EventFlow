@@ -13,6 +13,9 @@ export class LocationService {
   getAllLocation() {
     return this.httpClient.get(this.endpoint);
   }
+  getOneLocation(id: number) {
+    return this.httpClient.get(this.endpoint + `/${id}`);
+  }
 
   addLocation(location: Location, blob: any) {
     const body = new FormData();

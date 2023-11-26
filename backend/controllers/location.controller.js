@@ -70,6 +70,23 @@ exports.getAll = (req, res) => {
       });
     });
 };
+exports.getOne = (req, res) => {
+  Location.findByPk(req.params.id)
+    .then((location) => {
+      if (!location) {
+        return res.status(404).send({
+          message: "No locations found",
+        });
+      }
+      res.send(location);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({
+        message: err.message || "Error retrieving locations.",
+      });
+    });
+};
 
 exports.delete = (req, res) => {
   const id = req.params.id;

@@ -119,6 +119,15 @@ const routes: Routes = [
         (m) => m.ChangeModePageModule
       ),
   },
+  {
+    path: 'see-event',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] },
+    loadChildren: () =>
+      import('./pages/see-event/see-event.module').then(
+        (m) => m.SeeEventPageModule
+      ),
+  },
 ];
 
 @NgModule({
