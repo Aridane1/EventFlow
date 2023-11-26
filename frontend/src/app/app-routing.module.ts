@@ -110,6 +110,15 @@ const routes: Routes = [
         (m) => m.SendMessagePageModule
       ),
   },
+  {
+    path: 'change-mode',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] },
+    loadChildren: () =>
+      import('./pages/change-mode/change-mode.module').then(
+        (m) => m.ChangeModePageModule
+      ),
+  },
 ];
 
 @NgModule({
