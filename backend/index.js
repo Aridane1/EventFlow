@@ -92,3 +92,5 @@ require("./routes/relation-notification-event.routes")(app);
 app.listen(PORT, () => {
   console.log("Server started on: " + PORT);
 });
+
+module.exports = app;
