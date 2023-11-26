@@ -15,6 +15,7 @@ export class AddEventsPage implements OnInit {
   eventForm: FormGroup;
   locations: any;
   capturedPhoto: any;
+  isPopupOpen = false;
   constructor(
     private formBuilder: FormBuilder,
     private eventService: EventService,
@@ -43,6 +44,14 @@ export class AddEventsPage implements OnInit {
 
   discardImage() {
     this.capturedPhoto = null;
+  }
+
+  seeImage() {
+    this.isPopupOpen = true;
+  }
+
+  closeImage() {
+    this.isPopupOpen = false;
   }
 
   getAllLocation() {
@@ -79,6 +88,7 @@ export class AddEventsPage implements OnInit {
         console.log('The date is null');
         return;
       }
+      console.log(event);
       console.log('Please provide all the required values!');
       return;
     } else {

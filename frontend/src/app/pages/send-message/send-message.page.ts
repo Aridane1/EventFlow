@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { EventService } from 'src/app/services/event.service';
 import { LocationService } from 'src/app/services/location.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
@@ -10,26 +11,37 @@ import { NotificationService } from 'src/app/services/notification.service';
 })
 export class SendMessagePage implements OnInit {
   locations: any;
+  events: any;
   messageForm: FormGroup;
+  segmentSelected = 'location';
+
   constructor(
     private formBuild: FormBuilder,
     private locationService: LocationService,
+    private eventService: EventService,
     private notificationService: NotificationService
   ) {
     this.messageForm = this.formBuild.group({
       title: ['', Validators.required],
       message: ['', Validators.required],
-      location: ['', Validators.required],
+      location: [''],
+      event: [''],
     });
   }
 
   ngOnInit() {
     this.getAllLocations();
+    this.getAllEvents();
   }
 
   getAllLocations() {
     this.locationService.getAllLocation().subscribe((data: any) => {
       this.locations = data;
+    });
+  }
+  getAllEvents() {
+    this.eventService.getAllEvent().subscribe((data: any) => {
+      this.events = data;
     });
   }
   sendMessage() {
@@ -48,5 +60,8 @@ export class SendMessagePage implements OnInit {
         )
         .subscribe((data) => {});
     }
+  }
+  segmentChanged(event: any) {
+    this.segmentSelected = event.detail.value;
   }
 }

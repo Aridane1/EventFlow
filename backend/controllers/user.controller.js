@@ -114,36 +114,22 @@ exports.updateRol = (req, res) => {
     });
 };
 
-exports.userByToken = async (req, res) => {
-  try {
-    let decoded;
-    try {
-      decoded = jwt.verify(
-        req.headers["authorization"].split(" ")[1],
-        process.env.JWT_SECRET
-      );
-      console.log(decoded);
-    } catch (e) {
-      throw e;
-    }
-    await User.findOne({
-      where: { id: decoded.id },
-    }).then((user) => {
-      if (!user) {
-        return res.status(403).send({
-          message: "Unauthorized",
-        });
-      } else {
-        return res.status(200).send({
-          user,
+exports.delete = (req, res) => {
+  const id = req.params.id;
+  User.destroy({
+    where: { id: id },
+  })
+    .then((data) => {
+      if (!data) {
+        return res.status(404).send({
+          message: "User not found with id " + id,
         });
       }
+      res.send({ message: "User deleted successfully!" });
+    })
+    .catch((err) => {
+      return res.status(500).send({
+        message: "Could not delete user with id " + id,
+      });
     });
-  } catch (error) {
-    console.log("Error en el middleware de autenticacion", error);
-    return res.status(500).json({
-      success: false,
-      message: "Error interno del servidor",
-    });
-  }
 };

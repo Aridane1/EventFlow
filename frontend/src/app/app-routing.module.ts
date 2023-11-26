@@ -77,13 +77,6 @@ const routes: Routes = [
       import('./pages/events/events.module').then((m) => m.EventsPageModule),
   },
   {
-    path: 'account',
-    canActivate: [AuthGuard],
-    data: { allowedRoles: ['customer', 'admin'] },
-    loadChildren: () =>
-      import('./pages/account/account.module').then((m) => m.AccountPageModule),
-  },
-  {
     path: 'search',
     canActivate: [AuthGuard],
     data: { allowedRoles: ['customer', 'admin'] },

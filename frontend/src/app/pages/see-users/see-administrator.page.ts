@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class SeeAdministratorPage implements OnInit {
   users: any;
   token: any;
+  searcher: string = '';
   constructor(private authService: AuthService, private storage: Storage) {}
 
   async ngOnInit() {
@@ -30,18 +31,20 @@ export class SeeAdministratorPage implements OnInit {
       }
     });
   }
+  onSearch() {
+    if (this.searcher.trim() === '') return this.users;
+    return this.users.filter((user: any) => {
+      return user.email.toLowerCase().includes(this.searcher.toLowerCase());
+    });
+  }
 
   removeOrAddAdmin(user: User) {
     if (user.isAdmin) {
       user.rol = 'customer';
-      this.authService.changeRol(user, this.token).subscribe((data) => {
-        console.log(data);
-      });
+      this.authService.changeRol(user, this.token).subscribe((data) => {});
     } else {
       user.rol = 'admin';
-      this.authService.changeRol(user, this.token).subscribe((data) => {
-        console.log(data);
-      });
+      this.authService.changeRol(user, this.token).subscribe((data) => {});
     }
   }
 }

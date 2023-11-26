@@ -15,6 +15,7 @@ export class ModifyEventPage implements OnInit {
   eventForm: FormGroup;
   locations: any;
   capturedPhoto: any;
+  isPopupOpen = false;
   event: any;
   id: any;
   havePhoto = true;
@@ -46,6 +47,13 @@ export class ModifyEventPage implements OnInit {
     this.getOneEvent(this.id);
     this.eventForm.reset();
     this.capturedPhoto = null;
+  }
+  seeImage() {
+    this.isPopupOpen = true;
+  }
+
+  closeImage() {
+    this.isPopupOpen = false;
   }
 
   discardImage() {

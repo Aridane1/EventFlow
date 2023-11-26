@@ -9,7 +9,7 @@ import {
 import { Storage } from '@ionic/storage-angular';
 import { Observable, firstValueFrom } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-
+import { jwtDecode } from 'jwt-decode';
 @Injectable({
   providedIn: 'root',
 })
@@ -28,9 +28,10 @@ export class AuthGuard implements CanActivate {
     const isAuthenticated = await this.authService.isLoggedIn();
     const allowedRoles: Array<any> = route.data['allowedRoles'] as string[];
     let token = await this.storage.get('token');
-    const user = await firstValueFrom(this.authService.getUserByToken(token));
+    const decode = jwtDecode(token) as any;
+    this.userRol = decode.rol;
 
-    if (isAuthenticated && allowedRoles.includes(user.user.rol)) {
+    if (isAuthenticated && allowedRoles.includes(this.userRol)) {
       return true;
     } else {
       return false;

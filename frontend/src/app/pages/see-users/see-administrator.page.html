@@ -1,16 +1,27 @@
-<header class="bg-slate-500 flex justify-center">
+<div class="bg-slate-500 flex justify-center">
   <h2 class="text-4xl pb-2 pt-2 text-r h-[3.375rem]">EventFlow</h2>
-</header>
+</div>
 
 <ion-content>
-  <picture class="relative top-6 left-5" routerLink="/admin-page">
-    <img src="/assets/arrow-left.svg" alt="arrow-left" />
-  </picture>
-  <main class="pt-4 flex-col flex justify-center gap-12">
-    <section class="flex justify-center text-center">
-      <h1 class="text-4xl w-56">Usuarios Registados</h1>
-    </section>
-    <section class="overflow-auto rounded-lg shadow w-full">
+  <div class="flex justify-center">
+    <div class="text-center text-3xl align-middle w-52 mt-5">
+      <p>Usuarios registrados</p>
+    </div>
+    <div class="absolute left-1 top-10">
+      <ion-icon
+        name="arrow-back-circle-outline"
+        class="text-5xl cursor-pointer"
+        routerLink="/admin-page"
+      ></ion-icon>
+    </div>
+  </div>
+  <div class="pt-4 flex-col flex justify-center gap-12">
+    <ion-searchbar
+      search-icon="search"
+      class="rounded-md p-2 text-gray-700 text-lg w-56 m-auto mb-3"
+      [(ngModel)]="searcher"
+    ></ion-searchbar>
+    <div class="overflow-auto rounded-lg shadow w-10/12 m-auto -mt-10 mb-9">
       <table class="w-full">
         <thead class="bg-slate-100 border-b-2 border-slate-200">
           <tr>
@@ -27,7 +38,7 @@
         </thead>
         <tbody>
           <tr
-            *ngFor="let user of users"
+            *ngFor="let user of onSearch()"
             class="odd:bg-slate-100 even:bg-slate-300"
           >
             <td
@@ -47,7 +58,7 @@
               class="p-1 text-sm text-black whitespace-nowrap"
             >
               <label
-                class="relative inline-flex items-center mb-5 cursor-pointer border"
+                class="relative inline-flex items-center mb-5 cursor-pointer"
               >
                 <input
                   type="checkbox"
@@ -64,6 +75,6 @@
           </tr>
         </tbody>
       </table>
-    </section>
-  </main>
+    </div>
+  </div>
 </ion-content>

@@ -1,17 +1,23 @@
 <ion-content
   ><app-menu [mode]="'customer'"></app-menu>
-  <header>
-    <ion-searchbar
-      search-icon="search"
-      class="custom-search"
-      [(ngModel)]="searcher"
-    ></ion-searchbar>
-  </header>
-  <main class="container">
+  <div class="flex flex-col items-center">
+    <div class="text-center text-3xl align-middle w-52 mt-5">
+      <p>Buscador</p>
+    </div>
+    <div class="mt-3">
+      <ion-searchbar
+        search-icon="search"
+        class="rounded-md p-2 text-gray-700 text-lg w-56"
+        [(ngModel)]="searcher"
+      ></ion-searchbar>
+    </div>
+  </div>
+  <div class="flex flex-wrap gap-4 columns-2 mt-5 justify-center mx-auto p-7">
     <app-card-search
       *ngFor="let location of onSearch()"
       [location]="location"
       (locationId)="subscribeThisLocation($event)"
+      class="w-80 m-2 sm:w-96"
     ></app-card-search>
-  </main>
+  </div>
 </ion-content>
