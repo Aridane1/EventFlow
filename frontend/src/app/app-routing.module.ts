@@ -122,10 +122,19 @@ const routes: Routes = [
   {
     path: 'see-event',
     canActivate: [AuthGuard],
-    data: { allowedRoles: ['admin'] },
+    data: { allowedRoles: ['admin', 'customer'] },
     loadChildren: () =>
       import('./pages/see-event/see-event.module').then(
         (m) => m.SeeEventPageModule
+      ),
+  },
+  {
+    path: 'your-events',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin', 'customer'] },
+    loadChildren: () =>
+      import('./pages/your-events/your-events.module').then(
+        (m) => m.YourEventsPageModule
       ),
   },
 ];
