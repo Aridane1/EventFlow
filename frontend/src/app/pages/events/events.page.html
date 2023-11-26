@@ -5,6 +5,7 @@
       *ngFor="let event of events"
       [event]="event"
       [mode]="'customer'"
+      [routerLink]="['/see-event', { id: event.id }]"
     ></app-card>
   </main>
 </ion-content>
