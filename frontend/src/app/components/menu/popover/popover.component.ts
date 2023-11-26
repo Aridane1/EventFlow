@@ -26,7 +26,7 @@ export class PopoverComponent implements OnInit {
     this.rol = user.rol;
   }
   changeMode() {
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/change-mode');
     this.popoverController.dismiss();
   }
 
