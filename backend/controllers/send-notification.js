@@ -75,7 +75,6 @@ exports.sendNotificationAllUserInAnyLocation = async (
 
 exports.sendNotificationAllUserInAnyEvent = async (notificationId, eventId) => {
   try {
-    console.log(notificationId, eventId);
     const subscriptions = await UserSubscriptionEvent.findAll({
       where: { eventId: eventId },
       include: [{ model: User, include: [Device] }],
@@ -84,13 +83,11 @@ exports.sendNotificationAllUserInAnyEvent = async (notificationId, eventId) => {
       where: { id: notificationId },
     });
     const devices = [];
-
     for (const subscription of subscriptions) {
       const userDevices = subscription.user.get("devices");
 
       if (userDevices && userDevices.length > 0) {
         devices.push(...userDevices.map((device) => device.dataValues));
-        console.log(devices);
       }
     }
     for (const device of devices) {
