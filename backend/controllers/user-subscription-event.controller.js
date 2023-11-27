@@ -3,6 +3,15 @@ const UserSubscriptionEvent = db.UserSubscriptionEvent;
 const Event = db.Event;
 
 exports.create = (req, res) => {
+  const requiredFields = ["userId", "eventId"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
   let newUserSubscriptionEvent = {
     userId: req.body.userId,
     eventId: req.body.eventId,
@@ -70,8 +79,15 @@ exports.deleteSubscriptionUserEvent = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  console.log(req.body);
-  console.log(req.params);
+  const requiredFields = ["userId", "eventId"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
   UserSubscriptionEvent.update(req.body, {
     where: {
       userId: req.params.userId,
