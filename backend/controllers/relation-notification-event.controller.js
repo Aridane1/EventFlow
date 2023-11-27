@@ -4,6 +4,15 @@ const NotificationEvent = db.NotificationEvent;
 const sendNotification = require("./send-notification");
 
 exports.create = (req, res) => {
+  const requiredFields = ["notificationId", "eventId"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
   let eventId = req.body.eventId;
   let notificationId = req.body.notificationId;
 
@@ -76,6 +85,15 @@ exports.deleteNotificationEvent = (req, res) => {
     });
 };
 exports.updateNotificationLocation = (req, res) => {
+  const requiredFields = ["notificationId", "eventId"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
   let notificationId = req.params.notificationId;
   let eventId = req.params.eventId;
   RelationNotificationEvent.update(req.body, {

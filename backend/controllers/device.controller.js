@@ -2,6 +2,15 @@ const db = require("../models");
 const Device = db.Device;
 
 exports.create = (req, res) => {
+  const requiredFields = ["subscription", "userId"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
   let subscription = {
     endpoint: req.body.subscription.endpoint,
     keys: JSON.stringify(req.body.subscription.keys),
@@ -84,6 +93,14 @@ exports.deleteByEndpoint = (req, res) => {
 };
 
 exports.update = (req, res) => {
+  const requiredFields = ["subscription", "userId"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
   const id = req.params.id;
   const data = req.body;
   Device.update(data, { where: { id: id } })

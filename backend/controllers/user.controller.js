@@ -5,7 +5,16 @@ const utils = require("../utils");
 const jwt = require("jsonwebtoken");
 
 exports.create = (req, res) => {
-  const newUser = {
+  const requiredFields = ["name", "email", "password", "rol"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
+  let newUser = {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
@@ -41,6 +50,14 @@ exports.create = (req, res) => {
 };
 
 exports.createAdmin = (req, res) => {
+  const requiredFields = ["name", "email", "password", "rol"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
   const newUser = {
     name: req.body.name,
     email: req.body.email,
@@ -96,6 +113,11 @@ exports.getAll = (req, res) => {
 };
 
 exports.updateRol = (req, res) => {
+  if (!req.body.rol) {
+    return res.status(400).send({
+      message: `Missing required field: rol`,
+    });
+  }
   let emailUser = req.params.email;
   let rol = req.body.rol;
   User.update({ rol: rol }, { where: { email: emailUser } })

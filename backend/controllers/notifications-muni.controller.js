@@ -2,6 +2,15 @@ const db = require("../models");
 const NotificationMuni = db.NotificationMuni;
 
 exports.create = (req, res) => {
+  const requiredFields = ["title", "message"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
   let notificationMuni = {
     title: req.body.title,
     message: req.body.message,
@@ -48,6 +57,14 @@ exports.delete = (req, res) => {
 };
 
 exports.update = (req, res) => {
+  const requiredFields = ["title", "message"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
   let id = req.params.id;
   NotificationMuni.update(req.body, { where: { id: id } })
     .then((data) => {

@@ -5,6 +5,15 @@ const Location = db.Location;
 const sendNotification = require("./send-notification");
 
 exports.createOneNotificationMunicipality = (req, res) => {
+  const requiredFields = ["notificationId", "locationId"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
   let locationId = req.body.locationId;
   let notificationId = req.body.notificationId;
 
@@ -34,6 +43,15 @@ exports.createOneNotificationMunicipality = (req, res) => {
     });
 };
 exports.createManyNotificationMunicipality = async (req, res) => {
+  const requiredFields = ["notificationId"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
   let notificationId = req.body.notificationId;
   const locations = await Location.findAll();
   const notificationMunicipality = locations.map((location) => ({
@@ -105,6 +123,15 @@ exports.deleteNotificationLocation = (req, res) => {
     });
 };
 exports.updateNotificationLocation = (req, res) => {
+  const requiredFields = ["notificationId", "locationId"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
   let notificationId = req.params.notificationId;
   let locationId = req.params.locationId;
   NotificationMunicipality.update(req.body, {
