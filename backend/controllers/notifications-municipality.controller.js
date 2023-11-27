@@ -21,6 +21,7 @@ exports.createOneNotificationMunicipality = (req, res) => {
     locationId: locationId,
     notificationId: notificationId,
   };
+
   NotificationMunicipality.create(notificationMunicipality)
     .then((data) => {
       if (!data) {

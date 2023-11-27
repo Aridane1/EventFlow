@@ -10,12 +10,12 @@ exports.create = (req, res) => {
       });
     }
   }
-
   let subscription = {
     endpoint: req.body.subscription.endpoint,
     keys: JSON.stringify(req.body.subscription.keys),
     userId: req.body.userId,
   };
+
   Device.findOne({
     where: {
       endpoint: req.body.subscription.endpoint,

@@ -12,12 +12,7 @@ export class NotificationService {
     return this.httpClient.get<any>(this.endpoint);
   }
 
-  sendNotificationsAllMunicipality(message: any) {
-    console.log(message);
-    return this.httpClient.post(this.endpoint + '/sendforall', message);
-  }
-  sendNotificationsByIdMunicipality(message: any, id: any) {
-    console.log(message);
-    return this.httpClient.post(this.endpoint + `/send/${id}`, message);
+  create(message: any) {
+    return this.httpClient.post(this.endpoint, message);
   }
 }

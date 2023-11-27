@@ -7,6 +7,7 @@ import { UserSubscribeLocationService } from 'src/app/services/user-subscribe-lo
 import { SwPush } from '@angular/service-worker';
 import { DeviceService } from 'src/app/services/device.service';
 import { environment } from '../../../environments/environment';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-search',
@@ -18,7 +19,8 @@ export class SearchPage implements OnInit {
   locations: any;
   token: any;
   searcher: string;
-  readonly PUBLIC_VAPID_KEY = environment.PUBLIC_VAPID_KEY;
+  readonly PUBLIC_VAPID_KEY =
+    'BMZ80ZRGERRFOYFrKBboF2T5g_sq-XTwZsWD49FYZelLjSN97B5570OmJKPm_GnIp_t_2lyw8NINyw2yfVFxxWw';
 
   constructor(
     private locationService: LocationService,
@@ -45,14 +47,14 @@ export class SearchPage implements OnInit {
   }
   async subscribeThisLocation(id: number) {
     let token = await this.storage.get('token');
-    let user = await firstValueFrom(this.authService.getUserByToken(token));
+    let user = jwtDecode(token) as any;
     this.swPush
       .requestSubscription({ serverPublicKey: this.PUBLIC_VAPID_KEY })
       .then((respuesta) => {
         this.respuesta = respuesta;
 
         let subscribe = {
-          userId: user.user.id,
+          userId: user.id,
           locationId: id,
         };
         this.userSubLocationService
@@ -61,7 +63,7 @@ export class SearchPage implements OnInit {
             this.deviceService
               .subscribeDevice({
                 subscription: respuesta,
-                userId: user.user.id,
+                userId: user.id,
               })
               .subscribe((data) => {});
           });
