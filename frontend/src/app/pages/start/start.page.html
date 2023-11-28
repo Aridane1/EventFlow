@@ -1,15 +1,30 @@
 <ion-content>
-  <header class="head">
-    <h2>EVENT FLOW</h2>
-  </header>
-  <main class="container">
-    <section class="container-btn">
-      <section class="btn" routerLink="/login">
-        <p>Inicar sesion</p>
-      </section>
-      <section class="btn" routerLink="/register">
-        <p>Crear cuenta</p>
-      </section>
-    </section>
-  </main>
+  <div class="flex flex-col h-screen justify-center items-center">
+    <div class="text-white text-center mb-10 w-52 sm:w-full">
+      <p class="text-6xl">EVENT FLOW</p>
+    </div>
+    <div class="flex justify-center">
+      <div class="bg-slate-500 w-fit h-fit p-10 rounded">
+        <div class="flex flex-col gap-6 pt-2 items-center">
+          <div>
+            <button class="bg-white py-3 px-12 rounded" routerLink="/login">
+              Iniciar sesión
+            </button>
+          </div>
+          <div>
+            <button class="bg-white py-3 px-12 rounded" routerLink="/register">
+              Crear cuenta
+            </button>
+          </div>
+          <div class="text-white text-lg self-start">
+            <p>Iniciar sesión con:</p>
+          </div>
+          <div class="flex gap-2">
+            <button class="bg-white py-3 px-5 rounded">Google</button>
+            <button class="bg-white py-3 px-5 rounded">Facebook</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

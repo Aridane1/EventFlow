@@ -5,7 +5,11 @@ const fs = require("fs");
 const path = require("path");
 
 exports.create = (req, res) => {
-  console.log(req.body.name);
+  if (!req.body.name) {
+    return res.status(400).send({
+      message: `Missing required field: name`,
+    });
+  }
   const newLocation = {
     name: req.body.name,
     location_img: req.file.filename,
@@ -70,6 +74,23 @@ exports.getAll = (req, res) => {
       });
     });
 };
+exports.getOne = (req, res) => {
+  Location.findByPk(req.params.id)
+    .then((location) => {
+      if (!location) {
+        return res.status(404).send({
+          message: "No locations found",
+        });
+      }
+      res.send(location);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({
+        message: err.message || "Error retrieving locations.",
+      });
+    });
+};
 
 exports.delete = (req, res) => {
   const id = req.params.id;
@@ -90,7 +111,7 @@ exports.delete = (req, res) => {
 exports.update = (req, res) => {
   if (!req.body.name) {
     return res.status(400).send({
-      message: "Content can not be empty!",
+      message: `Missing required field: name`,
     });
   }
   const updateLocation = {
@@ -118,6 +139,11 @@ exports.update = (req, res) => {
 };
 
 exports.updateImage = (req, res) => {
+  if (!req.body.name) {
+    return res.status(400).send({
+      message: `Missing required field: name`,
+    });
+  }
   let locationId = req.params.id;
   let updateLocation = {
     name: req.body.name,

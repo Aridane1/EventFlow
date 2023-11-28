@@ -15,6 +15,7 @@ export class ModifyEventPage implements OnInit {
   eventForm: FormGroup;
   locations: any;
   capturedPhoto: any;
+  isPopupOpen = false;
   event: any;
   id: any;
   havePhoto = true;
@@ -47,6 +48,13 @@ export class ModifyEventPage implements OnInit {
     this.eventForm.reset();
     this.capturedPhoto = null;
   }
+  seeImage() {
+    this.isPopupOpen = true;
+  }
+
+  closeImage() {
+    this.isPopupOpen = false;
+  }
 
   discardImage() {
     this.capturedPhoto = null;
@@ -68,7 +76,6 @@ export class ModifyEventPage implements OnInit {
 
   getOneEvent(id: any) {
     this.eventService.getOneEvent(id).subscribe((data) => {
-      //almacena los datos en el formulario
       this.event = data;
       this.eventForm.controls['title'].setValue(this.event.name);
       this.capturedPhoto = this.event.img;
@@ -79,6 +86,7 @@ export class ModifyEventPage implements OnInit {
       this.eventForm.controls['locationName'].setValue(this.event.locationId);
     });
   }
+
   async updateEvent() {
     const title = this.eventForm.get('title')?.value;
     const description = this.eventForm.get('description')?.value;

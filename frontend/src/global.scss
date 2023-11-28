@@ -27,7 +27,9 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 
+ion-content {
+  --background: #a5acb8;
+}
 body {
-  background-color: #f4f5fa;
-  font-family: Inter;
+  font-family: "Inter", sans-serif;
 }

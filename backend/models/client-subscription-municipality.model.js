@@ -4,7 +4,6 @@ module.exports = (sequelize, Sequelize) => {
     {
       userId: {
         primaryKey: true,
-        allowNull: false,
         type: Sequelize.INTEGER,
       },
       locationId: {

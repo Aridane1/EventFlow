@@ -1,0 +1,36 @@
+<ion-content>
+  <app-menu [mode]="'customer'"></app-menu>
+
+  <ng-container *ngIf="event">
+    <div
+      class="max-w-lg mx-auto bg-slate-400 shadow-md rounded-md overflow-hidden my-9"
+    >
+      <img
+        [src]="'http://localhost:8080/images/' + event.img"
+        [alt]="event.name"
+        class="w-full h-40 object-cover"
+      />
+      <div class="p-6 text-black">
+        <div class="font-bold text-3xl capitalize mb-2">{{ event.name }}</div>
+        <div class="mb-4">{{ event.description }}</div>
+        <div class="mb-2">Price: {{ event.price }}</div>
+      </div>
+      <div class="flex justify-center mb-8">
+        <button
+          *ngIf="!isSubscribe"
+          (click)="subscribe()"
+          class="block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+        >
+          Subscribirte
+        </button>
+        <button
+          *ngIf="isSubscribe"
+          (click)="unSubscribe()"
+          class="block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
+        >
+          Desubscribirte
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</ion-content>

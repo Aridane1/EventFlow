@@ -1,33 +1,39 @@
-<section class="card">
-  <img
-    src="http://localhost:8080/images/{{ event.img }}"
-    alt="{{ event.img }}"
-  />
-  <section class="card-content">
-    <header class="card-header">
-      <p class="header">{{ event.name }}</p>
-    </header>
-    <section class="card-body">
-      <p class="body">{{ event.description }}</p>
-    </section>
-    <footer class="card-footer">
-      <p class="footer">{{ event.price }}€</p>
-      <p class="footer">{{ event.locationName }}</p>
-    </footer>
-  </section>
-  <picture
-    class="delete-svg"
-    (click)="deleteOneEvent(event.id)"
-    *ngIf="mode === 'admin'"
-  >
-    <img src="../../assets/delete.svg" alt="" />
-  </picture>
-  <picture class="update-svg">
+<div class="w-full h-44 bg-slate-400 flex rounded gap-3 shadow-lg text-black">
+  <picture class="w-40">
     <img
-      src="../../assets/update.svg"
-      alt=""
-      [routerLink]="['/modify-event', { id: event.id }]"
-      *ngIf="mode === 'admin'"
+      class="h-full rounded"
+      src="http://localhost:8080/images/{{ event.img }}"
+      alt="{{ event.img }}"
     />
   </picture>
-</section>
+  <div class="relative">
+    <div class="w-40 h-6 text-sm mt-3">
+      <p class="truncate">{{ event.name }}</p>
+    </div>
+
+    <div class="h-[95px] overflow-hidden text-sm w-52 mr-9">
+      <p class="truncate whitespace-pre-wrap">{{ event.description }}</p>
+    </div>
+
+    <div class="absolute bottom-0 w-full flex justify-around text-sm mb-2">
+      <p>{{ event.price }}€</p>
+      <p>{{ event.locationName }}</p>
+    </div>
+
+    <div
+      class="absolute flex sm:flex-col right-1 top-0"
+      *ngIf="mode === 'admin'"
+    >
+      <picture (click)="deleteOneEvent(event.id)" class="cursor-pointer">
+        <ion-icon name="trash-outline" class="text-lg md:text-xl"></ion-icon>
+      </picture>
+      <picture class="cursor-pointer">
+        <ion-icon
+          name="pencil-outline"
+          [routerLink]="['/modify-event', { id: event.id }]"
+          class="text-lg md:text-xl"
+        ></ion-icon>
+      </picture>
+    </div>
+  </div>
+</div>

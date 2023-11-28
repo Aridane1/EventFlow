@@ -1,59 +1,119 @@
-<header class="header">
-  <h2>EventFlow</h2>
-</header>
+<div class="bg-slate-500 flex justify-center">
+  <p class="text-4xl pb-2 pt-2 text-r h-[3.375rem]">EventFlow</p>
+</div>
 <ion-content>
-  <main>
-    <section>
-      <img
-        src="../../../assets/arrow-left.svg"
-        alt="arrow"
+  <div class="flex justify-center">
+    <div class="text-center text-3xl align-middle w-52 mt-5">
+      <p>Ver y Registrar Municipios</p>
+    </div>
+    <div class="absolute left-1 top-10">
+      <ion-icon
+        name="arrow-back-circle-outline"
+        class="text-5xl cursor-pointer"
         routerLink="/admin-page"
-      />
-      <h1>Municipios registrados</h1>
-    </section>
-
-    <section class="container">
-      <section class="container-form">
-        <form [formGroup]="locationForm" (ngSubmit)="onAdd()" class="form">
-          <section>
-            <label for="name">Nombre del Municipio</label>
+      ></ion-icon>
+    </div>
+  </div>
+  <div class="">
+    <div class="flex flex-wrap justify-evenly">
+      <div class="p-4 rounded">
+        <form
+          [formGroup]="locationForm"
+          class="flex flex-col gap-5 text-white bg-slate-500 w-fit p-4 rounded"
+        >
+          <div>
+            <label class="text-lg" for="name"> Nombre del Municipio:</label>
             <input
               type="text"
               placeholder="Nombre del municipio"
               formControlName="name"
               id="name"
+              class="text-black block border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
             />
-            <label for="name">Imagen del Municipio</label>
-            <input
-              type="text"
-              placeholder="Nombre del municipio"
-              formControlName="name"
-              id="name"
-              value="{{capturedPhoto}}"
-            />
-            <ion-button *ngIf="!capturedPhoto" (click)="selectImage()"
-              >Seleccionar imagen</ion-button
+          </div>
+          <div>
+            <label class="text-lg">Imagen del Municipio:</label>
+            <button
+              *ngIf="!capturedPhoto"
+              (click)="selectImage()"
+              class="block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
             >
-          </section>
-          <ion-button color="success" type="submit">
-            Añadir Municipio
-          </ion-button>
+              Seleccionar imagen
+            </button>
+            <div class="flex">
+              <button
+                *ngIf="capturedPhoto"
+                (click)="discardImage()"
+                class="block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
+              >
+                Descartar imagen
+              </button>
+              <button
+                *ngIf="capturedPhoto"
+                (click)="seeImage()"
+                class="text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
+              >
+                <ion-icon name="eye-outline"></ion-icon>
+              </button>
+            </div>
+          </div>
+          <div class="mt-5 flex justify-center">
+            <button
+              (click)="onAdd()"
+              class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+            >
+              Añadir municipio
+            </button>
+          </div>
         </form>
-      </section>
-      <table>
-        <tr>
-          <th>Municipio</th>
-          <th>Accion</th>
-        </tr>
-        <tr *ngFor="let location of locations">
-          <td>{{location.name}}</td>
-          <td>
-            <ion-button color="danger" (click)="deleteLocation(location.id)"
-              >Eliminar</ion-button
-            >
-          </td>
-        </tr>
-      </table>
-    </section>
-  </main>
+      </div>
+      <div class="p-8 relative">
+        <!-- Buscador -->
+        <ion-searchbar
+          search-icon="search"
+          class="rounded-md p-2 text-gray-700 text-lg w-56 m-auto mb-3"
+          [(ngModel)]="searcher"
+        ></ion-searchbar>
+
+        <table
+          class="w-96 bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden"
+        >
+          <thead>
+            <tr class="bg-gray-200">
+              <th class="py-3 px-6 text-left font-bold text-gray-600">
+                Municipio
+              </th>
+              <th class="py-3 px-6 text-left font-bold text-gray-600">
+                Acción
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let location of onSearch()" class="hover:bg-gray-100">
+              <td class="py-4 px-6 border-b border-gray-300">
+                {{ location.name }}
+              </td>
+              <td class="py-4 px-6 border-b border-gray-300">
+                <button
+                  (click)="deleteLocation(location.id)"
+                  class="bg-red-500 hover:bg-red-700 focus:outline-none text-white p-2 rounded"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="isPopupOpen"
+    class="absolute flex inset-0 items-center align-middle justify-center bg-gray-800 bg-opacity-75"
+  >
+    <app-popup-image
+      [capturedPhoto]="capturedPhoto"
+      (closePopup)="closeImage()"
+    ></app-popup-image>
+  </div>
 </ion-content>

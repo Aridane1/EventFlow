@@ -4,6 +4,22 @@ const fs = require("fs");
 const path = require("path");
 
 exports.create = (req, res) => {
+  const requiredFields = [
+    "name",
+    "description",
+    "date",
+    "price",
+    "numTickets",
+    "location",
+  ];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
   const newEvent = {
     name: req.body.name,
     description: req.body.description,
@@ -82,7 +98,23 @@ exports.deleteOne = (req, res) => {
 };
 
 exports.updateOneWithFile = (req, res) => {
+  const requiredFields = [
+    "name",
+    "description",
+    "date",
+    "price",
+    "numTickets",
+    "location",
+  ];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
   const eventId = req.params.id;
+
   const updateEvent = {
     name: req.body.name,
     description: req.body.description,
@@ -110,7 +142,23 @@ exports.updateOneWithFile = (req, res) => {
       });
     });
 };
+
 exports.updateOne = (req, res) => {
+  const requiredFields = [
+    "name",
+    "description",
+    "date",
+    "price",
+    "numTickets",
+    "location",
+  ];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
   const eventId = req.params.id;
   const updateEvent = {
     name: req.body.name,
@@ -122,11 +170,18 @@ exports.updateOne = (req, res) => {
   };
   console.log("no updatePhoto");
 
-  Event.update(updateEvent, { where: { id: eventId } }).then((event) => {
-    if (event == 1) {
-      res.send({ message: "Update successful" });
-    } else {
-      res.send({ message: `Cannot find Event with id ${eventId}` });
-    }
-  });
+  Event.update(updateEvent, { where: { id: eventId } })
+    .then((event) => {
+      if (event == 1) {
+        res.send({ message: "Update successful" });
+      } else {
+        res.send({ message: `Cannot find Event with id ${eventId}` });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send({
+        message: "Error updating event.",
+      });
+    });
 };

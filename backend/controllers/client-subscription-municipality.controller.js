@@ -2,11 +2,19 @@ const db = require("../models");
 const ClientSubscriptionMunicipality = db.ClientSubscriptionMunicipality;
 
 exports.create = (req, res) => {
+  const requiredFields = ["locationId", "userId"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
+
   const newClientSubMunicipality = {
     userId: req.body.userId,
     locationId: req.body.locationId,
   };
-
   ClientSubscriptionMunicipality.create(newClientSubMunicipality)
     .then((data) => {
       if (!data) {
@@ -22,6 +30,7 @@ exports.create = (req, res) => {
         .send({ message: "There was an error in the server", err });
     });
 };
+
 exports.findAllByClientId = (req, res) => {
   let id = req.params.id;
   ClientSubscriptionMunicipality.findAll({ userId: id })
@@ -60,6 +69,14 @@ exports.findAll = (req, res) => {
 };
 
 exports.update = (req, res) => {
+  const requiredFields = ["locationId", "userId"];
+  for (const field of requiredFields) {
+    if (!req.body[field]) {
+      return res.status(400).send({
+        message: `Missing required field: ${field}`,
+      });
+    }
+  }
   let id = req.params.id;
   let updateData = req.body;
   ClientSubscriptionMunicipality.update(updateData, { where: { userId: id } })

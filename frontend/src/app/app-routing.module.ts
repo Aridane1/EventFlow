@@ -77,18 +77,65 @@ const routes: Routes = [
       import('./pages/events/events.module').then((m) => m.EventsPageModule),
   },
   {
-    path: 'account',
-    canActivate: [AuthGuard],
-    data: { allowedRoles: ['customer', 'admin'] },
-    loadChildren: () =>
-      import('./pages/account/account.module').then((m) => m.AccountPageModule),
-  },
-  {
     path: 'search',
     canActivate: [AuthGuard],
     data: { allowedRoles: ['customer', 'admin'] },
     loadChildren: () =>
       import('./pages/search/search.module').then((m) => m.SearchPageModule),
+  },
+  {
+    path: 'add-administrator',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['manager'] },
+    loadChildren: () =>
+      import('./pages/add-administrator/add-administrator.module').then(
+        (m) => m.AddAdministratorPageModule
+      ),
+  },
+  {
+    path: 'see-administrator',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['manager'] },
+    loadChildren: () =>
+      import('./pages/see-users/see-administrator.module').then(
+        (m) => m.SeeAdministratorPageModule
+      ),
+  },
+  {
+    path: 'send-message',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] },
+    loadChildren: () =>
+      import('./pages/send-message/send-message.module').then(
+        (m) => m.SendMessagePageModule
+      ),
+  },
+  {
+    path: 'change-mode',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin'] },
+    loadChildren: () =>
+      import('./pages/change-mode/change-mode.module').then(
+        (m) => m.ChangeModePageModule
+      ),
+  },
+  {
+    path: 'see-event',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin', 'customer'] },
+    loadChildren: () =>
+      import('./pages/see-event/see-event.module').then(
+        (m) => m.SeeEventPageModule
+      ),
+  },
+  {
+    path: 'your-events',
+    canActivate: [AuthGuard],
+    data: { allowedRoles: ['admin', 'customer'] },
+    loadChildren: () =>
+      import('./pages/your-events/your-events.module').then(
+        (m) => m.YourEventsPageModule
+      ),
   },
 ];
 

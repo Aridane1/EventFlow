@@ -10,14 +10,6 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       unique: true,
     },
-    profile_picture: {
-      type: Sequelize.STRING,
-      allowNull: true,
-    },
-    aboutMe: {
-      type: Sequelize.TEXT,
-      allowNull: true,
-    },
     rol: {
       type: Sequelize.STRING,
     },

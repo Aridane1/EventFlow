@@ -1,0 +1,93 @@
+<ion-content>
+  <app-menu [mode]="'admin'"></app-menu>
+  <h1 class="text-4xl text-center">Mandar notificaciones</h1>
+  <ion-segment
+    [(ngModel)]="segmentSelected"
+    (ionChange)="segmentChanged($event)"
+  >
+    <ion-segment-button value="location">
+      <ion-label>Location</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="event">
+      <ion-label>Event</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div class="pt-20 pb-20 flex items-center justify-center">
+    <div
+      class="max-w-md mx-auto bg-slate-500 text-white p-8 rounded-md shadow-md"
+    >
+      <h2 class="text-2xl font-semibold mb-4">Enviar Mensaje</h2>
+      <form [formGroup]="messageForm">
+        <div class="mb-4">
+          <label for="titulo" class="block text-gray-50 text-sm font-bold mb-2"
+            >Título:</label
+          >
+          <input
+            type="text"
+            id="titulo"
+            formControlName="title"
+            name="titulo"
+            class="w-full p-2 border rounded-md bg-slate-700 text-gray-50"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="mensaje" class="block text-gray-50 text-sm font-bold mb-2"
+            >Mensaje:</label
+          >
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            formControlName="message"
+            rows="4"
+            class="w-full p-2 border rounded-md overflow-y-auto bg-slate-700 text-gray-50"
+          ></textarea>
+        </div>
+
+        <div class="mb-4" *ngIf="segmentSelected==='location'">
+          <label
+            for="localidad"
+            class="block text-gray-50 text-sm font-bold mb-2"
+            >Localidad:</label
+          >
+          <select
+            id="localidad"
+            name="localidad"
+            formControlName="location"
+            class="w-full p-2 border rounded-md bg-slate-700 text-gray-50"
+          >
+            <option value="all" selected>Todas las localidades</option>
+            <option *ngFor="let location of locations" value="{{location.id}}">
+              {{location.name}}
+            </option>
+          </select>
+        </div>
+        <div class="mb-4" *ngIf="segmentSelected ==='event'">
+          <label for="event" class="block text-gray-50 text-sm font-bold mb-2"
+            >Evento:</label
+          >
+          <select
+            id="event"
+            name="event"
+            formControlName="event"
+            class="w-full p-2 border rounded-md bg-slate-700 text-gray-50"
+          >
+            <option *ngFor="let event of events" value="{{event.id}}">
+              {{event.name}}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <button
+            type="submit"
+            class="bg-slate-700 text-white p-2 rounded-md hover:bg-slate-600"
+            (click)="sendMessage()"
+          >
+            Enviar Mensaje
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

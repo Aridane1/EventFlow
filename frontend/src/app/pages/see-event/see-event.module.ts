@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AccountPageRoutingModule } from './account-routing.module';
+import { SeeEventPageRoutingModule } from './see-event-routing.module';
 
-import { AccountPage } from './account.page';
+import { SeeEventPage } from './see-event.page';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
     CommonModule,
     FormsModule,
     IonicModule,
-    AccountPageRoutingModule,
+    SeeEventPageRoutingModule,
     SharedModule,
   ],
-  declarations: [AccountPage],
+  declarations: [SeeEventPage],
 })
-export class AccountPageModule {}
+export class SeeEventPageModule {}

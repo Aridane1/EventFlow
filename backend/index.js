@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const webpush = require("web-push");
 const jwt = require("jsonwebtoken");
 const express = require("express");
 const cors = require("cors");
@@ -17,12 +17,23 @@ var corsOptions = {
   origin: "*",
 };
 
+const vapidKeys = {
+  publicKey: process.env.PUBLIC_VAPID_KEY,
+  privateKey: process.env.PRIVATE_VAPID_KEY,
+};
+
+webpush.setVapidDetails(
+  "mailto:example@yourdomain.org",
+  vapidKeys.publicKey,
+  vapidKeys.privateKey
+);
+
 const db = require("./models");
 
-// db.sequelize.sync();
-db.sequelize
-  .sync({ force: true })
-  .then(() => console.log("Drop and Resync with { force: true }"));
+db.sequelize.sync();
+// db.sequelize
+//   .sync({ force: true })
+//   .then(() => console.log("Drop and Resync with { force: true }"));
 
 app.use(cors(corsOptions));
 
@@ -71,7 +82,15 @@ require("./routes/event.routes")(app);
 require("./routes/location.routes")(app);
 require("./routes/user.routes")(app);
 require("./routes/client-subscription-municipality.routes")(app);
+require("./routes/notifications-muni.routes")(app);
+require("./routes/notifications-municipality.routes")(app);
+require("./routes/device.routes")(app);
+require("./routes/user-subscription-event.routes")(app);
+require("./routes/notification-event.routes")(app);
+require("./routes/relation-notification-event.routes")(app);
 
 app.listen(PORT, () => {
   console.log("Server started on: " + PORT);
 });
+
+module.exports = app;

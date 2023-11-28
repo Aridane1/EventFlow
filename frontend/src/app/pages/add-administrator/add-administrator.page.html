@@ -1,0 +1,55 @@
+<div class="bg-slate-500 flex justify-center">
+  <p class="text-4xl pb-2 pt-2 text-r h-[3.375rem]">EventFlow</p>
+</div>
+<ion-content>
+  <div class="flex justify-center">
+    <div class="text-center text-3xl align-middle w-52 mt-5">
+      <p>Registrar Administrador</p>
+    </div>
+    <div class="absolute left-1 top-10">
+      <ion-icon
+        name="arrow-back-circle-outline"
+        class="text-5xl cursor-pointer"
+        routerLink="/admin-page"
+      ></ion-icon>
+    </div>
+  </div>
+  <div class="flex justify-center flex-col mt-16">
+    <div class="flex justify-center">
+      <form
+        [formGroup]="registerAdminForm"
+        class="flex flex-col gap-2 bg-slate-400 p-10 rounded text-white"
+      >
+        <div>
+          <label>Nombre del administrador:</label>
+          <input
+            class="border-0 rounded-md block text-black"
+            type="text"
+            formControlName="name"
+          />
+        </div>
+        <div>
+          <label>Correo electronico:</label>
+          <input
+            class="border-0 rounded-md block text-black"
+            type="text"
+            formControlName="email"
+          />
+        </div>
+        <div>
+          <label>Contraseña:</label>
+          <input
+            class="border-0 rounded-md block text-black"
+            type="text"
+            formControlName="password"
+          />
+        </div>
+        <div class="text-center py-5">
+          <button (click)="registerAdmin()" class="bg-blue-500 p-4 rounded-lg">
+            Añadir administrador
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

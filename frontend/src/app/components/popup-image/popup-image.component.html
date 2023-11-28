@@ -1,0 +1,12 @@
+<div class="relative bg-white p-5 rounded-md">
+  <ion-icon
+    name="close-circle-outline"
+    class="absolute top-2 right-2 cursor-pointer text-2xl"
+    (click)="closeImage()"
+  ></ion-icon>
+  <ion-img
+    class="w-72 mx-auto"
+    [src]="capturedPhoto"
+    alt="Imagen capturada"
+  ></ion-img>
+</div>
