@@ -27,7 +27,7 @@
             id="titulo"
             formControlName="title"
             name="titulo"
-            class="w-full p-2 border rounded-md bg-slate-700 text-gray-50"
+            class="w-full p-2 border rounded-md bg-white text-black"
           />
         </div>
 
@@ -40,7 +40,7 @@
             name="mensaje"
             formControlName="message"
             rows="4"
-            class="w-full p-2 border rounded-md overflow-y-auto bg-slate-700 text-gray-50"
+            class="w-full p-2 border rounded-md overflow-y-auto bg-white text-black"
           ></textarea>
         </div>
 
@@ -54,7 +54,7 @@
             id="localidad"
             name="localidad"
             formControlName="location"
-            class="w-full p-2 border rounded-md bg-slate-700 text-gray-50"
+            class="w-56 p-2 border rounded-md bg-white text-black"
           >
             <option value="all" selected>Todas las localidades</option>
             <option *ngFor="let location of locations" value="{{location.id}}">
@@ -70,7 +70,7 @@
             id="event"
             name="event"
             formControlName="event"
-            class="w-full p-2 border rounded-md bg-slate-700 text-gray-50"
+            class="w-56 p-2 border rounded-md bg-white text-black"
           >
             <option *ngFor="let event of events" value="{{event.id}}">
               {{event.name}}
@@ -78,10 +78,10 @@
           </select>
         </div>
 
-        <div>
+        <div class="flex justify-center">
           <button
             type="submit"
-            class="bg-slate-700 text-white p-2 rounded-md hover:bg-slate-600"
+            class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
             (click)="sendMessage()"
           >
             Enviar Mensaje

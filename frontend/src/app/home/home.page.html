@@ -4,20 +4,21 @@
     <div class="text-center text-3xl align-middle w-52 mt-5">
       <p>Eventos de tus municipio</p>
     </div>
-    <div class="absolute right-2 top-[80px]">
+    <div class="absolute right-2 top-[120px] sm:top-[80px]">
       <ion-icon
         name="add-circle-outline"
         routerLink="/add-events"
-        class="text-6xl text-slate-700 cursor-pointer"
+        class="text-5xl text-slate-700 cursor-pointer"
       ></ion-icon>
     </div>
   </div>
-  <div class="flex flex-wrap gap-5 columns-2 mt-5 justify-center m-7">
+  <div class="flex flex-wrap gap-5 justify-center my-5 mx-5">
     <app-card
       [mode]="'admin'"
       *ngFor="let event of events"
       [event]="event"
       (change)="deleteOneEvent($event)"
+      class="w-52 sm:w-fit"
     ></app-card>
   </div>
 </ion-content>

@@ -1,12 +1,13 @@
 <ion-content>
   <app-menu [mode]="'customer'"></app-menu>
   <p class="text-3xl text-center mt-9">Evento en los que participas</p>
-  <div class="flex flex-wrap gap-2 mt-9 justify-center">
+  <div class="flex flex-wrap gap-5 justify-center my-5 mx-5">
     <app-card
-      *ngFor="let event of subscriptions"
-      [event]="event.event"
+      *ngFor="let subscription of subscriptions"
+      [event]="subscription"
       [mode]="'customer'"
-      [routerLink]="['/see-event', { id: event.event.id }]"
+      [routerLink]="['/see-event', { id: subscription.id }]"
+      class="w-52 sm:w-fit"
     ></app-card>
   </div>
 </ion-content>

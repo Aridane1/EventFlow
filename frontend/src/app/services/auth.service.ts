@@ -53,16 +53,6 @@ export class AuthService {
       );
   }
 
-  getUserByToken(token: any) {
-    const header = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.httpClient.get<any>(`${this.endpoint}/token`, {
-      headers: header,
-    });
-  }
-
   register(user: User): Observable<User> {
     return this.httpClient
       .post<any>(

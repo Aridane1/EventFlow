@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from '../services/event.service';
 import { LocationService } from '../services/location.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -51,8 +52,27 @@ export class HomePage implements OnInit {
     });
   }
   deleteOneEvent(id: number) {
-    this.eventService.deleteOneEvent(id).subscribe((data) => {
-      this.getAllEvents();
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: 'No podras revertir el cambio!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.eventService.deleteOneEvent(id).subscribe((data) => {
+          this.getAllEvents();
+          Swal.fire({
+            title: 'Eliminado!',
+            text: 'El evento ha sido eliminado.',
+            icon: 'success',
+            heightAuto: false,
+          });
+        });
+      }
     });
   }
 }
