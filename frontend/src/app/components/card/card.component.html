@@ -1,23 +1,27 @@
-<div class="w-full h-44 bg-slate-400 flex rounded gap-3 shadow-lg text-black">
-  <picture class="w-40">
+<div
+  class="w-full h-full sm:h-44 bg-slate-400 flex flex-col sm:flex-row rounded gap-3 shadow-lg text-black transform hover:scale-105 transition-transform"
+>
+  <picture class="w-full max-w-96 h-52 sm:h-full">
     <img
-      class="h-full rounded"
+      class="w-full h-full sm:w-52 rounded object-cover"
       src="http://localhost:8080/images/{{ event.img }}"
       alt="{{ event.img }}"
     />
   </picture>
-  <div class="relative">
+  <div class="relative ml-4">
     <div class="w-40 h-6 text-sm mt-3">
       <p class="truncate">{{ event.name }}</p>
     </div>
 
-    <div class="h-[95px] overflow-hidden text-sm w-52 mr-9">
-      <p class="truncate whitespace-pre-wrap">{{ event.description }}</p>
+    <div class="h-[95px] overflow-hidden text-sm w-44 sm:w-52 mr-9">
+      <p class="whitespace-pre-wrap truncate">{{ event.description }}</p>
     </div>
 
-    <div class="absolute bottom-0 w-full flex justify-around text-sm mb-2">
+    <div
+      class="mt-5 sm:mt-0 sm:absolute bottom-0 w-full flex justify-around text-sm mb-2"
+    >
       <p>{{ event.price }}€</p>
-      <p>{{ event.locationName }}</p>
+      <p class="truncate w-7/12 text-center">{{ event.locationName }}</p>
     </div>
 
     <div

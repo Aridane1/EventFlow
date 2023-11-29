@@ -61,24 +61,26 @@
         <button
           *ngIf="!capturedPhoto"
           (click)="selectImage()"
-          class="block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+          class="block bg-blue-500 text-white py-3 px-5 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
         >
           Seleccionar imagen
         </button>
-        <button
-          *ngIf="capturedPhoto"
-          (click)="discardImage()"
-          class="block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
-        >
-          Descartar imagen
-        </button>
-        <button
-          *ngIf="capturedPhoto"
-          (click)="seeImage()"
-          class="text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
-        >
-          <ion-icon name="eye-outline"></ion-icon>
-        </button>
+        <div class="flex">
+          <button
+            *ngIf="capturedPhoto"
+            (click)="discardImage()"
+            class="block bg-red-500 text-white py-3 px-5 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
+          >
+            Descartar imagen
+          </button>
+          <button
+            *ngIf="capturedPhoto"
+            (click)="seeImage()"
+            class="text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
+          >
+            <ion-icon name="eye-outline"></ion-icon>
+          </button>
+        </div>
       </div>
 
       <div class="mb-4 md:hidden">
@@ -87,7 +89,7 @@
         <button
           *ngIf="!capturedPhoto"
           (click)="selectImage()"
-          class="block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+          class="block bg-blue-500 text-white py-3 px-5 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
         >
           Seleccionar imagen
         </button>
@@ -95,7 +97,7 @@
           <button
             *ngIf="capturedPhoto"
             (click)="discardImage()"
-            class="block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
+            class="block bg-red-500 text-white py-3 px-5 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
           >
             Descartar imagen
           </button>
@@ -205,9 +207,9 @@
       <div class="mt-5 flex justify-center">
         <button
           (click)="updateEvent()"
-          class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+          class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline-blue active:bg-green-800"
         >
-          Crear evento
+          Modificar evento
         </button>
       </div>
     </form>

@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocationService } from 'src/app/services/location.service';
 import { Location } from '../../interfaces/location';
 import { PhotoService } from 'src/app/services/photo.service';
+import Swal from 'sweetalert2';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-location',
@@ -37,14 +39,17 @@ export class LocationPage implements OnInit {
   closeImage() {
     this.isPopupOpen = false;
   }
+
   discardImage() {
     this.capturedPhoto = null;
   }
-  getAllLocation() {
-    this.locationService.getAllLocation().subscribe((data) => {
-      this.locations = data;
-    });
+
+  async getAllLocation() {
+    this.locations = await firstValueFrom(
+      this.locationService.getAllLocation()
+    );
   }
+
   selectImage() {
     this.photoService.pickImage().then((data) => {
       this.capturedPhoto = data.webPath;
@@ -53,29 +58,81 @@ export class LocationPage implements OnInit {
 
   async onAdd() {
     const name = this.locationForm.get('name')?.value;
+
     let location: Location = {
       name: name,
     };
 
+    const locationExist = this.locations.some(
+      (existingLocation: any) => existingLocation.name === location.name
+    );
+
+    if (locationExist) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: `La localidad ${name} ya existe`,
+        heightAuto: false,
+      });
+      return;
+    }
+
     if (!this.locationForm.valid) {
-      console.log('Please provide all the required values!');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Falta algun campo por rellenar',
+        heightAuto: false,
+      });
       return;
     } else {
       let blob = null;
-      if (this.capturedPhoto != '') {
-        const response = await fetch(this.capturedPhoto);
-        blob = await response.blob();
+      if (!this.capturedPhoto) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Falta añadir una foto',
+          heightAuto: false,
+        });
+        return;
       }
+      const response = await fetch(this.capturedPhoto);
+      blob = await response.blob();
 
       this.locationService.addLocation(location, blob).subscribe((data) => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Se ha registrado el municipio correctamente',
+          heightAuto: false,
+        });
         this.getAllLocation();
+        this.locationForm.reset();
       });
     }
   }
 
   deleteLocation(locationId: number) {
-    this.locationService.deleteLocation(locationId).subscribe((data) => {
-      this.getAllLocation();
+    Swal.fire({
+      title: 'Estas seguro?',
+      text: 'No podras revertir el cambio!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.locationService.deleteLocation(locationId).subscribe((data) => {
+          this.getAllLocation();
+          Swal.fire({
+            title: 'Eliminado!',
+            text: 'La localidad se ha sido eliminado.',
+            icon: 'success',
+            heightAuto: false,
+          });
+        });
+      }
     });
   }
 

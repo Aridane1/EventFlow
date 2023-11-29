@@ -5,6 +5,7 @@ import { EventService } from 'src/app/services/event.service';
 import { LocationService } from 'src/app/services/location.service';
 import { PhotoService } from 'src/app/services/photo.service';
 import { Event } from '../../interfaces/event';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modify-event',
@@ -48,6 +49,7 @@ export class ModifyEventPage implements OnInit {
     this.eventForm.reset();
     this.capturedPhoto = null;
   }
+
   seeImage() {
     this.isPopupOpen = true;
   }
@@ -78,7 +80,7 @@ export class ModifyEventPage implements OnInit {
     this.eventService.getOneEvent(id).subscribe((data) => {
       this.event = data;
       this.eventForm.controls['title'].setValue(this.event.name);
-      this.capturedPhoto = this.event.img;
+      this.capturedPhoto = `http://localhost:8080/images/` + this.event.img;
       this.eventForm.controls['dateTime'].setValue(this.event.date);
       this.eventForm.controls['price'].setValue(this.event.price);
       this.eventForm.controls['numTickets'].setValue(this.event.numTickets);
@@ -98,37 +100,61 @@ export class ModifyEventPage implements OnInit {
     let event: Event = {
       name: title,
       description: description,
-      date: '12-09-2022',
+      date: date,
       price: price,
       numTickets: numTickets,
       location: locationName,
     };
 
     if (!this.eventForm.valid) {
-      if (date == null) {
-        console.log('The date is null');
-        return;
-      }
-      console.log('Please provide all the required values!');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Falta algun campo por rellenar',
+        heightAuto: false,
+      });
       return;
     } else {
-      let blob = null;
-      if (this.capturedPhoto != '') {
+      if (this.havePhoto == false) {
+        let blob = null;
+        if (!this.capturedPhoto) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Falta añadir una foto',
+            heightAuto: false,
+          });
+          return;
+        }
         const response = await fetch(this.capturedPhoto);
         blob = await response.blob();
-      }
 
-      if (this.havePhoto == false) {
-        console.log('false');
         this.eventService
           .updateEventWithPhoto(this.id, event, blob)
           .subscribe((data) => {
-            this.router.navigateByUrl('/home');
+            Swal.fire({
+              icon: 'success',
+              title: 'El evento se ha registrado correctamente',
+              showConfirmButton: true,
+              heightAuto: false,
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigateByUrl('/home');
+              }
+            });
           });
       } else {
-        console.log('true');
         this.eventService.updateEvent(this.id, event).subscribe((data) => {
-          this.router.navigateByUrl('/home');
+          Swal.fire({
+            icon: 'success',
+            title: 'El evento se ha registrado correctamente',
+            showConfirmButton: true,
+            heightAuto: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.router.navigateByUrl('/home');
+            }
+          });
         });
       }
     }

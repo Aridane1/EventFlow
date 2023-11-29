@@ -19,7 +19,7 @@
       <div class="p-4 rounded">
         <form
           [formGroup]="locationForm"
-          class="flex flex-col gap-5 text-white bg-slate-500 w-fit p-4 rounded"
+          class="flex flex-col gap-5 text-white bg-slate-500 w-fit p-5 sm:p-8 rounded"
         >
           <div>
             <label class="text-lg" for="name"> Nombre del Municipio:</label>
@@ -36,7 +36,7 @@
             <button
               *ngIf="!capturedPhoto"
               (click)="selectImage()"
-              class="block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+              class="block bg-blue-500 text-white py-3 px-5 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
             >
               Seleccionar imagen
             </button>
@@ -44,7 +44,7 @@
               <button
                 *ngIf="capturedPhoto"
                 (click)="discardImage()"
-                class="block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
+                class="block bg-red-500 text-white py-3 px-5 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
               >
                 Descartar imagen
               </button>
@@ -60,7 +60,7 @@
           <div class="mt-5 flex justify-center">
             <button
               (click)="onAdd()"
-              class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+              class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline-blue active:bg-green-800"
             >
               Añadir municipio
             </button>
@@ -71,29 +71,33 @@
         <!-- Buscador -->
         <ion-searchbar
           search-icon="search"
-          class="rounded-md p-2 text-gray-700 text-lg w-56 m-auto mb-3"
+          class="rounded-3xl p-2 text-gray-700 text-lg w-56 m-auto mb-3"
           [(ngModel)]="searcher"
         ></ion-searchbar>
 
         <table
-          class="w-96 bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden"
+          class="max-w-[45%] sm:max-w-[100%] bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden"
         >
           <thead>
             <tr class="bg-gray-200">
-              <th class="py-3 px-6 text-left font-bold text-gray-600">
+              <th
+                class="py-2 px-4 sm:py-3 sm:px-6 text-left font-bold text-gray-600"
+              >
                 Municipio
               </th>
-              <th class="py-3 px-6 text-left font-bold text-gray-600">
+              <th
+                class="py-2 px-4 sm:py-3 sm:px-6 text-left font-bold text-gray-600"
+              >
                 Acción
               </th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let location of onSearch()" class="hover:bg-gray-100">
-              <td class="py-4 px-6 border-b border-gray-300">
+              <td class="py-2 px-4 sm:py-4 sm:px-6 border-b border-gray-300">
                 {{ location.name }}
               </td>
-              <td class="py-4 px-6 border-b border-gray-300">
+              <td class="py-2 px-4 sm:py-4 sm:px-6 border-b border-gray-300">
                 <button
                   (click)="deleteLocation(location.id)"
                   class="bg-red-500 hover:bg-red-700 focus:outline-none text-white p-2 rounded"
