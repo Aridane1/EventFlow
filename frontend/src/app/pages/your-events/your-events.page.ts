@@ -20,6 +20,9 @@ export class YourEventsPage implements OnInit {
   ngOnInit() {
     this.getEventsSubscription();
   }
+  ionViewWillEnter() {
+    this.getEventsSubscription();
+  }
 
   async getEventsSubscription() {
     let token = await this.storage.get('token');

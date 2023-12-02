@@ -4,9 +4,9 @@
   <div class="flex flex-wrap gap-5 justify-center my-5 mx-5">
     <app-card
       *ngFor="let subscription of subscriptions"
-      [event]="subscription"
+      [event]="subscription.event"
       [mode]="'customer'"
-      [routerLink]="['/see-event', { id: subscription.id }]"
+      [routerLink]="['/see-event', { id: subscription.event.id }]"
       class="w-52 sm:w-fit"
     ></app-card>
   </div>
