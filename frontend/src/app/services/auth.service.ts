@@ -43,8 +43,6 @@ export class AuthService {
         switchMap(async (res: any) => {
           if (res.user) {
             await this.storage.set('token', res.access_token);
-
-            await this.storage.set('rol', this.userRoles);
             return res; // Emitir la respuesta original después de realizar las operaciones de almacenamiento
           } else {
             throw new Error('Invalid credentials'); // Puedes personalizar el mensaje de error según tus necesidades
