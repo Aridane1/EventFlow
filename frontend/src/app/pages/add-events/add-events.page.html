@@ -74,7 +74,7 @@
         </button>
         <button
           *ngIf="capturedPhoto"
-          (click)="seeImage()"
+          (click)="openPopover($event)"
           class="text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
         >
           <ion-icon name="eye-outline"></ion-icon>
@@ -101,7 +101,7 @@
           </button>
           <button
             *ngIf="capturedPhoto"
-            (click)="seeImage()"
+            (click)="openPopover($event)"
             class="text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
           >
             <ion-icon name="eye-outline"></ion-icon>
@@ -211,15 +211,5 @@
         </button>
       </div>
     </form>
-  </div>
-
-  <div
-    *ngIf="isPopupOpen"
-    class="absolute flex inset-0 items-center align-middle justify-center bg-gray-800 bg-opacity-75"
-  >
-    <app-popup-image
-      [capturedPhoto]="capturedPhoto"
-      (closePopup)="closeImage()"
-    ></app-popup-image>
   </div>
 </ion-content>

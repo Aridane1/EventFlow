@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { animate } from '@angular/animations';
 
 @NgModule({
   declarations: [AppComponent],

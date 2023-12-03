@@ -5,6 +5,8 @@ import { Location } from '../../interfaces/location';
 import { PhotoService } from 'src/app/services/photo.service';
 import Swal from 'sweetalert2';
 import { firstValueFrom } from 'rxjs';
+import { PopoverImageComponent } from 'src/app/components/popover-image/popover-image.component';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-location',
@@ -20,7 +22,7 @@ export class LocationPage implements OnInit {
   constructor(
     private locationService: LocationService,
     private photoService: PhotoService,
-
+    private popoverController: PopoverController,
     private formBuilder: FormBuilder
   ) {
     this.locationForm = this.formBuilder.group({
@@ -32,12 +34,17 @@ export class LocationPage implements OnInit {
     this.getAllLocation();
   }
 
-  seeImage() {
-    this.isPopupOpen = true;
-  }
+  async openPopover(ev: any): Promise<void> {
+    const popover = await this.popoverController.create({
+      component: PopoverImageComponent,
+      componentProps: {
+        imageUrl: this.capturedPhoto,
+      },
+      event: ev,
+      translucent: true,
+    });
 
-  closeImage() {
-    this.isPopupOpen = false;
+    return await popover.present();
   }
 
   discardImage() {

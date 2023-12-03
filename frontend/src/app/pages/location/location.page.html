@@ -1,12 +1,12 @@
-<div class="bg-slate-500 flex justify-center">
-  <p class="text-4xl pb-2 pt-2 text-r h-[3.375rem]">EventFlow</p>
-</div>
 <ion-content>
+  <div class="bg-slate-500 flex justify-center text-white">
+    <p class="text-4xl pb-2 pt-2 h-[3.375rem]">EventFlow</p>
+  </div>
   <div class="flex justify-center">
     <div class="text-center text-3xl align-middle w-52 mt-5">
       <p>Ver y Registrar Municipios</p>
     </div>
-    <div class="absolute left-1 top-10">
+    <div class="absolute left-1 top-24">
       <ion-icon
         name="arrow-back-circle-outline"
         class="text-5xl cursor-pointer"
@@ -50,7 +50,7 @@
               </button>
               <button
                 *ngIf="capturedPhoto"
-                (click)="seeImage()"
+                (click)="openPopover($event)"
                 class="text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
               >
                 <ion-icon name="eye-outline"></ion-icon>
@@ -110,14 +110,5 @@
         </table>
       </div>
     </div>
-  </div>
-  <div
-    *ngIf="isPopupOpen"
-    class="absolute flex inset-0 items-center align-middle justify-center bg-gray-800 bg-opacity-75"
-  >
-    <app-popup-image
-      [capturedPhoto]="capturedPhoto"
-      (closePopup)="closeImage()"
-    ></app-popup-image>
   </div>
 </ion-content>
