@@ -17,6 +17,10 @@ export class SubscribeUserEventService {
     return this.httpClient.get<any[]>(this.endpoint + `/${id}`);
   }
 
+  getEventsIdsSubscription(id: any): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.endpoint + `/event-ids/${id}`);
+  }
+
   deleteSubscribe(userId: number, eventId: number) {
     return this.httpClient.delete(this.endpoint + `/${userId}/${eventId}`);
   }

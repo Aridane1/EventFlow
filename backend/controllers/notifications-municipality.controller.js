@@ -82,15 +82,23 @@ exports.createManyNotificationMunicipality = async (req, res) => {
 };
 
 exports.getNotificationByLocation = (req, res) => {
+  const locationIds = req.query.locationIds;
+
   NotificationMunicipality.findAll({
-    where: { locationId: req.params.id },
+    where: { locationId: locationIds },
     include: { model: NotificationMuni },
   })
     .then((notifications) => {
       if (!notifications) {
         res.json({ data: "No hay notificaciones para este lugar" });
       } else {
-        res.json(notifications);
+        const mappedNotifications = notifications.map((notification) => ({
+          title: notification["notification-muni"].title,
+          message: notification["notification-muni"].message,
+          date: notification["notification-muni"].createdAt,
+        }));
+
+        res.json(mappedNotifications);
       }
     })
     .catch((err) => {

@@ -33,14 +33,21 @@ exports.create = (req, res) => {
 
 exports.findAllByClientId = (req, res) => {
   let id = req.params.id;
-  ClientSubscriptionMunicipality.findAll({ userId: id })
+  ClientSubscriptionMunicipality.findAll({
+    attributes: ["locationId"],
+    where: { userId: id },
+  })
     .then((data) => {
       if (!data) {
         return res
           .status(404)
           .send({ message: `No subscriptions found for this client` });
       }
-      return res.json(data);
+      const subscriptionIds = data.map(
+        (subscription) => subscription.locationId
+      );
+
+      return res.json(subscriptionIds);
     })
     .catch((err) => {
       console.log("error", err);
@@ -94,8 +101,11 @@ exports.delete = (req, res) => {
   ClientSubscriptionMunicipality.destroy({
     where: { userId: userId, locationId: locationId },
   })
-    .then(() => {
-      return res.status(200).send({ message: "Deleted successfully!" });
+    .then((num) => {
+      if (num == 1) {
+        return res.status(200).send({ message: "Deleted successfully!" });
+      }
+      return res.json("No subscription found with that ID!");
     })
     .catch((err) => {
       return res.status(500).send({ message: "Failed to delete data!", err });

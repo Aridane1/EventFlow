@@ -32,10 +32,12 @@ export class SendMessagePage implements OnInit {
       event: [''],
     });
   }
-
   ngOnInit() {
     this.getAllLocations();
     this.getAllEvents();
+  }
+  ionViewWillEnter() {
+    this.messageForm.reset();
   }
 
   getAllLocations() {
@@ -83,13 +85,14 @@ export class SendMessagePage implements OnInit {
       this.notificationEventService
         .create({ title: title, message: message })
         .subscribe((data: any) => {
-          console.log(data);
           this.notificationEventService
             .sendMessage({ notificationId: data.id, eventId: Number(event) })
             .subscribe((data: any) => {});
         });
     }
+    this.messageForm.reset();
   }
+
   segmentChanged(event: any) {
     this.segmentSelected = event.detail.value;
   }
