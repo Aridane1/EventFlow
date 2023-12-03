@@ -29,7 +29,7 @@
 
         <button
           class="relative text-xl text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
-          (click)="mostrarOpcionesPopover($event)"
+          (click)="showOptionsPopover($event)"
         >
           <ion-icon name="person-outline"></ion-icon>
 
@@ -49,7 +49,9 @@
         <button class="text-2xl text-white" routerLink="/send-message">
           Mandar Notificaciones
         </button>
-        <button class="text-2xl text-white">Cambiar de modo</button>
+        <button class="text-2xl text-white" routerLink="/change-mode">
+          Cambiar de modo
+        </button>
         <button class="text-2xl text-white" (click)="logout()">
           Cerrar sesión
         </button>
@@ -94,7 +96,10 @@
         <button
           class="relative text-xl text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
         >
-          <ion-icon name="notifications-outline"></ion-icon>
+          <ion-icon
+            name="notifications-outline"
+            routerLink="/your-notifications"
+          ></ion-icon>
           <span
             class="absolute top-10 inset-x-0 bottom-0 h-0.5 bg-white transform origin-bottom scale-x-0 transition-transform group-hover:scale-x-100"
           ></span>
@@ -110,7 +115,7 @@
 
         <button
           class="relative text-xl text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
-          (click)="mostrarOpcionesPopover($event)"
+          (click)="showOptionsPopover($event)"
         >
           <ion-icon name="person-outline"></ion-icon>
 
@@ -129,11 +134,18 @@
         <button class="text-xl text-white" routerLink="/your-events">
           Eventos en los que participas
         </button>
-        <button class="text-xl text-white" routerLink="/">
+        <button class="text-xl text-white" routerLink="/your-notifications">
           Notificaciones
         </button>
         <button class="text-xl text-white" routerLink="/search">
           Busqueda
+        </button>
+        <button
+          class="text-xl text-white"
+          routerLink="/change-mode"
+          *ngIf="rol.rol === 'admin'"
+        >
+          Cambiar de modo
         </button>
         <button class="text-xl text-white" (click)="logout()">
           Cerrar sesión

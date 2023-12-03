@@ -5,6 +5,9 @@ import { EventService } from 'src/app/services/event.service';
 import { LocationService } from 'src/app/services/location.service';
 import { PhotoService } from 'src/app/services/photo.service';
 import { Event } from '../../interfaces/event';
+import Swal from 'sweetalert2';
+import { PopoverController } from '@ionic/angular';
+import { PopoverImageComponent } from 'src/app/components/popover-image/popover-image.component';
 
 @Component({
   selector: 'app-add-events',
@@ -21,7 +24,8 @@ export class AddEventsPage implements OnInit {
     private eventService: EventService,
     private locationService: LocationService,
     private photoService: PhotoService,
-    private router: Router
+    private router: Router,
+    private popoverController: PopoverController
   ) {
     this.eventForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -46,8 +50,17 @@ export class AddEventsPage implements OnInit {
     this.capturedPhoto = null;
   }
 
-  seeImage() {
-    this.isPopupOpen = true;
+  async openPopover(ev: any): Promise<void> {
+    const popover = await this.popoverController.create({
+      component: PopoverImageComponent,
+      componentProps: {
+        imageUrl: this.capturedPhoto,
+      },
+      event: ev,
+      translucent: true,
+    });
+
+    return await popover.present();
   }
 
   closeImage() {
@@ -84,21 +97,37 @@ export class AddEventsPage implements OnInit {
     };
 
     if (!this.eventForm.valid) {
-      if (date == null) {
-        console.log('The date is null');
-        return;
-      }
-      console.log(event);
-      console.log('Please provide all the required values!');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Falta algun campo por rellenar',
+        heightAuto: false,
+      });
       return;
     } else {
       let blob = null;
-      if (this.capturedPhoto != '') {
-        const response = await fetch(this.capturedPhoto);
-        blob = await response.blob();
+      if (!this.capturedPhoto) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Falta añadir una foto',
+          heightAuto: false,
+        });
+        return;
       }
+      const response = await fetch(this.capturedPhoto);
+      blob = await response.blob();
       this.eventService.addEvent(event, blob).subscribe((data) => {
-        this.router.navigateByUrl('/home');
+        Swal.fire({
+          icon: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: true,
+          heightAuto: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.router.navigateByUrl('/home');
+          }
+        });
       });
     }
   }

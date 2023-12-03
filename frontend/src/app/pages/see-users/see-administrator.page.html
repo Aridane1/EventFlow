@@ -1,13 +1,12 @@
-<div class="bg-slate-500 flex justify-center">
-  <h2 class="text-4xl pb-2 pt-2 text-r h-[3.375rem]">EventFlow</h2>
-</div>
-
 <ion-content>
+  <div class="bg-slate-500 flex justify-center text-white">
+    <p class="text-4xl pb-2 pt-2 h-[3.375rem]">EventFlow</p>
+  </div>
   <div class="flex justify-center">
     <div class="text-center text-3xl align-middle w-52 mt-5">
       <p>Usuarios registrados</p>
     </div>
-    <div class="absolute left-1 top-10">
+    <div class="absolute left-1 top-20">
       <ion-icon
         name="arrow-back-circle-outline"
         class="text-5xl cursor-pointer"
@@ -22,40 +21,45 @@
       [(ngModel)]="searcher"
     ></ion-searchbar>
     <div class="overflow-auto rounded-lg shadow w-10/12 m-auto -mt-10 mb-9">
-      <table class="w-full">
-        <thead class="bg-slate-100 border-b-2 border-slate-200">
-          <tr>
-            <th class="p-3 text-sm font-semibold tracking-wide text-left">
+      <table
+        class="w-full bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden"
+      >
+        <thead>
+          <tr class="bg-gray-200">
+            <th
+              class="py-2 px-4 sm:py-3 sm:px-6 text-left font-bold text-gray-600"
+            >
               Nombre
             </th>
-            <th class="p-3 text-sm font-semibold tracking-wide text-left">
+            <th
+              class="py-2 px-4 sm:py-3 sm:px-6 text-left font-bold text-gray-600"
+            >
               Email
             </th>
-            <th class="p-3 text-sm font-semibold tracking-wide text-left">
+            <th
+              class="py-2 px-4 sm:py-3 sm:px-6 text-left font-bold text-gray-600"
+            >
               Administrador
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr
-            *ngFor="let user of onSearch()"
-            class="odd:bg-slate-100 even:bg-slate-300"
-          >
+          <tr *ngFor="let user of onSearch()" class="hover:bg-gray-100">
             <td
               *ngIf="user.rol ==='admin' || user.rol ==='customer' "
-              class="p-1 text-sm text-black whitespace-nowrap"
+              class="py-2 px-4 sm:py-4 sm:px-6 border-b border-gray-300"
             >
               {{user.name}}
             </td>
             <td
               *ngIf="user.rol ==='admin' || user.rol ==='customer' "
-              class="p-1 text-sm text-black whitespace-nowrap"
+              class="py-2 px-4 sm:py-4 sm:px-6 border-b border-gray-300"
             >
               {{user.email}}
             </td>
             <td
               *ngIf="user.rol ==='admin' || user.rol ==='customer' "
-              class="p-1 text-sm text-black whitespace-nowrap"
+              class="py-2 px-4 sm:py-4 sm:px-6 border-b border-gray-300"
             >
               <label
                 class="relative inline-flex items-center mb-5 cursor-pointer"

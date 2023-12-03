@@ -42,7 +42,33 @@ exports.getAllSubscriptionUser = (req, res) => {
           message: "No subscription found with that userId",
         });
       }
+
       res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving subscription.",
+      });
+    });
+};
+
+exports.getAllSubscriptionEventIdForUser = (req, res) => {
+  UserSubscriptionEvent.findAll({
+    where: { userId: req.params.userId },
+    include: {
+      model: Event,
+    },
+  })
+    .then((data) => {
+      if (!data) {
+        return res.status(404).send({
+          message: "No subscription found with that userId",
+        });
+      }
+      const subscriptionIds = data.map((subscription) => subscription.eventId);
+
+      return res.json(subscriptionIds);
     })
     .catch((err) => {
       res.status(500).send({

@@ -12,9 +12,9 @@ exports.create = (req, res) => {
       });
     }
   }
-
   let eventId = req.body.eventId;
   let notificationId = req.body.notificationId;
+  console.log(notificationId);
 
   let notificationEvent = {
     eventId: eventId,
@@ -43,15 +43,21 @@ exports.create = (req, res) => {
 };
 
 exports.getNotificationByEvent = (req, res) => {
+  const eventIds = req.query.eventIds;
   RelationNotificationEvent.findAll({
-    where: { eventId: req.params.id },
+    where: { eventId: eventIds },
     include: { model: NotificationEvent },
   })
     .then((notifications) => {
       if (!notifications) {
         res.json({ data: "No hay notificaciones para este evento" });
       } else {
-        res.json(notifications);
+        const mappedNotifications = notifications.map((notification) => ({
+          title: notification["notification-event"].title,
+          message: notification["notification-event"].message,
+          date: notification["notification-event"].createdAt,
+        }));
+        res.json(mappedNotifications);
       }
     })
     .catch((err) => {

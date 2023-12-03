@@ -1,10 +1,12 @@
-<header class="bg-slate-500 flex justify-center text-white">
-  <h2 class="text-4xl pb-2 pt-2">EventFlow</h2>
-</header>
 <ion-content>
+  <div
+    class="bg-slate-500 flex justify-center static w-full sm:fixed text-white"
+  >
+    <p class="text-4xl pb-2 pt-2 h-[3.375rem]">EventFlow</p>
+  </div>
   <div class="h-full">
     <div
-      class="flex flex-col justify-center gap-9 h-full text-center items-center"
+      class="flex flex-col justify-center gap-9 my-24 sm:my-0 h-full text-center items-center"
     >
       <div>
         <button
@@ -30,7 +32,7 @@
           Añadir un municipio y Ver Municipios registrados
         </button>
       </div>
-      <div>
+      <div class="mb-5">
         <button
           (click)="closeSession()"
           class="bg-slate-600 p-9 text-2xl text-white rounded-lg w-56 sm:w-96"

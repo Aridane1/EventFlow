@@ -2,11 +2,11 @@
   <ion-icon
     name="close-circle-outline"
     class="absolute top-2 right-2 cursor-pointer text-2xl"
-    (click)="closeImage()"
+    (click)="closePopover()"
   ></ion-icon>
   <ion-img
-    class="w-72 mx-auto"
-    [src]="capturedPhoto"
+    class="max-w-72 mx-auto"
+    [src]="imageUrl"
     alt="Imagen capturada"
   ></ion-img>
 </div>

@@ -11,4 +11,8 @@ export class UserSubscribeLocationService {
   subscribeUserALocation(userSubscribeLocation: any) {
     return this.httpClient.post(this.endpoint, userSubscribeLocation);
   }
+
+  getSubscriptionUser(userId: any) {
+    return this.httpClient.get(this.endpoint + `/${userId}`);
+  }
 }

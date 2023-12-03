@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { PopoverComponent } from './popover/popover.component';
+import { Storage } from '@ionic/storage-angular';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-menu',
@@ -11,12 +13,17 @@ import { PopoverComponent } from './popover/popover.component';
 export class MenuComponent implements OnInit {
   showMenu = false;
   @Input() mode: any;
+  rol: any = '';
   constructor(
     private authService: AuthService,
+    private storage: Storage,
     public popoverController: PopoverController
   ) {}
 
-  ngOnInit() {}
+  async ngOnInit() {
+    let token = await this.storage.get('token');
+    this.rol = jwtDecode(token) as any;
+  }
 
   switch() {
     this.showMenu = !this.showMenu;
@@ -26,7 +33,7 @@ export class MenuComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-  async mostrarOpcionesPopover(ev: any) {
+  async showOptionsPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,
       event: ev,

@@ -5,6 +5,7 @@ import { jwtDecode } from 'jwt-decode';
 import { EventService } from 'src/app/services/event.service';
 import { LocationService } from 'src/app/services/location.service';
 import { SubscribeUserEventService } from 'src/app/services/subscribe-user-event.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-see-event',
@@ -12,7 +13,7 @@ import { SubscribeUserEventService } from 'src/app/services/subscribe-user-event
   styleUrls: ['./see-event.page.scss'],
 })
 export class SeeEventPage implements OnInit {
-  event: any;
+  event: any = '';
   location: any;
   id: number;
   isSubscribe: boolean = false;
@@ -52,7 +53,6 @@ export class SeeEventPage implements OnInit {
     let token = await this.storage.get('token');
     let decode = jwtDecode(token) as any;
     let userId = decode.id;
-    console.log('Tipo de this.id:', typeof this.id);
 
     this.subscribeUserEvent.getEventsSubscription(userId).subscribe(
       (events: any[]) => {
@@ -71,21 +71,50 @@ export class SeeEventPage implements OnInit {
     let token = await this.storage.get('token');
     let decode = jwtDecode(token) as any;
     let userId = decode.id;
-    this.subscribeUserEvent
-      .subscribe({ userId: userId, eventId: this.id })
-      .subscribe((data) => {
-        this.isSubscribe = true;
-      });
+    Swal.fire({
+      icon: 'success',
+      title: 'Te quires registrar a este evento?',
+      heightAuto: false,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.subscribeUserEvent
+          .subscribeEvent({ userId: userId, eventId: this.id })
+          .subscribe((data) => {
+            this.isSubscribe = true;
+          });
+      }
+    });
   }
 
   async unSubscribe() {
     let token = await this.storage.get('token');
     let decode = jwtDecode(token) as any;
     let userId = decode.id;
-    this.subscribeUserEvent
-      .deleteSubscribe(userId, this.id)
-      .subscribe((data) => {
-        this.isSubscribe = false;
-      });
+    Swal.fire({
+      icon: 'warning',
+      title: 'Estas seguro?',
+      text: 'Estas seguro el querer desuscribirte',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      heightAuto: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.subscribeUserEvent
+          .deleteSubscribe(userId, this.id)
+          .subscribe((data) => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Te has desubscrito correctamente',
+              heightAuto: false,
+            });
+            this.isSubscribe = false;
+          });
+      }
+    });
   }
 }

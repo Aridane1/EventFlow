@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
@@ -12,7 +12,17 @@ export class NotificatinEventService {
   create(message: any) {
     return this.httpClient.post(this.endpointNotificationEvent, message);
   }
+
   sendMessage(relation: any) {
     return this.httpClient.post(this.endpointNotificationEventUser, relation);
+  }
+
+  getNotificationByLocation(eventIds: any) {
+    const params = new HttpParams().set(
+      'eventIds',
+      eventIds.eventIds.join(',')
+    );
+
+    return this.httpClient.get(this.endpointNotificationEventUser, { params });
   }
 }
