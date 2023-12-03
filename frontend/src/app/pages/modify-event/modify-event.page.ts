@@ -6,6 +6,8 @@ import { LocationService } from 'src/app/services/location.service';
 import { PhotoService } from 'src/app/services/photo.service';
 import { Event } from '../../interfaces/event';
 import Swal from 'sweetalert2';
+import { PopoverImageComponent } from 'src/app/components/popover-image/popover-image.component';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-modify-event',
@@ -26,7 +28,8 @@ export class ModifyEventPage implements OnInit {
     private locationService: LocationService,
     private photoService: PhotoService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private popoverController: PopoverController
   ) {
     this.eventForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -50,12 +53,17 @@ export class ModifyEventPage implements OnInit {
     this.capturedPhoto = null;
   }
 
-  seeImage() {
-    this.isPopupOpen = true;
-  }
+  async openPopover(ev: any): Promise<void> {
+    const popover = await this.popoverController.create({
+      component: PopoverImageComponent,
+      componentProps: {
+        imageUrl: this.capturedPhoto,
+      },
+      event: ev,
+      translucent: true,
+    });
 
-  closeImage() {
-    this.isPopupOpen = false;
+    return await popover.present();
   }
 
   discardImage() {
