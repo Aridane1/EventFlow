@@ -1,15 +1,17 @@
 <ion-content>
-  <div class="bg-slate-500 flex justify-center text-white">
+  <div
+    class="bg-slate-500 dark:bg-slate-800 flex justify-center dark:text-white"
+  >
     <p class="text-4xl pb-2 pt-2 h-[3.375rem]">EventFlow</p>
   </div>
   <div class="flex justify-center">
-    <div class="text-center text-3xl align-middle w-52 mt-5">
+    <div class="text-center text-3xl align-middle w-52 mt-5 dark:text-white">
       <p>Ver y Registrar Municipios</p>
     </div>
     <div class="absolute left-1 top-24">
       <ion-icon
         name="arrow-back-circle-outline"
-        class="text-5xl cursor-pointer"
+        class="text-5xl cursor-pointer dark:text-white"
         routerLink="/admin-page"
       ></ion-icon>
     </div>
@@ -19,7 +21,7 @@
       <div class="p-4 rounded">
         <form
           [formGroup]="locationForm"
-          class="flex flex-col gap-5 text-white bg-slate-500 w-fit p-5 sm:p-8 rounded"
+          class="flex flex-col gap-5 text-white bg-slate-500 dark:bg-slate-800 w-fit p-5 sm:p-8 rounded"
         >
           <div>
             <label class="text-lg" for="name"> Nombre del Municipio:</label>
@@ -32,30 +34,9 @@
             />
           </div>
           <div>
-            <label class="text-lg">Imagen del Municipio:</label>
-            <button
-              *ngIf="!capturedPhoto"
-              (click)="selectImage()"
-              class="block bg-blue-500 text-white py-3 px-5 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-            >
-              Seleccionar imagen
-            </button>
-            <div class="flex">
-              <button
-                *ngIf="capturedPhoto"
-                (click)="discardImage()"
-                class="block bg-red-500 text-white py-3 px-5 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
-              >
-                Descartar imagen
-              </button>
-              <button
-                *ngIf="capturedPhoto"
-                (click)="openPopover($event)"
-                class="text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
-              >
-                <ion-icon name="eye-outline"></ion-icon>
-              </button>
-            </div>
+            <app-button-select-photo
+              (capturedPhotoOutput)="selectImage($event)"
+            ></app-button-select-photo>
           </div>
           <div class="mt-5 flex justify-center">
             <button
@@ -68,7 +49,6 @@
         </form>
       </div>
       <div class="p-8 relative">
-        <!-- Buscador -->
         <ion-searchbar
           search-icon="search"
           class="rounded-3xl p-2 text-gray-700 text-lg w-56 m-auto mb-3"
@@ -76,24 +56,23 @@
         ></ion-searchbar>
 
         <table
-          class="max-w-[45%] sm:max-w-[100%] bg-white border border-gray-300 shadow-lg rounded-lg overflow-hidden"
+          class="max-w-[45%] sm:max-w-[100%] bg-white dark:bg-slate-500 border border-gray-300 shadow-lg rounded-lg overflow-hidden"
         >
           <thead>
-            <tr class="bg-gray-200">
-              <th
-                class="py-2 px-4 sm:py-3 sm:px-6 text-left font-bold text-gray-600"
-              >
+            <tr class="dark:bg-slate-600 text-gray-600 dark:text-white">
+              <th class="py-2 px-4 sm:py-3 sm:px-6 text-left font-bold">
                 Municipio
               </th>
-              <th
-                class="py-2 px-4 sm:py-3 sm:px-6 text-left font-bold text-gray-600"
-              >
+              <th class="py-2 px-4 sm:py-3 sm:px-6 text-left font-bold">
                 Acción
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let location of onSearch()" class="hover:bg-gray-100">
+            <tr
+              *ngFor="let location of onSearch()"
+              class="hover:bg-gray-100 dark:hover:bg-slate-700 dark:text-white"
+            >
               <td class="py-2 px-4 sm:py-4 sm:px-6 border-b border-gray-300">
                 {{ location.name }}
               </td>

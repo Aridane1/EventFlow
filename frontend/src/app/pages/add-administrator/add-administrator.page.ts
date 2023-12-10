@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class AddAdministratorPage implements OnInit {
   registerAdminForm: FormGroup;
   users: any;
+  theme: any;
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -25,14 +26,27 @@ export class AddAdministratorPage implements OnInit {
       email: ['', Validators.required],
     });
   }
-  ngOnInit() {
+  async ngOnInit() {
     this.registerAdminForm.reset();
     this.getAllUsers();
+
+    this.theme = await this.storage.get('mode');
+    let html = document.querySelector('html');
+    if (this.theme == 'dark') {
+      html?.classList.add('dark');
+      document.documentElement.style.setProperty('--bg-color', 'rgb(51 65 85)');
+    }
+    if (this.theme == 'white') {
+      html?.classList.remove('dark');
+      document.documentElement.style.setProperty('--bg-color', '#a5acb8');
+    }
   }
+
   async getAllUsers() {
     let token = await this.storage.get('token');
     this.users = await firstValueFrom(this.authService.getAllUser(token));
   }
+
   registerAdmin() {
     const name = this.registerAdminForm.get('name')?.value;
     const email = this.registerAdminForm.get('email')?.value;
@@ -57,7 +71,6 @@ export class AddAdministratorPage implements OnInit {
     const emailExists = this.users.some(
       (existingUser: any) => existingUser.email === user.email
     );
-    console.log(emailExists);
     if (emailExists) {
       Swal.fire({
         icon: 'error',

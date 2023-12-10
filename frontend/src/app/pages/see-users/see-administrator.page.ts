@@ -12,11 +12,22 @@ export class SeeAdministratorPage implements OnInit {
   users: any;
   token: any;
   searcher: string = '';
+  theme: any;
   constructor(private authService: AuthService, private storage: Storage) {}
 
   async ngOnInit() {
     this.getAllUser();
     this.token = await this.storage.get('token');
+    this.theme = await this.storage.get('mode');
+    let html = document.querySelector('html');
+    if (this.theme == 'dark') {
+      html?.classList.add('dark');
+      document.documentElement.style.setProperty('--bg-color', 'rgb(51 65 85)');
+    }
+    if (this.theme == 'white') {
+      html?.classList.remove('dark');
+      document.documentElement.style.setProperty('--bg-color', '#a5acb8');
+    }
   }
 
   async getAllUser() {

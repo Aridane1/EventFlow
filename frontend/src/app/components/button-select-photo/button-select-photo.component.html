@@ -1,0 +1,26 @@
+<div class="flex flex-col">
+  <label class="text-white text-lg"> Imagen:</label>
+  <div class="flex">
+    <button
+      *ngIf="!capturedPhoto"
+      (click)="selectImage()"
+      class="block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+    >
+      Seleccionar imagen
+    </button>
+    <button
+      *ngIf="capturedPhoto"
+      (click)="discardImage()"
+      class="block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
+    >
+      Descartar imagen
+    </button>
+    <button
+      *ngIf="capturedPhoto"
+      (click)="openPopover($event)"
+      class="text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
+    >
+      <ion-icon name="eye-outline"></ion-icon>
+    </button>
+  </div>
+</div>

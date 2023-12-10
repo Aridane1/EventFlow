@@ -36,10 +36,8 @@ export class RegisterPage implements OnInit {
       name: name,
       rol: 'customer',
     };
-    console.log(user);
 
     this.authService.register(user).subscribe((res) => {
-      console.log(res);
       this.router.navigateByUrl('/events');
     });
   }

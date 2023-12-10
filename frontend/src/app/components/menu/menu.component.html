@@ -1,5 +1,7 @@
 <div *ngIf="mode === 'admin'">
-  <div class="flex justify-center text-white bg-slate-500 w-full">
+  <div
+    class="flex justify-center text-black dark:text-white bg-slate-500 dark:bg-slate-800 w-full"
+  >
     <div class="flex justify-between align-middle w-[95%] h-full">
       <h2 class="text-3xl cursor-pointer" routerLink="/home">EventFlow</h2>
       <div class="flex justify-center md:invisible" (click)="switch()">
@@ -10,7 +12,7 @@
         class="hidden md:text-lg md:flex md:justify-end md:align-bottom md:w-[60%] gap-7"
       >
         <button
-          class="relative text-xl text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
         >
           <span class="relative z-10" routerLink="/home">Ver Eventos</span>
           <span
@@ -19,7 +21,33 @@
         </button>
 
         <button
-          class="relative text-xl text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          *ngIf="theme === 'dark'"
+          (click)="themeDark()"
+        >
+          <span class="relative z-10"
+            ><ion-icon name="moon-outline"></ion-icon
+          ></span>
+          <span
+            class="absolute top-10 inset-x-0 bottom-0 h-0.5 bg-white transform origin-bottom scale-x-0 transition-transform group-hover:scale-x-100"
+          ></span>
+        </button>
+
+        <button
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          (click)="themeWhite()"
+          *ngIf="theme === 'white'"
+        >
+          <span class="relative z-10"
+            ><ion-icon name="sunny-outline"></ion-icon
+          ></span>
+          <span
+            class="absolute top-10 inset-x-0 bottom-0 h-0.5 bg-white transform origin-bottom scale-x-0 transition-transform group-hover:scale-x-100"
+          ></span>
+        </button>
+
+        <button
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
         >
           <ion-icon name="send-outline" routerLink="/send-message"></ion-icon>
           <span
@@ -28,7 +56,7 @@
         </button>
 
         <button
-          class="relative text-xl text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
           (click)="showOptionsPopover($event)"
         >
           <ion-icon name="person-outline"></ion-icon>
@@ -40,19 +68,39 @@
       </div>
 
       <div
-        class="fixed top-[63px] flex flex-col justify-evenly bg-slate-400 text-black w-full bottom-0 left-0 z-10 nav-menu md:hidden"
+        class="fixed top-[63px] flex flex-col justify-evenly bg-slate-400 dark:bg-slate-600 text-black w-full bottom-0 left-0 z-10 nav-menu md:hidden"
         [ngClass]="{ show: showMenu }"
       >
-        <button class="text-2xl text-white" routerLink="/home">
+        <button class="text-2xl text-black dark:text-white" routerLink="/home">
           Ver Eventos
         </button>
-        <button class="text-2xl text-white" routerLink="/send-message">
+        <button
+          class="text-2xl text-black dark:text-white"
+          routerLink="/send-message"
+        >
           Mandar Notificaciones
         </button>
-        <button class="text-2xl text-white" routerLink="/change-mode">
+        <button class="text-2xl text-black dark:text-white">
+          <span
+            class="relative z-10"
+            *ngIf="theme === 'dark'"
+            (click)="themeDark()"
+            >Modo claro</span
+          >
+          <span
+            class="relative z-10"
+            *ngIf="theme === 'white'"
+            (click)="themeWhite()"
+            >Modo oscuro</span
+          >
+        </button>
+        <button
+          class="text-2xl text-black dark:text-white"
+          routerLink="/change-mode"
+        >
           Cambiar de modo
         </button>
-        <button class="text-2xl text-white" (click)="logout()">
+        <button class="text-2xl text-black dark:text-white" (click)="logout()">
           Cerrar sesión
         </button>
       </div>
@@ -61,8 +109,10 @@
 </div>
 
 <div *ngIf="mode === 'customer'">
-  <div class="flex justify-center text-white bg-slate-500 w-full">
-    <div class="flex justify-between align-middle w-[95%] h-full">
+  <div
+    class="flex justify-center text-black dark:text-white bg-slate-500 dark:bg-slate-800 w-full"
+  >
+    <div class="flex justify-between align-middle w-[96%] h-full">
       <h2 class="text-3xl cursor-pointer" routerLink="/events">EventFlow</h2>
       <div class="flex justify-center md:invisible" (click)="switch()">
         <img src="/assets/menu.svg" alt="menu" *ngIf="!showMenu" />
@@ -73,7 +123,7 @@
         [ngClass]="{ show: showMenu }"
       >
         <button
-          class="relative text-xl text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
         >
           <span class="relative z-10" routerLink="/events"
             >Eventos Populares</span
@@ -83,7 +133,7 @@
           ></span>
         </button>
         <button
-          class="relative text-xl text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
         >
           <span class="relative z-10" routerLink="/your-events">
             Eventos en los que participas
@@ -94,7 +144,33 @@
         </button>
 
         <button
-          class="relative text-xl text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          *ngIf="theme === 'dark'"
+          (click)="themeDark()"
+        >
+          <span class="relative z-10"
+            ><ion-icon name="moon-outline"></ion-icon
+          ></span>
+          <span
+            class="absolute top-10 inset-x-0 bottom-0 h-0.5 bg-white transform origin-bottom scale-x-0 transition-transform group-hover:scale-x-100"
+          ></span>
+        </button>
+
+        <button
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          (click)="themeWhite()"
+          *ngIf="theme === 'white'"
+        >
+          <span class="relative z-10"
+            ><ion-icon name="sunny-outline"></ion-icon
+          ></span>
+          <span
+            class="absolute top-10 inset-x-0 bottom-0 h-0.5 bg-white transform origin-bottom scale-x-0 transition-transform group-hover:scale-x-100"
+          ></span>
+        </button>
+
+        <button
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
         >
           <ion-icon
             name="notifications-outline"
@@ -105,7 +181,7 @@
           ></span>
         </button>
         <button
-          class="relative text-xl text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
         >
           <ion-icon name="search-outline" routerLink="/search"></ion-icon>
           <span
@@ -114,7 +190,7 @@
         </button>
 
         <button
-          class="relative text-xl text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
+          class="relative text-xl text-black dark:text-white overflow-hidden transition-transform transform-gpu group focus:outline-none"
           (click)="showOptionsPopover($event)"
         >
           <ion-icon name="person-outline"></ion-icon>
@@ -125,29 +201,50 @@
         </button>
       </div>
       <div
-        class="fixed top-[63px] flex flex-col justify-evenly bg-slate-400 text-black w-full bottom-0 left-0 z-10 nav-menu md:hidden"
+        class="fixed top-[63px] flex flex-col justify-evenly bg-slate-400 dark:bg-slate-600 text-black w-full bottom-0 left-0 z-10 nav-menu md:hidden"
         [ngClass]="{ show: showMenu }"
       >
-        <button class="text-xl text-white" routerLink="/events">
+        <button class="text-xl text-black dark:text-white" routerLink="/events">
           Eventos populares
         </button>
-        <button class="text-xl text-white" routerLink="/your-events">
+        <button
+          class="text-xl text-black dark:text-white"
+          routerLink="/your-events"
+        >
           Eventos en los que participas
         </button>
-        <button class="text-xl text-white" routerLink="/your-notifications">
+        <button
+          class="text-xl text-black dark:text-white"
+          routerLink="/your-notifications"
+        >
           Notificaciones
         </button>
-        <button class="text-xl text-white" routerLink="/search">
+        <button class="text-xl text-black dark:text-white" routerLink="/search">
           Busqueda
         </button>
+        <button class="text-xl text-black dark:text-white">
+          <span
+            class="relative z-10"
+            *ngIf="theme === 'dark'"
+            (click)="themeDark()"
+            >Modo claro</span
+          >
+          <span
+            class="relative z-10"
+            *ngIf="theme === 'white'"
+            (click)="themeWhite()"
+            >Modo oscuro</span
+          >
+        </button>
+
         <button
-          class="text-xl text-white"
+          class="text-xl text-black dark:text-white"
           routerLink="/change-mode"
           *ngIf="rol.rol === 'admin'"
         >
           Cambiar de modo
         </button>
-        <button class="text-xl text-white" (click)="logout()">
+        <button class="text-xl text-black dark:text-white" (click)="logout()">
           Cerrar sesión
         </button>
       </div>

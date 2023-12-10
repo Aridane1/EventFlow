@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { firstValueFrom } from 'rxjs';
 import { PopoverImageComponent } from 'src/app/components/popover-image/popover-image.component';
 import { PopoverController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-location',
@@ -18,20 +19,32 @@ export class LocationPage implements OnInit {
   locations: any;
   isPopupOpen = false;
   capturedPhoto: any;
+  theme: any;
   searcher: string = '';
   constructor(
     private locationService: LocationService,
     private photoService: PhotoService,
     private popoverController: PopoverController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private storage: Storage
   ) {
     this.locationForm = this.formBuilder.group({
       name: ['', Validators.required],
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.getAllLocation();
+    this.theme = await this.storage.get('mode');
+    let html = document.querySelector('html');
+    if (this.theme == 'dark') {
+      html?.classList.add('dark');
+      document.documentElement.style.setProperty('--bg-color', 'rgb(51 65 85)');
+    }
+    if (this.theme == 'white') {
+      html?.classList.remove('dark');
+      document.documentElement.style.setProperty('--bg-color', '#a5acb8');
+    }
   }
 
   async openPopover(ev: any): Promise<void> {
@@ -57,10 +70,8 @@ export class LocationPage implements OnInit {
     );
   }
 
-  selectImage() {
-    this.photoService.pickImage().then((data) => {
-      this.capturedPhoto = data.webPath;
-    });
+  selectImage(photo: any) {
+    this.capturedPhoto = photo;
   }
 
   async onAdd() {

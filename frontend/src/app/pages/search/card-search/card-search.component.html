@@ -1,13 +1,13 @@
-<div class="relative flex bg-slate-400 w-full rounded">
+<div class="relative flex bg-slate-500 dark:bg-slate-800 w-full rounded">
   <div class="flex gap-5">
     <picture class="w-20">
       <img
-        class="w-20 rounded"
+        class="w-20 h-20 rounded"
         src="http://localhost:8080/images/{{ location.location_img }}"
         alt="{{ location.name }}"
       />
     </picture>
-    <div class="w-[12rem] flex items-center">
+    <div class="w-[12rem] flex items-center dark:text-white">
       <p>{{ location.name }}</p>
     </div>
   </div>
@@ -15,18 +15,18 @@
     <div class="w-full flex justify-end mt-1 mr-1 relative">
       <ion-icon
         name="ellipsis-vertical-outline"
-        class="text-xl cursor-pointer"
+        class="text-xl cursor-pointer dark:text-white"
         (click)="open(location)"
       ></ion-icon>
       <div class="absolute right-6 -top-4" *ngIf="location.showText">
         <div class="flex items-center relative w-fit">
-          <div class="w-32 bg-slate-500 rounded p-2 text-white">
+          <div class="w-32 bg-slate-600 rounded p-2 text-white">
             <button (click)="subscribe(location.id)">
               Suscribirte a este municipio
             </button>
           </div>
           <div
-            class="w-5 h-5 bg-slate-500 rotate-45 absolute -right-2 rounded z-10"
+            class="w-5 h-5 bg-slate-600 rotate-45 absolute -right-2 rounded z-10"
           ></div>
         </div>
       </div>

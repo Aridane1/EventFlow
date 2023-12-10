@@ -1,23 +1,25 @@
 <ion-content>
   <app-menu [mode]="'admin'"></app-menu>
-  <h1 class="text-4xl text-center">Mandar notificaciones</h1>
+  <h1 class="text-4xl text-center dark:text-slate-200">
+    Mandar notificaciones
+  </h1>
   <ion-segment
     [(ngModel)]="segmentSelected"
     (ionChange)="segmentChanged($event)"
   >
     <ion-segment-button value="location">
-      <ion-label>Location</ion-label>
+      <ion-label class="dark:text-slate-200">Location</ion-label>
     </ion-segment-button>
     <ion-segment-button value="event">
-      <ion-label>Event</ion-label>
+      <ion-label class="dark:text-slate-200">Event</ion-label>
     </ion-segment-button>
   </ion-segment>
   <div class="pt-20 pb-20 flex items-center justify-center">
     <div
-      class="max-w-md mx-auto bg-slate-500 text-white p-8 rounded-md shadow-md"
+      class="max-w-md mx-auto bg-slate-500 dark:bg-slate-800 text-white p-8 rounded-md shadow-md"
     >
       <h2 class="text-2xl font-semibold mb-4">Enviar Mensaje</h2>
-      <form [formGroup]="messageForm">
+      <form [formGroup]="messageForm" class="">
         <div class="mb-4">
           <label for="titulo" class="block text-gray-50 text-sm font-bold mb-2"
             >Título:</label

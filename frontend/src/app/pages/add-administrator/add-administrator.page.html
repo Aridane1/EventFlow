@@ -1,15 +1,15 @@
 <ion-content>
-  <div class="bg-slate-500 flex justify-center text-white">
-    <p class="text-4xl pb-2 pt-2 h-[3.375rem]">EventFlow</p>
+  <div class="bg-slate-500 dark:bg-slate-800 flex justify-center">
+    <p class="text-4xl pb-2 pt-2 h-[3.375rem] dark:text-white">EventFlow</p>
   </div>
   <div class="flex justify-center">
-    <div class="text-center text-3xl align-middle w-52 mt-5">
+    <div class="text-center text-3xl align-middle w-52 mt-5 dark:text-white">
       <p>Registrar Administrador</p>
     </div>
     <div class="absolute left-1 top-20">
       <ion-icon
         name="arrow-back-circle-outline"
-        class="text-5xl cursor-pointer"
+        class="text-5xl cursor-pointer dark:text-white"
         routerLink="/admin-page"
       ></ion-icon>
     </div>
@@ -18,7 +18,7 @@
     <div class="flex justify-center">
       <form
         [formGroup]="registerAdminForm"
-        class="flex flex-col gap-5 text-white bg-slate-500 w-fit p-5 sm:p-10 rounded"
+        class="flex flex-col gap-5 text-white bg-slate-500 dark:bg-slate-800 w-fit p-5 sm:p-10 rounded"
       >
         <div>
           <label>Nombre del administrador:</label>
