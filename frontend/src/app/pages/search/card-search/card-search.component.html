@@ -2,13 +2,13 @@
   <div class="flex gap-5">
     <picture class="w-20">
       <img
-        class="w-20 rounded"
+        class="w-20 h-20 rounded"
         src="http://localhost:8080/images/{{ location.location_img }}"
         alt="{{ location.name }}"
       />
     </picture>
-    <div class="w-[12rem] flex items-center">
-      <p>{{ location.name }}</p>
+    <div class="w-[15rem] flex items-center">
+      <p class="whitespace-pre-wrap truncate w-[8rem]">{{ location.name }}</p>
     </div>
   </div>
   <div class="absolute right-0">

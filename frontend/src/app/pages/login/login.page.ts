@@ -6,6 +6,7 @@ import { Storage } from '@ionic/storage-angular';
 import { firstValueFrom } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -60,20 +61,34 @@ export class LoginPage implements OnInit {
         this.loginForm.reset();
       },
       (err) => {
-        this.presentAlert(err.message || 'Error');
+        console.log(err);
+        this.alert(err);
       }
     );
   }
 
-  async presentAlert(message: string) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Error',
-      subHeader: message,
-      message: 'Could not login. Try again.',
-      buttons: ['OK'],
-    });
-
-    await alert.present();
+  alert(err: any) {
+    if (err.status === 0) {
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Error de conexción',
+        showConfirmButton: false,
+        timer: 1500,
+        heightAuto: false,
+      });
+      return;
+    }
+    if (err.status === 500) {
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'El usuario o la contraseña están mal',
+        showConfirmButton: false,
+        timer: 1500,
+        heightAuto: false,
+      });
+      return;
+    }
   }
 }
