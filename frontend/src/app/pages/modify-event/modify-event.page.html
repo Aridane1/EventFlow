@@ -1,20 +1,22 @@
 <ion-content>
   <app-menu [mode]="'admin'"></app-menu>
   <div class="flex justify-center">
-    <div class="text-center text-3xl align-middle w-52 mt-5">
+    <div
+      class="text-center text-3xl align-middle w-52 mt-5 text-black dark:text-white"
+    >
       <p>Actualizar evento</p>
     </div>
     <div class="absolute left-1 top-[80px]">
       <ion-icon
         name="arrow-back-circle-outline"
-        class="text-5xl cursor-pointer"
+        class="text-5xl cursor-pointer text-black dark:text-white"
         routerLink="/home"
       ></ion-icon>
     </div>
   </div>
 
   <div
-    class="flex justify-center bg-slate-500 w-fit m-auto rounded-md mt-10 mb-52"
+    class="flex justify-center bg-slate-500 dark:bg-slate-800 w-fit m-auto rounded-md mt-10 mb-52"
   >
     <form [formGroup]="eventForm" class="p-9">
       <div class="gap-2 hidden md:flex">

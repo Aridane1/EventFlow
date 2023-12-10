@@ -1,14 +1,16 @@
 <ion-content>
   <app-menu [mode]="'admin'"></app-menu>
   <div class="flex justify-center">
-    <div class="text-center text-3xl align-middle w-52 mt-5">
+    <div
+      class="text-center text-3xl align-middle w-52 mt-5 dark:text-slate-200"
+    >
       <p>Eventos de tus municipio</p>
     </div>
     <div class="absolute right-2 top-[120px] sm:top-[80px]">
       <ion-icon
         name="add-circle-outline"
         routerLink="/add-events"
-        class="text-5xl text-slate-700 cursor-pointer"
+        class="text-5xl text-slate-700 dark:text-slate-200 cursor-pointer"
       ></ion-icon>
     </div>
   </div>

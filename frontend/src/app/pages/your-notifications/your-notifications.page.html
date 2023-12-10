@@ -1,11 +1,11 @@
 <ion-content>
   <app-menu [mode]="'customer'"></app-menu>
-  <p class="text-3xl text-center mt-9">Tus Notificaciones</p>
+  <p class="text-3xl text-center mt-9 dark:text-white">Tus Notificaciones</p>
 
   <div class="flex justify-center flex-col items-center mt-10">
     <div
       *ngFor="let notification of notifications"
-      class="bg-slate-500 p-6 mb-4 rounded-lg shadow-md max-w-[15rem] sm:max-w-[25rem] w-full hover:scale-105 transition-transform"
+      class="bg-slate-500 dark:bg-slate-800 p-6 mb-4 rounded-lg shadow-md max-w-[15rem] sm:max-w-[25rem] w-full hover:scale-105 transition-transform"
     >
       <p class="text-xl font-semibold text-white capitalize mb-2">
         {{notification.title}}

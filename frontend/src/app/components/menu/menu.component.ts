@@ -11,6 +11,7 @@ import { jwtDecode } from 'jwt-decode';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
+  theme: any;
   showMenu = false;
   @Input() mode: any;
   rol: any = '';
@@ -23,6 +24,16 @@ export class MenuComponent implements OnInit {
   async ngOnInit() {
     let token = await this.storage.get('token');
     this.rol = jwtDecode(token) as any;
+    this.theme = await this.storage.get('mode');
+    let html = document.querySelector('html');
+    if (this.theme == 'dark') {
+      html?.classList.add('dark');
+      document.documentElement.style.setProperty('--bg-color', 'rgb(51 65 85)');
+    }
+    if (this.theme == 'white') {
+      html?.classList.remove('dark');
+      document.documentElement.style.setProperty('--bg-color', '#a5acb8');
+    }
   }
 
   switch() {
@@ -33,6 +44,24 @@ export class MenuComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
+  async themeDark() {
+    let mode = await this.storage.set('mode', 'white');
+    console.log(mode);
+    this.theme = mode;
+    let html = document.querySelector('html');
+    html?.classList.remove('dark');
+    document.documentElement.style.setProperty('--bg-color', '#a5acb8');
+  }
+
+  async themeWhite() {
+    let mode = await this.storage.set('mode', 'dark');
+    console.log(mode);
+    this.theme = mode;
+    let html = document.querySelector('html');
+    html?.classList.add('dark');
+    document.documentElement.style.setProperty('--bg-color', 'rgb(51 65 85)');
+  }
+
   async showOptionsPopover(ev: any) {
     const popover = await this.popoverController.create({
       component: PopoverComponent,

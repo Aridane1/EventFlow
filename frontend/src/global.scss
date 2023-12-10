@@ -26,10 +26,13 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
-
-ion-content {
-  --background: #a5acb8;
+:root {
+  --bg-color: rgb(51 65 85);
 }
+ion-content {
+  --background: var(--bg-color);
+}
+
 body {
   font-family: "Inter", sans-serif;
 }

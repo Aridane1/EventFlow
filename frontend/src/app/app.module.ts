@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { animate } from '@angular/animations';
+import { SharedModule } from './shared/shared/shared.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +26,7 @@ import { animate } from '@angular/animations';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    SharedModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

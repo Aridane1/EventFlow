@@ -1,41 +1,49 @@
 <ion-content>
   <div
-    class="bg-slate-500 flex justify-center static w-full sm:fixed text-white"
+    class="bg-slate-500 dark:bg-slate-800 flex justify-center static w-full sm:fixed text-black dark:text-white"
   >
     <p class="text-4xl pb-2 pt-2 h-[3.375rem]">EventFlow</p>
   </div>
-  <div class="h-full">
-    <div
-      class="flex flex-col justify-center gap-9 my-24 sm:my-0 h-full text-center items-center"
-    >
-      <div>
+  <div class="h-full mt-20">
+    <div class="h-full">
+      <div
+        class="flex flex-wrap justify-center gap-9 my-24 sm:my-0 text-center items-center h-[80%]"
+      >
         <button
           routerLink="/add-administrator"
-          class="bg-slate-600 p-9 text-2xl text-white rounded-lg w-56 sm:w-96"
+          class="bg-slate-500 dark:bg-slate-800 shadow-2xl p-9 text-2xl text-black dark:text-white rounded-lg w-56 h-32 sm:w-96"
         >
           Añadir un administrador
         </button>
-      </div>
-      <div>
+        <button
+          class="bg-slate-500 dark:bg-slate-800 shadow-2xl p-9 text-2xl text-black dark:text-white rounded-lg w-56 h-32 sm:w-96"
+          *ngIf="theme === 'dark'"
+          (click)="themeDark()"
+        >
+          Modo claro
+        </button>
+        <button
+          class="bg-slate-500 dark:bg-slate-800 shadow-2xl p-9 text-2xl text-black dark:text-white rounded-lg w-56 h-32 sm:w-96"
+          *ngIf="theme === 'white'"
+          (click)="themeWhite()"
+        >
+          Modo oscuro
+        </button>
         <button
           routerLink="/see-administrator"
-          class="bg-slate-600 p-9 text-2xl text-white rounded-lg w-56 sm:w-96"
+          class="bg-slate-500 dark:bg-slate-800 shadow-2xl p-9 text-2xl text-black dark:text-white rounded-lg w-56 h-32 sm:w-96"
         >
           Usuarios registrados
         </button>
-      </div>
-      <div>
         <button
           routerLink="/location"
-          class="bg-slate-600 p-9 text-2xl text-white rounded-lg w-56 sm:w-96"
+          class="bg-slate-500 dark:bg-slate-800 shadow-2xl p-9 text-2xl text-black dark:text-white rounded-lg w-56 h-32 sm:w-96"
         >
-          Añadir un municipio y Ver Municipios registrados
+          Añadir un municipio y Ver Municipios
         </button>
-      </div>
-      <div class="mb-5">
         <button
           (click)="closeSession()"
-          class="bg-slate-600 p-9 text-2xl text-white rounded-lg w-56 sm:w-96"
+          class="bg-slate-500 dark:bg-slate-800 shadow-2xl p-9 text-2xl text-black dark:text-white rounded-lg w-56 h-32 sm:w-96"
         >
           Cerrar sesión
         </button>

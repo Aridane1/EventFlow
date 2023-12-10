@@ -6,8 +6,6 @@ import { LocationService } from 'src/app/services/location.service';
 import { PhotoService } from 'src/app/services/photo.service';
 import { Event } from '../../interfaces/event';
 import Swal from 'sweetalert2';
-import { PopoverController } from '@ionic/angular';
-import { PopoverImageComponent } from 'src/app/components/popover-image/popover-image.component';
 
 @Component({
   selector: 'app-add-events',
@@ -23,9 +21,7 @@ export class AddEventsPage implements OnInit {
     private formBuilder: FormBuilder,
     private eventService: EventService,
     private locationService: LocationService,
-    private photoService: PhotoService,
-    private router: Router,
-    private popoverController: PopoverController
+    private router: Router
   ) {
     this.eventForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -50,33 +46,14 @@ export class AddEventsPage implements OnInit {
     this.capturedPhoto = null;
   }
 
-  async openPopover(ev: any): Promise<void> {
-    const popover = await this.popoverController.create({
-      component: PopoverImageComponent,
-      componentProps: {
-        imageUrl: this.capturedPhoto,
-      },
-      event: ev,
-      translucent: true,
-    });
-
-    return await popover.present();
-  }
-
-  closeImage() {
-    this.isPopupOpen = false;
-  }
-
   getAllLocation() {
     this.locationService.getAllLocation().subscribe((data) => {
       this.locations = data;
     });
   }
 
-  selectImage() {
-    this.photoService.pickImage().then((data) => {
-      this.capturedPhoto = data.webPath;
-    });
+  selectImage(photo: any) {
+    this.capturedPhoto = photo;
   }
 
   async addEvent() {

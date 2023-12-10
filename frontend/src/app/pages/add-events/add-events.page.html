@@ -1,24 +1,55 @@
 <ion-content>
   <app-menu [mode]="'admin'"></app-menu>
-  <div class="flex justify-center">
-    <div class="text-center text-3xl align-middle w-52 mt-5">
-      <p>Añadir un evento</p>
+  <div class="dark:bg-slate-700 h-full">
+    <div class="flex justify-center">
+      <div
+        class="text-center text-3xl align-middle w-52 mt-5 dark:text-slate-200"
+      >
+        <p>Añadir un evento</p>
+      </div>
+      <div class="absolute left-1 top-[80px] dark:text-slate-200">
+        <ion-icon
+          name="arrow-back-circle-outline"
+          class="text-5xl cursor-pointer"
+          routerLink="/home"
+        ></ion-icon>
+      </div>
     </div>
-    <div class="absolute left-1 top-[80px]">
-      <ion-icon
-        name="arrow-back-circle-outline"
-        class="text-5xl cursor-pointer"
-        routerLink="/home"
-      ></ion-icon>
-    </div>
-  </div>
 
-  <div
-    class="flex justify-center bg-slate-500 w-fit m-auto rounded-md mt-10 mb-52"
-  >
-    <form [formGroup]="eventForm" class="p-9">
-      <div class="gap-2 hidden md:flex">
-        <div class="mb-4">
+    <div
+      class="flex justify-center bg-slate-500 dark:bg-slate-800 w-fit m-auto rounded-md mt-10 mb-52"
+    >
+      <form [formGroup]="eventForm" class="p-9">
+        <div class="gap-2 hidden md:flex">
+          <div class="mb-4">
+            <label class="text-white text-lg"> Nombre del evento:</label>
+            <input
+              type="text"
+              formControlName="title"
+              class="block border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
+            />
+          </div>
+
+          <div class="mb-4">
+            <label class="text-white text-lg">Fecha y Hora:</label>
+            <div class="relative">
+              <input
+                type="datetime-local"
+                id="datetime"
+                formControlName="dateTime"
+                class="block w-full border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
+              />
+              <span class="absolute right-3 top-2">
+                <ion-icon
+                  name="calendar-outline"
+                  class="text-gray-400"
+                ></ion-icon>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-4 md:hidden">
           <label class="text-white text-lg"> Nombre del evento:</label>
           <input
             type="text"
@@ -27,7 +58,19 @@
           />
         </div>
 
-        <div class="mb-4">
+        <div class="mb-4 hidden gap-2 md:flex">
+          <app-button-select-photo
+            (capturedPhotoOutput)="selectImage($event)"
+          ></app-button-select-photo>
+        </div>
+
+        <div class="mb-4 md:hidden">
+          <app-button-select-photo
+            (capturedPhotoOutput)="selectImage($event)"
+          ></app-button-select-photo>
+        </div>
+
+        <div class="mb-4 md:hidden">
           <label class="text-white text-lg">Fecha y Hora:</label>
           <div class="relative">
             <input
@@ -44,103 +87,46 @@
             </span>
           </div>
         </div>
-      </div>
 
-      <div class="mb-4 md:hidden">
-        <label class="text-white text-lg"> Nombre del evento:</label>
-        <input
-          type="text"
-          formControlName="title"
-          class="block border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
-        />
-      </div>
-
-      <div class="mb-4 hidden gap-2 md:flex">
-        <label class="text-white text-lg"> Imagen:</label>
-
-        <button
-          *ngIf="!capturedPhoto"
-          (click)="selectImage()"
-          class="block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-        >
-          Seleccionar imagen
-        </button>
-        <button
-          *ngIf="capturedPhoto"
-          (click)="discardImage()"
-          class="block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
-        >
-          Descartar imagen
-        </button>
-        <button
-          *ngIf="capturedPhoto"
-          (click)="openPopover($event)"
-          class="text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
-        >
-          <ion-icon name="eye-outline"></ion-icon>
-        </button>
-      </div>
-
-      <div class="mb-4 md:hidden">
-        <label class="text-white text-lg"> Imagen:</label>
-
-        <button
-          *ngIf="!capturedPhoto"
-          (click)="selectImage()"
-          class="block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
-        >
-          Seleccionar imagen
-        </button>
-        <div class="flex">
-          <button
-            *ngIf="capturedPhoto"
-            (click)="discardImage()"
-            class="block bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:shadow-outline-blue active:bg-red-800"
-          >
-            Descartar imagen
-          </button>
-          <button
-            *ngIf="capturedPhoto"
-            (click)="openPopover($event)"
-            class="text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
-          >
-            <ion-icon name="eye-outline"></ion-icon>
-          </button>
-        </div>
-      </div>
-
-      <div class="mb-4 md:hidden">
-        <label class="text-white text-lg">Fecha y Hora:</label>
-        <div class="relative">
-          <input
-            type="datetime-local"
-            id="datetime"
-            formControlName="dateTime"
-            class="block w-full border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
-          />
-          <span class="absolute right-3 top-2">
-            <ion-icon name="calendar-outline" class="text-gray-400"></ion-icon>
-          </span>
-        </div>
-      </div>
-
-      <div class="mb-4">
-        <label class="text-white text-lg">Municipio:</label>
-        <div class="relative">
-          <select
-            class="block appearance-none w-full border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
-            formControlName="locationName"
-          >
-            <option disabled selected>Elige el municipio</option>
-            <option *ngFor="let location of locations" [value]="location.id">
-              {{ location.name }}
-            </option>
-          </select>
-        </div>
-      </div>
-
-      <div class="hidden gap-2 md:flex">
         <div class="mb-4">
+          <label class="text-white text-lg">Municipio:</label>
+          <div class="relative">
+            <select
+              class="block appearance-none w-full border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
+              formControlName="locationName"
+            >
+              <option disabled selected>Elige el municipio</option>
+              <option *ngFor="let location of locations" [value]="location.id">
+                {{ location.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div class="hidden gap-2 md:flex">
+          <div class="mb-4">
+            <label class="text-white text-lg">Precio:</label>
+            <input
+              type="number"
+              min="0"
+              step="any"
+              formControlName="price"
+              class="block appearance-none w-full border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
+            />
+          </div>
+          <div class="mb-4">
+            <label class="text-white text-lg">Numero de tickets:</label>
+            <input
+              type="number"
+              min="0"
+              step="any"
+              formControlName="numTickets"
+              class="block appearance-none w-full border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
+            />
+          </div>
+        </div>
+
+        <div class="mb-4 md:hidden">
           <label class="text-white text-lg">Precio:</label>
           <input
             type="number"
@@ -150,7 +136,7 @@
             class="block appearance-none w-full border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
           />
         </div>
-        <div class="mb-4">
+        <div class="mb-4 md:hidden">
           <label class="text-white text-lg">Numero de tickets:</label>
           <input
             type="number"
@@ -160,56 +146,37 @@
             class="block appearance-none w-full border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
           />
         </div>
-      </div>
-
-      <div class="mb-4 md:hidden">
-        <label class="text-white text-lg">Precio:</label>
-        <input
-          type="number"
-          min="0"
-          step="any"
-          formControlName="price"
-          class="block appearance-none w-full border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
-        />
-      </div>
-      <div class="mb-4 md:hidden">
-        <label class="text-white text-lg">Numero de tickets:</label>
-        <input
-          type="number"
-          min="0"
-          step="any"
-          formControlName="numTickets"
-          class="block appearance-none w-full border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
-        />
-      </div>
-      <div class="mb-4 md:hidden">
-        <label class="text-white text-lg">Descripción:</label>
-        <textarea
-          rows="4"
-          cols="900"
-          formControlName="description"
-          class="block w-52 resize-none appearance-none border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
-        ></textarea>
-      </div>
-      <div class="mb-4 hidden md:block">
-        <div class="flex flex-col items-center">
-          <label class="text-white text-lg self-start ml-7">Descripción:</label>
+        <div class="mb-4 md:hidden">
+          <label class="text-white text-lg">Descripción:</label>
           <textarea
             rows="4"
             cols="900"
             formControlName="description"
-            class="block w-96 resize-none appearance-none border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
+            class="block w-52 resize-none appearance-none border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
           ></textarea>
         </div>
-      </div>
-      <div class="mt-5 flex justify-center">
-        <button
-          (click)="addEvent()"
-          class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline-blue active:bg-green-800"
-        >
-          Crear evento
-        </button>
-      </div>
-    </form>
+        <div class="mb-4 hidden md:block">
+          <div class="flex flex-col items-center">
+            <label class="text-white text-lg self-start ml-7"
+              >Descripción:</label
+            >
+            <textarea
+              rows="4"
+              cols="900"
+              formControlName="description"
+              class="block w-96 resize-none appearance-none border p-2 focus:outline-none focus:ring focus:ring-blue-200 rounded"
+            ></textarea>
+          </div>
+        </div>
+        <div class="mt-5 flex justify-center">
+          <button
+            (click)="addEvent()"
+            class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:shadow-outline-blue active:bg-green-800"
+          >
+            Crear evento
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </ion-content>
