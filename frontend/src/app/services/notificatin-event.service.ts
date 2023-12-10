@@ -22,7 +22,6 @@ export class NotificatinEventService {
       'eventIds',
       eventIds.eventIds.join(',')
     );
-
     return this.httpClient.get(this.endpointNotificationEventUser, { params });
   }
 }

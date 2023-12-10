@@ -26,31 +26,37 @@ export class HomePage implements OnInit {
   }
 
   getAllEvents() {
-    this.eventService.getAllEvent().subscribe((dataEvent) => {
-      this.events = dataEvent;
-      this.locationService.getAllLocation().subscribe((dataLocation: any) => {
-        for (
-          let indexEvent = 0;
-          indexEvent < this.events.length;
-          indexEvent++
-        ) {
+    this.eventService.getAllEvent().subscribe(
+      (dataEvent) => {
+        this.events = dataEvent;
+        this.locationService.getAllLocation().subscribe((dataLocation: any) => {
           for (
-            let indexLocation = 0;
-            indexLocation < dataLocation.length;
-            indexLocation++
+            let indexEvent = 0;
+            indexEvent < this.events.length;
+            indexEvent++
           ) {
-            if (
-              this.events[indexEvent].locationId ==
-              dataLocation[indexLocation].id
+            for (
+              let indexLocation = 0;
+              indexLocation < dataLocation.length;
+              indexLocation++
             ) {
-              this.events[indexEvent].locationName =
-                dataLocation[indexLocation].name;
+              if (
+                this.events[indexEvent].locationId ==
+                dataLocation[indexLocation].id
+              ) {
+                this.events[indexEvent].locationName =
+                  dataLocation[indexLocation].name;
+              }
             }
           }
-        }
-      });
-    });
+        });
+      },
+      (err) => {
+        this.alert(err);
+      }
+    );
   }
+
   deleteOneEvent(id: number) {
     Swal.fire({
       title: 'Estas seguro?',
@@ -61,18 +67,47 @@ export class HomePage implements OnInit {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Si, eliminar!',
       heightAuto: false,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.eventService.deleteOneEvent(id).subscribe((data) => {
-          this.getAllEvents();
-          Swal.fire({
-            title: 'Eliminado!',
-            text: 'El evento ha sido eliminado.',
-            icon: 'success',
-            heightAuto: false,
+    }).then(
+      (result) => {
+        if (result.isConfirmed) {
+          this.eventService.deleteOneEvent(id).subscribe((data) => {
+            this.getAllEvents();
+            Swal.fire({
+              title: 'Eliminado!',
+              text: 'El evento ha sido eliminado.',
+              icon: 'success',
+              heightAuto: false,
+            });
           });
-        });
+        }
+      },
+      (err) => {
+        console.log(err);
+        this.alert(err);
       }
-    });
+    );
+  }
+  alert(err: any) {
+    if (err.status === 0) {
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Error de conexción',
+        showConfirmButton: false,
+        heightAuto: false,
+      });
+      return;
+    }
+    if (err.status === 500) {
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'El usuario o la contraseña están mal',
+        showConfirmButton: false,
+        timer: 1500,
+        heightAuto: false,
+      });
+      return;
+    }
   }
 }

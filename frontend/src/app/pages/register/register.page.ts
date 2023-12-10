@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -36,11 +37,47 @@ export class RegisterPage implements OnInit {
       name: name,
       rol: 'customer',
     };
-    console.log(user);
 
-    this.authService.register(user).subscribe((res) => {
-      console.log(res);
-      this.router.navigateByUrl('/events');
-    });
+    this.authService.register(user).subscribe(
+      (res) => {
+        this.router.navigateByUrl('/events');
+        Swal.fire({
+          position: 'top',
+          icon: 'success',
+          title: 'Te has registrado correctamente',
+          showConfirmButton: false,
+          timer: 1500,
+          heightAuto: false,
+        });
+      },
+      (err) => {
+        this.alert(err);
+      }
+    );
+  }
+
+  alert(err: any) {
+    if (err.status === 0) {
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Error de conexción',
+        showConfirmButton: false,
+        timer: 1500,
+        heightAuto: false,
+      });
+      return;
+    }
+    if (err.status === 400) {
+      Swal.fire({
+        position: 'top',
+        icon: 'error',
+        title: 'Falta algun campo por rellenar',
+        showConfirmButton: false,
+        timer: 1500,
+        heightAuto: false,
+      });
+      return;
+    }
   }
 }
