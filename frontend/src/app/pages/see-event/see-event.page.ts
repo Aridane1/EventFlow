@@ -73,7 +73,7 @@ export class SeeEventPage implements OnInit {
     let userId = decode.id;
     Swal.fire({
       icon: 'success',
-      title: 'Te quires registrar a este evento?',
+      title: 'Te quieres registrar a este evento?',
       heightAuto: false,
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
