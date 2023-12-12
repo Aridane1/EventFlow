@@ -10,7 +10,9 @@ The application is made with node, express and sequelize as part of the backend 
 
 ## DIAGRAMS
 
-Here is the use case diagram, the entity-relationship diagram the class diagram and relation diagram
+
+Here is the use case diagram, the entity-relationship diagram the class diagram and relational diagram
+
 
 ### RELATIONAL DIAGRAM
 

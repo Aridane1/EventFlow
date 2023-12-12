@@ -100,6 +100,12 @@
         >
           Cambiar de modo
         </button>
+        <button
+          class="text-2xl text-black dark:text-white"
+          routerLink="/change-mode"
+        >
+          Ayuda
+        </button>
         <button class="text-2xl text-black dark:text-white" (click)="logout()">
           Cerrar sesión
         </button>
@@ -243,6 +249,13 @@
           *ngIf="rol.rol === 'admin'"
         >
           Cambiar de modo
+        </button>
+        <button
+          class="text-xl text-black dark:text-white"
+          routerLink="/change-mode"
+          *ngIf="rol.rol === 'admin'"
+        >
+          Ayuda
         </button>
         <button class="text-xl text-black dark:text-white" (click)="logout()">
           Cerrar sesión

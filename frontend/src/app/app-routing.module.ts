@@ -136,11 +136,14 @@ const routes: Routes = [
       import('./pages/your-events/your-events.module').then(
         (m) => m.YourEventsPageModule
       ),
-  },  {
-    path: 'your-notifications',
-    loadChildren: () => import('./pages/your-notifications/your-notifications.module').then( m => m.YourNotificationsPageModule)
   },
-
+  {
+    path: 'your-notifications',
+    loadChildren: () =>
+      import('./pages/your-notifications/your-notifications.module').then(
+        (m) => m.YourNotificationsPageModule
+      ),
+  },
 ];
 
 @NgModule({
