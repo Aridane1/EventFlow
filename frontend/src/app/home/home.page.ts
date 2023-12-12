@@ -3,6 +3,7 @@ import { EventService } from '../services/event.service';
 import { LocationService } from '../services/location.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +12,31 @@ import Swal from 'sweetalert2';
 })
 export class HomePage implements OnInit {
   events: any;
+  theme: any;
 
   constructor(
+    private storage: Storage,
     private eventService: EventService,
     private locationService: LocationService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.getAllEvents();
+    this.theme = await this.storage.get('mode');
+    let html = document.querySelector('html');
+    if (this.theme == 'dark') {
+      html?.classList.add('dark');
+      document.documentElement.style.setProperty('--bg-color', 'rgb(51 65 85)');
+    }
+    if (this.theme == 'white') {
+      html?.classList.remove('dark');
+      document.documentElement.style.setProperty('--bg-color', '#a5acb8');
+    }
+    if (this.theme == null) {
+      this.theme = await this.storage.set('mode', 'white');
+      html?.classList.remove('dark');
+      document.documentElement.style.setProperty('--bg-color', '#a5acb8');
+    }
   }
 
   ionViewWillEnter() {
@@ -82,7 +100,6 @@ export class HomePage implements OnInit {
         }
       },
       (err) => {
-        console.log(err);
         this.alert(err);
       }
     );

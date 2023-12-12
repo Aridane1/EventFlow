@@ -1,4 +1,6 @@
-<div class="relative flex bg-slate-500 dark:bg-slate-800 w-full rounded">
+<div
+  class="relative flex bg-slate-500 dark:bg-slate-800 w-full rounded select-none"
+>
   <div class="flex gap-5">
     <picture class="w-20">
       <img
@@ -8,7 +10,9 @@
       />
     </picture>
     <div class="w-[15rem] flex items-center">
-      <p class="whitespace-pre-wrap truncate w-[8rem]">{{ location.name }}</p>
+      <p class="whitespace-pre-wrap truncate w-[8rem] dark:text-white">
+        {{ location.name }}
+      </p>
     </div>
   </div>
   <div class="absolute right-0">

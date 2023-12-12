@@ -58,6 +58,7 @@ export class AddAdministratorPage implements OnInit {
       name: name,
       rol: 'admin',
     };
+
     if (!this.registerAdminForm.valid) {
       Swal.fire({
         icon: 'error',
