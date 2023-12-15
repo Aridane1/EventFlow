@@ -5,6 +5,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+const initializeDatabase = require("./initialize");
 var path = require("path");
 
 const app = express();
@@ -30,10 +31,11 @@ webpush.setVapidDetails(
 
 const db = require("./models");
 
-db.sequelize.sync();
-// db.sequelize
-//   .sync({ force: true })
-//   .then(() => console.log("Drop and Resync with { force: true }"));
+db.sequelize.sync().then(initializeDatabase());
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log("Sync db without dropping.");
+//   initializeDatabase();
+// });
 
 app.use(cors(corsOptions));
 

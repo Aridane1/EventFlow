@@ -187,14 +187,20 @@ Here is the use case diagram, the entity-relationship diagram the class diagram 
 - Relationships:
   - user_id (foreign key referencing USER) links to the user owning the device.
 
+## SYSTEM DESCRIPTION
+
+A user with the manager role can add users with the administrator role. The user with the manager role can unregister the user of the administrator type. He can also register locations and delete locations
+
+The administrator user can create events, modify events and delete events. An administrator user can also send messages to users.
+
+The client user can register in events and can also register in a municipality. In addition, the user receives notifications associated with the event in which he/she is registered and in the municipality in which he/she is registered.
+
 ## INSTALLATION MANUAL
 
 Clone Repository, Enter Directory and Install Dependencies:
 
 ```bash
  git clone https://github.com/Aridane1/EventFlow.git
-
-
 ```
 
 Install all dependencies:
@@ -202,7 +208,6 @@ Install all dependencies:
 ```bash
  cd backend/
  npm intall
-
 
  cd backend/
  npm intall
