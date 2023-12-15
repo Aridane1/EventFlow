@@ -6,8 +6,6 @@ const User = db.User;
 const Device = db.Device;
 const Op = db.Sequelize.Op;
 const UserSubscriptionEvent = db.UserSubscriptionEvent;
-const Event = db.Event;
-const RelationNotificationEvent = db.RelationNotificationEvent;
 const NotificationEvent = db.NotificationEvent;
 
 exports.sendNotificationForIdLocation = async (notificationMunicipality) => {
@@ -56,7 +54,6 @@ exports.sendNotificationAllUserInAnyLocation = async (
       where: { id: notificationId },
     });
 
-    console.log(subscriptions);
     const devices = [];
 
     for (const subscription of subscriptions) {

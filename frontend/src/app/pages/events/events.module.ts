@@ -8,6 +8,7 @@ import { EventsPageRoutingModule } from './events-routing.module';
 
 import { EventsPage } from './events.page';
 import { SharedModule } from 'src/app/shared/shared/shared.module';
+import { CarruselComponent } from './carrusel/carrusel.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { SharedModule } from 'src/app/shared/shared/shared.module';
     EventsPageRoutingModule,
     SharedModule,
   ],
-  declarations: [EventsPage],
+  declarations: [EventsPage, CarruselComponent],
 })
 export class EventsPageModule {}
