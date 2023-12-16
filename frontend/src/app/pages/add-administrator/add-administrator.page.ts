@@ -59,6 +59,18 @@ export class AddAdministratorPage implements OnInit {
       rol: 'admin',
     };
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El email esta mal formado',
+        heightAuto: false,
+      });
+      return;
+    }
+
     if (!this.registerAdminForm.valid) {
       Swal.fire({
         icon: 'error',

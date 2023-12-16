@@ -64,6 +64,9 @@ export class AddEventsPage implements OnInit {
     const price = this.eventForm.get('price')?.value;
     const numTickets = this.eventForm.get('numTickets')?.value;
 
+    const currentDate = new Date();
+    const selectedDate = new Date(date);
+
     let event: Event = {
       name: title,
       description: description,
@@ -82,6 +85,15 @@ export class AddEventsPage implements OnInit {
       });
       return;
     } else {
+      if (selectedDate < currentDate) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La fecha no puede ser menor a la actual',
+          heightAuto: false,
+        });
+        return;
+      }
       let blob = null;
       if (!this.capturedPhoto) {
         Swal.fire({
