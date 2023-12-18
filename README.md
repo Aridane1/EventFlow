@@ -109,10 +109,6 @@ Explore the Figma prototype here: [Prototype Link](https://www.figma.com/file/JO
 
   ![REMINDERS EVENTS](https://github.com/Aridane1/EventFlow/blob/master/screenshots/reminders_events.PNG)
 
-- Crucial, easily accessible information such as location.n.
-
-  ![ACCESSIBLE INFORMATION](https://github.com/Aridane1/EventFlow/blob/master/screenshots/accessible_information.PNG)
-
 - Detailed information on each event, including schedules, etc.
 
   ![DEATILED INFORMATION EVENT](https://github.com/Aridane1/EventFlow/blob/master/screenshots/detailed_information.PNG)
@@ -126,10 +122,6 @@ Explore the Figma prototype here: [Prototype Link](https://www.figma.com/file/JO
   ![CUSTOMIZABLE PROFILES](https://github.com/Aridane1/EventFlow/blob/master/screenshots/button_dark_mode.PNG)
   ![CUSTOMIZABLE PROFILES](https://github.com/Aridane1/EventFlow/blob/master/screenshots/dark_mode.PNG)
 
-- Direct communication between attendees prior to the event.
-
-  ![DIRECT COMMUNICATION WITH ATTENDEES](https://github.com/Aridane1/EventFlow/blob/master/screenshots/reminders_events)
-
 - Tabulation and keyboard navigation
 
   ![NAVIGATION TAB](https://github.com/Aridane1/EventFlow/blob/master/screenshots/tab_nav.PNG)
@@ -140,7 +132,15 @@ Explore the Figma prototype here: [Prototype Link](https://www.figma.com/file/JO
 
 - Interactive elements like a carousel
 
-  ![NAVIGATION TAB](https://github.com/Aridane1/EventFlow/blob/master/screenshots/carousel.PNG)
+  ![ITERACTIVE ELEMENTS](https://github.com/Aridane1/EventFlow/blob/master/screenshots/carousel.PNG)
+
+- Encrypted password in the data base
+
+  ![ENCRYPTED PASSWORD](https://github.com/Aridane1/EventFlow/blob/master/screenshots/encrypted_password.PNG)
+
+- Have a token in the localStorage
+
+  ![NAVIGATION TAB](https://github.com/Aridane1/EventFlow/blob/master/screenshots/token.PNG)
 
 ## APPLICATION TYPE
 
