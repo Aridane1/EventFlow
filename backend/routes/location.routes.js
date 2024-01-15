@@ -5,6 +5,7 @@ module.exports = (app) => {
   var router = require("express").Router();
 
   router.post("/", upload.single("file"), location.create);
+  router.get("/count-localizaciones", location.countEventsOfLocation);
   router.get("/events-locations/:id", location.getAllEventsInLocation);
   router.get("/", location.getAll);
   router.get("/:id", location.getOne);

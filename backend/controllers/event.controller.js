@@ -29,7 +29,6 @@ exports.create = (req, res) => {
     locationId: req.body.location,
     img: req.file.filename,
   };
-  // Save event in the database
   Event.create(newEvent)
     .then((data) => {
       res.send(data);

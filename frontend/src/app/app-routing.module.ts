@@ -143,7 +143,11 @@ const routes: Routes = [
       import('./pages/your-notifications/your-notifications.module').then(
         (m) => m.YourNotificationsPageModule
       ),
+  },  {
+    path: 'analytic',
+    loadChildren: () => import('./pages/analytic/analytic.module').then( m => m.AnalyticPageModule)
   },
+
 ];
 
 @NgModule({

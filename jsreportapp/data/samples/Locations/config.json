@@ -1,0 +1,14 @@
+{
+    "shortid": "erkLzi",
+    "name": "Location",
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "creationDate": {
+        "$$date": 1704827875373
+    },
+    "modificationDate": {
+        "$$date": 1704827875373
+    },
+    "_id": "GDWKqFzco1rJltLK",
+    "$entitySet": "folders"
+}

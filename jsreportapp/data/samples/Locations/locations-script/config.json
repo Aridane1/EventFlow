@@ -1,0 +1,16 @@
+{
+    "shortid": "BJX1Jw82ce",
+    "name": "locations-script",
+    "inheritedReadPermissions": [],
+    "inheritedEditPermissions": [],
+    "creationDate": {
+        "$$date": 1704827875614
+    },
+    "modificationDate": {
+        "$$date": 1705348875049
+    },
+    "_id": "D03xbrZ2fbilKEDK",
+    "$entitySet": "scripts",
+    "scope": "template",
+    "isGlobal": false
+}

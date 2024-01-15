@@ -1,0 +1,94 @@
+2024-01-13T17:41:43.575Z - error: Report render failed
+(because) getaddrinfo ENOTFOUND services.odata.org
+Error: getaddrinfo ENOTFOUND services.odata.org
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26) rootId=2814k2i5wb4enn2, id=2814k2i5wb4enn2
+2024-01-13T17:41:44.031Z - error: Error during processing request at http://localhost:5488/templates/HJH11D83ce?id=1, details: Error: getaddrinfo ENOTFOUND services.odata.org
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)
+2024-01-13T17:41:47.490Z - error: Report render failed
+(because) getaddrinfo ENOTFOUND services.odata.org
+Error: getaddrinfo ENOTFOUND services.odata.org
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26) rootId=1s6x9phyvwde3j6, id=1s6x9phyvwde3j6
+2024-01-13T17:41:47.837Z - error: Error during processing request at http://localhost:5488/templates/HJH11D83ce?id=1, details: Error: getaddrinfo ENOTFOUND services.odata.org
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26)
+2024-01-13T17:42:09.941Z - error: Report render failed
+(because) getaddrinfo ENOTFOUND services.odata.org
+Error: getaddrinfo ENOTFOUND services.odata.org
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (node:dns:108:26) rootId=5qru46fvmyi3e1k, id=5qru46fvmyi3e1k
+2024-01-14T17:15:09.397Z - error: Report render failed
+(because) write EPROTO 505D0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO 505D0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=a0lobkwrnnlhqgm, id=a0lobkwrnnlhqgm
+2024-01-14T17:15:45.264Z - error: Report render failed
+(because) write EPROTO C0420000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO C0420000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=uoms40xip663ke5, id=uoms40xip663ke5
+2024-01-14T17:15:53.138Z - error: Report render failed
+(because) write EPROTO 784E0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO 784E0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=frkvyiehghirbbb, id=frkvyiehghirbbb
+2024-01-14T17:16:20.130Z - error: Report render failed
+(because) write EPROTO AC040000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO AC040000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=0nejv9l1eqxx72p, id=0nejv9l1eqxx72p
+2024-01-14T17:16:25.945Z - error: Report render failed
+(because) write EPROTO 58340000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO 58340000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=lcjqu92ys7y8hx8, id=lcjqu92ys7y8hx8
+2024-01-14T17:16:36.416Z - error: Report render failed
+(because) write EPROTO F04F0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO F04F0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=bj6zvrbwzy33516, id=bj6zvrbwzy33516
+2024-01-14T17:16:45.075Z - error: Report render failed
+(because) write EPROTO C45B0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO C45B0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=31otl3kfse2ar5r, id=31otl3kfse2ar5r
+2024-01-14T17:18:46.085Z - error: Report render failed
+(because) write EPROTO E45B0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO E45B0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=fcgu3d9bap7rihg, id=fcgu3d9bap7rihg
+2024-01-14T17:20:14.350Z - error: Report render failed
+(because) write EPROTO 00270000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO 00270000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=zzqgrsgi3423hle, id=zzqgrsgi3423hle
+2024-01-14T17:22:47.321Z - error: Report render failed
+(because) write EPROTO F8190000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO F8190000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=o0or8vsdtmloalb, id=o0or8vsdtmloalb
+2024-01-14T17:23:07.833Z - error: Report render failed
+(because) write EPROTO 68520000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO 68520000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=3u38736wuvg5zvt, id=3u38736wuvg5zvt
+2024-01-14T17:25:29.355Z - error: Report render failed
+(because) write EPROTO 204A0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO 204A0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=e71nhhqdwu22u0o, id=e71nhhqdwu22u0o
+2024-01-14T17:27:25.287Z - error: Report render failed
+(because) write EPROTO 14350000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+Error: write EPROTO 14350000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+    at WriteWrap.onWriteComplete [as oncomplete] (node:internal/stream_base_commons:94:16) rootId=aq3tzpsau4zdm28, id=aq3tzpsau4zdm28

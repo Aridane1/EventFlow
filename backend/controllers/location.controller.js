@@ -57,6 +57,25 @@ exports.getAllEventsInLocation = (req, res) => {
     });
 };
 
+exports.countEventsOfLocation = (req, res) => {
+  Location.findAll({ include: { model: Event } })
+    .then((data) => {
+      let a = [];
+      for (const location of data) {
+        location.numEventos = 0;
+        for (const iterator of location.events) {
+          location.numEventos += 1;
+        }
+        a.push({ numEvento: location.numEventos, name: location.name });
+      }
+
+      res.json({ localizaciones: a });
+    })
+    .catch((error) => {
+      res.status(500).json({ error: "Error interno del servidor" });
+    });
+};
+
 exports.getAll = (req, res) => {
   Location.findAll()
     .then((allLocation) => {
